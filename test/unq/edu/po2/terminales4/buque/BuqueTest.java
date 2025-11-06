@@ -1,19 +1,41 @@
 package unq.edu.po2.terminales4.buque;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class BuqueTest {
+import unq.edu.po2.terminales4.posicion.Posicion;
+import unq.edu.po2.terminales4.terminal.Terminal;
 
+class BuqueTest {
+	
+	Buque buque;
+	Terminal terminalDestino;
+	Posicion posicionBuque, posicionTerminal;
+	
 	@BeforeEach
 	void setUp() throws Exception {
+		
+		terminalDestino = mock(Terminal.class);
+		posicionBuque = mock(Posicion.class);
+		posicionTerminal = mock(Posicion.class);
+		buque = new Buque("Gran Buque");
+		buque.terminalDestino(terminalDestino);
 	}
 
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void testPasoDeOutbounAInboundMandarAvisoATerminal() {
+		when(terminalDestino.posicion()).thenReturn(posicionTerminal);
+		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(30);
+		
+		buque.posicion(posicionBuque);
+		
+		verify(terminalDestino).preavisoBuque();
 	}
+	
+	
 
 }
