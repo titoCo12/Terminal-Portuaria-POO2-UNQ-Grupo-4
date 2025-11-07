@@ -15,18 +15,23 @@ public class Buque{
 	private Posicion posicion;
 	
 
-	public Buque(String nombre) {
+	public Buque(String nombre, List<Orden> ordenes) {
 		this.nombre = nombre;
+		this.ordenes = ordenes;
 		this.fase = new FaseOutbound(this);
 	}
 
 	public void terminalDestino(Terminal terminalDestino) {
 		this.terminalDestino = terminalDestino;
 	}
-	public void posicion(Posicion posicion) {
-		this.fase.distancia(posicion.distanciaEnKmA(this.posicionPuertoDestino()));
+	public void actualizarPosicion(Posicion posicion) {
+		this.posicion = posicion;
+		this.fase.evaluarDistanciaADestino(posicion.distanciaEnKmA(this.posicionPuertoDestino()));
 	}
 
+	public Posicion posicion() {
+		return this.posicion;
+	}
 	private Posicion posicionPuertoDestino() {
 		
 		return this.terminalDestino.posicion();
@@ -42,11 +47,14 @@ public class Buque{
 		
 	}
 	
-	public void iniciarTranajo() {
+	protected void avisarSalidaATerminal() {
+		this.terminalDestino.buqueSaliendo();
+	}
+	public void iniciarTrabajo() {
 		this.fase.iniciarTrabajo();
 	}
 	
-	public void finalizarTrabajo() {
-		this.fase.finalizarTrabajo();
+	public void depart() {
+		this.fase.depart();
 	}
 }

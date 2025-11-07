@@ -12,25 +12,13 @@ public class FaseOutbound extends FaseBuque{
 		this.buque.setFase(new FaseInbound(this.buque));
 		
 	}
-
-	@Override
-	public void iniciarTrabajo() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void finalizarTrabajo() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	private boolean entrandoEnSiguienteFase(int distancia) {
 		return distancia < 50 && distancia > 0; 
 	}
 
 	@Override
-	public void distancia(int distancia) {
+	public void evaluarDistanciaADestino(int distancia) {
 		if(this.entrandoEnSiguienteFase(distancia)) {
 			this.siguienteFase();
 		}
@@ -57,6 +45,18 @@ public class FaseOutbound extends FaseBuque{
 
 	@Override
 	public void registrarExportaciones() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void iniciarTrabajo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void depart() {
 		// TODO Auto-generated method stub
 		
 	}
