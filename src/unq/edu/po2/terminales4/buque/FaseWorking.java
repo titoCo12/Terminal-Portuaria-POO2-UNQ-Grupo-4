@@ -20,14 +20,14 @@ public class FaseWorking extends FaseBuque {
 	}
 
 	@Override
-	public void finalizarTrabajo() {
+	public void depart() {
 		this.siguienteFase();
 
 	}
 
 
 	@Override
-	public void distancia(int distancia) {
+	public void evaluarDistanciaADestino(int distancia) {
 		// TODO Auto-generated method stub
 		
 	}

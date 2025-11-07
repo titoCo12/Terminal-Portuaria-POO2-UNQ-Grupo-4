@@ -13,29 +13,30 @@ public class FaseInbound extends FaseBuque {
 
 	}
 
-	@Override
-	public void iniciarTrabajo() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void finalizarTrabajo() {
-		
-
-	}
-
 	private boolean estaEnTerminal(int distanciaADestino) {
 		
 		return distanciaADestino == 0;
 	}
 
-	
 	@Override
-	public void distancia(int distancia) {
+	public void evaluarDistanciaADestino(int distancia) {
 		if(this.estaEnTerminal(distancia)) {
 			this.siguienteFase();
 		}		
+	}
+	
+	@Override
+	public void depart() {
+		
+
+	}
+	
+	
+
+	@Override
+	public void iniciarTrabajo() {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override

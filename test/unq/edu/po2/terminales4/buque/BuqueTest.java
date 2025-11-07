@@ -31,11 +31,56 @@ class BuqueTest {
 		when(terminalDestino.posicion()).thenReturn(posicionTerminal);
 		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(30);
 		
-		buque.posicion(posicionBuque);
+		buque.actualizarPosicion(posicionBuque);
 		
 		verify(terminalDestino).preavisoBuque();
 	}
 	
-	
+	@Test
+	void testPasoDeInboundAArrived() {
+		when(terminalDestino.posicion()).thenReturn(posicionTerminal);
+		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(30);
+		
+		//paso a inbound
+		buque.actualizarPosicion(posicionBuque);
+		
+		//me acerco para evaluar la otra rama del if , si llego a terminal
+		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(10);
+		buque.actualizarPosicion(posicionBuque);
+		
+		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(0);
+		//paso a arrived
+		buque.actualizarPosicion(posicionBuque);
+				
+		verify(terminalDestino, times(1)).preavisoBuque();
+		
+		
+	}
 
+	@Test
+	void testPasoDeArrivedAWorking() {
+		when(terminalDestino.posicion()).thenReturn(posicionTerminal);
+		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(30);
+		
+		//paso a inbound
+		buque.actualizarPosicion(posicionBuque);
+		
+		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(0);
+		//paso a arrived
+		buque.actualizarPosicion(posicionBuque);
+		
+		//iniciar trabajo ahora cambia de fase a working
+		buque.iniciarTrabajo();
+		//enviar mensaje a buque que puse salir
+		buque.depart();
+		verify(terminalDestino, times(1)).preavisoBuque();
+		verify(terminalDestino, never()).buqueSaliendo();
+		
+		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(3);
+		//buque saliendo esta a mas de 1km , debe comunicar a la terminal
+		buque.actualizarPosicion(posicionBuque);
+		verify(terminalDestino, times(1)).buqueSaliendo();
+		
+	}
+	
 }

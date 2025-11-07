@@ -23,8 +23,8 @@ public class Buque{
 	public void terminalDestino(Terminal terminalDestino) {
 		this.terminalDestino = terminalDestino;
 	}
-	public void posicion(Posicion posicion) {
-		this.fase.distancia(posicion.distanciaEnKmA(this.posicionPuertoDestino()));
+	public void actualizarPosicion(Posicion posicion) {
+		this.fase.evaluarDistanciaADestino(posicion.distanciaEnKmA(this.posicionPuertoDestino()));
 	}
 
 	private Posicion posicionPuertoDestino() {
@@ -42,11 +42,14 @@ public class Buque{
 		
 	}
 	
-	public void iniciarTranajo() {
+	protected void avisarSalidaATerminal() {
+		this.terminalDestino.buqueSaliendo();
+	}
+	public void iniciarTrabajo() {
 		this.fase.iniciarTrabajo();
 	}
 	
-	public void finalizarTrabajo() {
-		this.fase.finalizarTrabajo();
+	public void depart() {
+		this.fase.depart();
 	}
 }

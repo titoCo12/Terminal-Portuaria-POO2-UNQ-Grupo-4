@@ -13,5 +13,9 @@ public class Terminal {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public void buqueSaliendo() {
+		
+	}
 
 }
