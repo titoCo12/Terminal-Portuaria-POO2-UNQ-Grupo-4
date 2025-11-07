@@ -3,10 +3,13 @@ package unq.edu.po2.terminales4.buque;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import unq.edu.po2.terminales4.orden.Orden;
 import unq.edu.po2.terminales4.posicion.Posicion;
 import unq.edu.po2.terminales4.terminal.Terminal;
 
@@ -15,14 +18,16 @@ class BuqueTest {
 	Buque buque;
 	Terminal terminalDestino;
 	Posicion posicionBuque, posicionTerminal;
+	List<Orden> ordenes;
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		
+		ordenes = new ArrayList<Orden>();
 		terminalDestino = mock(Terminal.class);
 		posicionBuque = mock(Posicion.class);
 		posicionTerminal = mock(Posicion.class);
-		buque = new Buque("Gran Buque");
+		ordenes.add(mock(Orden.class));
+		buque = new Buque("Gran Buque", ordenes);
 		buque.terminalDestino(terminalDestino);
 	}
 
