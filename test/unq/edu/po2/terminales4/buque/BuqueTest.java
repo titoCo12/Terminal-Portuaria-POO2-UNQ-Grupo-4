@@ -41,10 +41,34 @@ class BuqueTest {
 		when(terminalDestino.posicion()).thenReturn(posicionTerminal);
 		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(30);
 		
-		
+		//paso a inbound
 		buque.actualizarPosicion(posicionBuque);
 		
-		verify(terminalDestino).preavisoBuque();
+		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(0);
+		//paso a arrived
+		buque.actualizarPosicion(posicionBuque);
+				
+		verify(terminalDestino, times(1)).preavisoBuque();
+		
+		
 	}
 
+	@Test
+	void testPasoDeArrivedAWorking() {
+		when(terminalDestino.posicion()).thenReturn(posicionTerminal);
+		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(30);
+		
+		//paso a inbound
+		buque.actualizarPosicion(posicionBuque);
+		
+		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(0);
+		//paso a arrived
+		buque.actualizarPosicion(posicionBuque);
+		
+		//iniciar trabajo ahora cambia de fase a working
+		buque.iniciarTranajo();
+		
+		verify(terminalDestino, times(1)).preavisoBuque();
+	}
+	
 }

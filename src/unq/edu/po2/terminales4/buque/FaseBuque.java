@@ -10,9 +10,9 @@ public abstract class FaseBuque {
 	
 	protected abstract void siguienteFase();
 	public abstract void iniciarTrabajo();
-	public abstract void finalizarTrabajo();
+	public abstract void depart();
 	
-	public  abstract void  distancia(int distancia);
+	public  abstract void  evaluarDistanciaADestino(int distancia);
 	
 
 	public abstract void informarExportaciones();
