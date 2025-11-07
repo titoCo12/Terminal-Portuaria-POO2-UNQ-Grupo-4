@@ -23,7 +23,7 @@ public class Buque{
 	public void terminalDestino(Terminal terminalDestino) {
 		this.terminalDestino = terminalDestino;
 	}
-	public void posicion(Posicion posicion) {
+	public void actualizarPosicion(Posicion posicion) {
 		this.fase.distancia(posicion.distanciaEnKmA(this.posicionPuertoDestino()));
 	}
 

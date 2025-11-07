@@ -31,11 +31,20 @@ class BuqueTest {
 		when(terminalDestino.posicion()).thenReturn(posicionTerminal);
 		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(30);
 		
-		buque.posicion(posicionBuque);
+		buque.actualizarPosicion(posicionBuque);
 		
 		verify(terminalDestino).preavisoBuque();
 	}
 	
-	
+	@Test
+	void testPasoDeInboundAArrived() {
+		when(terminalDestino.posicion()).thenReturn(posicionTerminal);
+		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(30);
+		
+		
+		buque.actualizarPosicion(posicionBuque);
+		
+		verify(terminalDestino).preavisoBuque();
+	}
 
 }
