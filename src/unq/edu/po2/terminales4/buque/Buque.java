@@ -42,7 +42,10 @@ public class Buque{
 		
 	}
 	
-	public void iniciarTranajo() {
+	protected void avisarSalidaATerminal() {
+		this.terminalDestino.buqueSaliendo();
+	}
+	public void iniciarTrabajo() {
 		this.fase.iniciarTrabajo();
 	}
 	

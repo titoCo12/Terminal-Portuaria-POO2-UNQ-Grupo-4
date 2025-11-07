@@ -44,6 +44,10 @@ class BuqueTest {
 		//paso a inbound
 		buque.actualizarPosicion(posicionBuque);
 		
+		//me acerco para evaluar la otra rama del if , si llego a terminal
+		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(10);
+		buque.actualizarPosicion(posicionBuque);
+		
 		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(0);
 		//paso a arrived
 		buque.actualizarPosicion(posicionBuque);
@@ -66,9 +70,17 @@ class BuqueTest {
 		buque.actualizarPosicion(posicionBuque);
 		
 		//iniciar trabajo ahora cambia de fase a working
-		buque.iniciarTranajo();
-		
+		buque.iniciarTrabajo();
+		//enviar mensaje a buque que puse salir
+		buque.depart();
 		verify(terminalDestino, times(1)).preavisoBuque();
+		verify(terminalDestino, never()).buqueSaliendo();
+		
+		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(3);
+		//buque saliendo esta a mas de 1km , debe comunicar a la terminal
+		buque.actualizarPosicion(posicionBuque);
+		verify(terminalDestino, times(1)).buqueSaliendo();
+		
 	}
 	
 }
