@@ -83,4 +83,13 @@ class BuqueTest {
 		
 	}
 	
+	@Test
+	void testNoSeDebeInvocarBuqueSaliendoEnFaseInbound() {
+		when(terminalDestino.posicion()).thenReturn(posicionTerminal);
+		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(30);
+		verify(terminalDestino, never()).buqueSaliendo();
+		
+		
+	}
+	
 }
