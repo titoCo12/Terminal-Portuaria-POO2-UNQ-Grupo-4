@@ -15,10 +15,13 @@ public class Buque{
 	private Posicion posicion;
 	
 
-	public Buque(String nombre, List<Orden> ordenes) {
+	public Buque(String nombre) {
 		this.nombre = nombre;
-		this.ordenes = ordenes;
 		this.fase = new FaseOutbound(this);
+	}
+
+	public void agregarOrden(Orden orden) {
+		this.ordenes.add(orden);
 	}
 
 	public void terminalDestino(Terminal terminalDestino) {
