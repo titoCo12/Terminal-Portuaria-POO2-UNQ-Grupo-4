@@ -27,7 +27,7 @@ class BuqueTest {
 		posicionBuque = mock(Posicion.class);
 		posicionTerminal = mock(Posicion.class);
 		ordenes.add(mock(Orden.class));
-		buque = new Buque("Gran Buque", ordenes);
+		buque = new Buque("Gran Buque");
 		buque.terminalDestino(terminalDestino);
 	}
 
