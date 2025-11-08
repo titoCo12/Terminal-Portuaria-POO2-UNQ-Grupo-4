@@ -1,7 +1,6 @@
 package unq.edu.po2.terminales4.condicionesRutas;
 
 import java.util.*;
-import java.util.stream.*;
 import unq.edu.po2.terminales4.posicion.*;
 import unq.edu.po2.terminales4.viajes.*;
 
