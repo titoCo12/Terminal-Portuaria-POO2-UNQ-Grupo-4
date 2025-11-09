@@ -40,7 +40,7 @@ class CondicionRutaTest {
 	 * */
 	
 	@Test
-	void CondicionDestinoAcertado() {
+	void condicionDestinoUnResultado() {
 	
 		//setup
 		condRuta = new CondicionDestino(destino);
@@ -75,7 +75,7 @@ class CondicionRutaTest {
 	}
 	
 	@Test
-	void CondicionDestinoSinResultados() {
+	void condicionDestinoSinResultados() {
 	
 		//setup
 		condRuta = new CondicionDestino(destino);
@@ -105,6 +105,78 @@ class CondicionRutaTest {
 		//Verify
 		// No hay ninguna ruta resultante.
 		assertTrue(result.isEmpty());
+	}
+	
+	@Test
+	void condicionSalidaVariosResultados() {
+		
+		//SetUp
+		Puerto pA = mock(Puerto.class);
+		Puerto pC = mock(Puerto.class);
+		Puerto pD = mock(Puerto.class);
+		Puerto pE = mock(Puerto.class);
+		
+		LocalDate fechaSalida = LocalDate.of(2025, 11, 8);
+		condRuta = new CondicionSalida(fechaSalida);
+		
+		//viaje 1 cumple
+		when(viaje1.pasaPor(origen)).thenReturn(true);
+		when(viaje1.fechaLlegadaA(origen)).thenReturn(Optional.of(LocalDate.of(2025, 11, 8)));
+		when(viaje1.getPuertos()).thenReturn(new ArrayList<>(Arrays.asList(pA, origen, pC, pD, pE)));
+		when(viaje1.fechaLlegadaA(pA)).thenReturn(Optional.of(LocalDate.of(2025, 11, 7)));
+		when(viaje1.fechaLlegadaA(pC)).thenReturn(Optional.of(LocalDate.of(2025, 11, 9)));
+		when(viaje1.fechaLlegadaA(pD)).thenReturn(Optional.of(LocalDate.of(2025, 11, 10)));
+		when(viaje1.fechaLlegadaA(pE)).thenReturn(Optional.of(LocalDate.of(2025, 11, 11)));
+		
+		//viaje 2 no cumple, sale del origen en otra fecha.
+		when(viaje2.pasaPor(origen)).thenReturn(true);
+		when(viaje2.fechaLlegadaA(origen)).thenReturn(Optional.of(LocalDate.of(2022, 10, 11)));
+		
+		//viaje3 no cumple, no pasa por el origen.
+		when(viaje3.pasaPor(origen)).thenReturn(false);
+		
+		//Exercise
+		List<Ruta> result = condRuta.validarViajes(listado, origen);
+		
+		//Verify
+		// Hay 3 rutas, todas pertenecen al viaje 1
+		/* 
+		 	ruta1 = origen -> pC
+			ruta2 = origen -> pC -> pD
+			ruta3 = origen -> pC -> pD -> pE
+		*/
+		assertTrue(result.size() == 3);
+		assertTrue(result.stream().allMatch(r -> r.getViaje() == viaje1));
+		assertTrue(result.get(0).getDestino() == pC);
+		assertTrue(result.get(1).getDestino() == pD);
+		assertTrue(result.get(2).getDestino() == pE);
+		
+	}
+	
+	@Test
+	void condicionSalidaSinResultados() {
+		
+		//SetUp
+		
+		LocalDate fechaSalida = LocalDate.of(2025, 11, 8);
+		condRuta = new CondicionSalida(fechaSalida);
+		
+		//viaje 1 no cumple, no pasa por el origen
+		when(viaje1.pasaPor(origen)).thenReturn(false);
+		
+		//viaje 2 no cumple, sale del origen en otra fecha.
+		when(viaje2.pasaPor(origen)).thenReturn(true);
+		when(viaje2.fechaLlegadaA(origen)).thenReturn(Optional.of(LocalDate.of(2022, 10, 11)));
+		
+		//viaje3 no cumple, no pasa por el origen.
+		when(viaje3.pasaPor(origen)).thenReturn(false);
+		
+		//Exercise
+		List<Ruta> result = condRuta.validarViajes(listado, origen);
+		
+		//Verify
+		// Hay 0 rutas
+		assertTrue(result.size() == 0);
 	}
 
 }
