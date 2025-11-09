@@ -1,5 +1,6 @@
 package unq.edu.po2.terminales4.condicionesRutas;
 
+import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -176,6 +177,62 @@ class CondicionRutaTest {
 		
 		//Verify
 		// Hay 0 rutas
+		assertTrue(result.size() == 0);
+	}
+	
+	
+	@Test
+	void condicionLlegadaConResultados() {
+		
+		//SetUp
+		LocalDate fechaLlegada = LocalDate.of(2025, 11, 8);
+		condRuta = new CondicionLlegada(fechaLlegada);
+		
+		//viaje1 cumple
+		when(viaje1.pasaPor(origen)).thenReturn(true);
+		when(viaje1.pasaEnFecha(fechaLlegada)).thenReturn(true);
+		when(viaje1.puertoEnFecha(fechaLlegada)).thenReturn(Optional.of(destino));
+		when(viaje1.fechaLlegadaA(origen)).thenReturn(Optional.of(LocalDate.of(2025, 11, 5)));
+		
+		//viaje2 no cumple, no pasa por ningun puerto en esa fecha
+		when(viaje2.pasaPor(origen)).thenReturn(true);
+		when(viaje2.pasaEnFecha(fechaLlegada)).thenReturn(false);
+		
+		//viaje3 no cumple, no pasa por el origen
+		when(viaje3.pasaPor(origen)).thenReturn(false);
+		
+		//Exercise
+		List<Ruta> result = condRuta.validarViajes(listado, origen);
+		
+		//Verify
+		// Solo viaje1 cumple la condicion, de este viaje debe salir una sola ruta
+		assertTrue(result.size() == 1);
+		assertTrue(result.getFirst().getViaje() == viaje1);
+	}
+	
+	
+	@Test
+	void condicionLlegadaSinResultados() {
+		
+		//SetUp
+		LocalDate fechaLlegada = LocalDate.of(2025, 11, 8);
+		condRuta = new CondicionLlegada(fechaLlegada);
+		
+		//viaje1 cumple, no pasa por el origen
+		when(viaje1.pasaPor(origen)).thenReturn(false);
+		
+		//viaje2 no cumple, no pasa por ningun puerto en esa fecha
+		when(viaje2.pasaPor(origen)).thenReturn(true);
+		when(viaje2.pasaEnFecha(fechaLlegada)).thenReturn(false);
+		
+		//viaje3 no cumple, no pasa por el origen
+		when(viaje3.pasaPor(origen)).thenReturn(false);
+		
+		//Exercise
+		List<Ruta> result = condRuta.validarViajes(listado, origen);
+		
+		//Verify
+		// Solo viaje1 cumple la condicion, de este viaje debe salir una sola ruta
 		assertTrue(result.size() == 0);
 	}
 

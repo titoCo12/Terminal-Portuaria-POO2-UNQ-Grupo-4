@@ -22,5 +22,4 @@ public class CondicionLlegada implements CondicionRuta {
 		return vs.map(v -> new Ruta(origen, v.puertoEnFecha(llegada).get(), v.fechaLlegadaA(origen).get(), llegada, v)).toList();
 	}
 	
-	
 }

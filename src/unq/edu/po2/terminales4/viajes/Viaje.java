@@ -40,6 +40,7 @@ public class Viaje {
 		return Optional.ofNullable(this.cronograma.get(p));
 	}
 	
+	//Devuelve si en esa fecha llega/sale de algun puerto
 	public boolean pasaEnFecha(LocalDate fecha) {
 		return this.cronograma.containsValue(fecha);
 	}
