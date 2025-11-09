@@ -15,9 +15,4 @@ public class ContainerDry extends Container{
 		return 0;
 	}
 
-	@Override
-	public ContenidoCarga getBL() {
-		return carga;
-	}
-
 }
