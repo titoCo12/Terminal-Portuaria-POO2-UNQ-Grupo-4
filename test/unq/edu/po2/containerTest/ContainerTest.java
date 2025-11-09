@@ -24,14 +24,23 @@ class ContainerTest {
 	ContenidoCarga contenido = mock(ContenidoCarga.class);
 	Producto producto = mock(Producto.class);
 	Contenedor contenedor = mock(Contenedor.class);
+	Producto productoNuevo = mock(Producto.class);
 	
 	@BeforeEach
 	public void setUp() {
 		when(producto.getPesoKilos()).thenReturn(500);
 		when(producto.getTipoProducto()).thenReturn("Comida");
+		when(productoNuevo.getPesoKilos()).thenReturn(200);
+		when(productoNuevo.getTipoProducto()).thenReturn("Gasóleo A");
 		
-		when(contenedor.getPesoKilos()).thenReturn(300);
-	}
+		when(contenido.getPesoKilos()).thenReturn(300);
+		when(contenido.getTipoProducto()).thenReturn("Cucharas");
+		
+		when(dry.getBL()).thenReturn(contenido);
+		when(reefer.getBL()).thenReturn(producto);
+		when(tanque.getBL()).thenReturn(productoNuevo);
+		
+		}
 	
 	@Test
     public void test() {
