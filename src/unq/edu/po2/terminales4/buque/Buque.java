@@ -51,7 +51,7 @@ public class Buque{
 	}
 	
 	protected void avisarSalidaATerminal() {
-		this.terminalDestino.buqueSaliendo();
+		this.terminalDestino.buqueSaliendo(this);
 	}
 	public void iniciarTrabajo() {
 		this.fase.iniciarTrabajo();
@@ -59,5 +59,10 @@ public class Buque{
 	
 	public void depart() {
 		this.fase.depart();
+	}
+
+	public void enviarFacturas() {
+		this.ordenes.stream().forEach(orden -> orden.enviarFactura());
+		
 	}
 }
