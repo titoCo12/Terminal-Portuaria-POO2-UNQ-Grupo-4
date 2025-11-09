@@ -16,11 +16,19 @@ public class Ruta {
 		this.destino = destino;
 		this.salida = salida;
 		this.llegada = llegada;
-		this.viaje = viaje;
+		this.viaje = viaje; 
 	}
 	
 	public Viaje getViaje() {
 		return this.viaje;
+	}
+	
+	public Puerto getOrigen() {
+		return this.origen;
+	}
+	
+	public Puerto getDestino() {
+		return this.destino;
 	}
 	
 	//Comparamos rutas por este codigo, sabemos que no van a existir dos rutas distintas que
