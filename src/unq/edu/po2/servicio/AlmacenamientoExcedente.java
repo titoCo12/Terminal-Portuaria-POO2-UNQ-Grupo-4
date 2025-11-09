@@ -1,15 +1,17 @@
 package unq.edu.po2.servicio;
 
+import java.time.Duration;
 import java.time.LocalDate;
 
 import unq.edu.po2.container.Container;
 
-public class AlmacenamientoExcedente implements Servicio {
+public class AlmacenamientoExcedente extends Servicio {
 	
 	double monto;
 	
-	public AlmacenamientoExcedente(double monto) {
+	public AlmacenamientoExcedente(double monto, Orden orden) {
 		this.monto = monto;
+		this.orden = orden;
 	}
 
 	@Override

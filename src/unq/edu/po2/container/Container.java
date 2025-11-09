@@ -48,8 +48,6 @@ public abstract class Container {
 		return nombre.substring(0, 4);
 	}
 	
-	public abstract double costoServicios();
-	
 	public int getPesoCarga() {
 		
 		return carga.getPesoKilos();

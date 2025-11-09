@@ -40,11 +40,5 @@ public class ContainerReefer extends Container{
 	
 	//¿Es necesario validar que no tenga más de un tipo de producto? si lo especifican cero que sí
 	
-		//FALTAN LOS SERVICIOS
-	@Override
-	public double costoServicios() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }

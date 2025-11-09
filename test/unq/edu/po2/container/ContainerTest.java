@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import unq.edu.po2.cliente.Cliente;
+import unq.edu.po2.cliente.*;
 
 
 class ContainerTest {
@@ -178,10 +178,6 @@ class ContainerTest {
 		assertEquals(1300, peso);
 		
 	}
-	
-	/*
-		Faltan los servicios
-	 */
 
 }
 

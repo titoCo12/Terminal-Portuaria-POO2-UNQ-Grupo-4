@@ -2,8 +2,14 @@ package unq.edu.po2.servicio;
 
 import unq.edu.po2.container.Container;
 
-public interface Servicio {
+public abstract class Servicio {
 	
-	public double getMontoFinal(Container container);
+	Orden orden;
+	
+	public abstract double getMontoFinal(Container container);
+	
+	public void setOrden(Orden orden) {
+		this.orden = orden;
+	}
 
 }

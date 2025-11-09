@@ -5,7 +5,7 @@ import java.time.Duration;
 import unq.edu.po2.container.Container;
 import unq.edu.po2.container.ContainerReefer;
 
-public class Electricidad implements Servicio {
+public class Electricidad extends Servicio {
 	
 	double precioPorKw;
 	
