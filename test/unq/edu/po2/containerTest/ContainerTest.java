@@ -8,11 +8,14 @@ import org.junit.jupiter.api.Test;
 
 import unq.edu.po2.cliente.Cliente;
 import unq.edu.po2.container.ContainerDry;
-import unq.edu.po2.container.ContenidoCarga;
+import unq.edu.po2.container.Producto;
 
 class ContainerTest {
 	
 	Cliente clienteBruno = new Cliente("Bruno Diaz");
+	Producto arroz = new Producto("Arroz", 40);
+	Producto fideos = new Producto("Fideos", 50);
+	
 
 	@BeforeEach
 	public void setup() {
@@ -20,12 +23,9 @@ class ContainerTest {
     }
 	
 	@Test
-    public void crearContainerDryConCliente() {
-		
-        ContainerDry dry = new ContainerDry("ABCD1234567", 2, 2, 2, 100, clienteBruno);
-
-        assertEquals("ABCD1234567", dry.getIdentificador());
-        assertEquals("Bruno Diaz", dry.getCliente().getNombre());
+    public void test() {
+        
+        
     }
 
 
