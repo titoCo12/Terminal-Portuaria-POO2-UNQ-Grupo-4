@@ -1,13 +1,12 @@
-package unq.edu.po2.cliente;
+package unq.edu.po2.servicio;
 
 import unq.edu.po2.container.Container;
-import unq.edu.po2.servicio.Servicio;
 
-public class Pesado implements Servicio {
+public class AlmacenamientoExcedente implements Servicio {
 	
 	double monto;
 	
-	public Pesado(double monto) {
+	public AlmacenamientoExcedente(double monto) {
 		this.monto = monto;
 	}
 
