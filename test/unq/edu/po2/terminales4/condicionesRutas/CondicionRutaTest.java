@@ -29,6 +29,7 @@ class CondicionRutaTest {
 		viaje3 = mock(Viaje.class);
 		origen = mock(Puerto.class);
 		destino = mock(Puerto.class);
+		listado = new ArrayList<>();
 		listado.add(viaje1);
 		listado.add(viaje2);
 		listado.add(viaje3);
@@ -47,20 +48,20 @@ class CondicionRutaTest {
 		//viaje 1 cumple.
 		when(viaje1.pasaPor(destino)).thenReturn(true);
 		when(viaje1.pasaPor(origen)).thenReturn(true);
-		when(viaje1.fechaLlegadaA(destino)).thenReturn(LocalDate.of(2022, 10, 10));
-		when(viaje1.fechaLlegadaA(origen)).thenReturn(LocalDate.of(2022, 10, 7));
+		when(viaje1.fechaLlegadaA(destino)).thenReturn(Optional.of(LocalDate.of(2022, 10, 10)));
+		when(viaje1.fechaLlegadaA(origen)).thenReturn(Optional.of(LocalDate.of(2022, 10, 7)));
 		
 		//viaje 2 no cumple, pasa por origen despues de pasar por destino.
 		when(viaje2.pasaPor(destino)).thenReturn(true);
 		when(viaje2.pasaPor(origen)).thenReturn(true);
-		when(viaje2.fechaLlegadaA(destino)).thenReturn(LocalDate.of(2022, 10, 10));
-		when(viaje2.fechaLlegadaA(origen)).thenReturn(LocalDate.of(2022, 10, 11));
+		when(viaje2.fechaLlegadaA(destino)).thenReturn(Optional.of(LocalDate.of(2022, 10, 10)));
+		when(viaje2.fechaLlegadaA(origen)).thenReturn(Optional.of(LocalDate.of(2022, 10, 11)));
 		
 		//viaje3 no cumple, no pasa por el puerto destino.
 		when(viaje3.pasaPor(destino)).thenReturn(false);
 		when(viaje3.pasaPor(origen)).thenReturn(true);
-		when(viaje3.fechaLlegadaA(destino)).thenReturn(LocalDate.of(2022, 10, 9));
-		when(viaje3.fechaLlegadaA(origen)).thenReturn(LocalDate.of(2022, 10, 5));
+		when(viaje3.fechaLlegadaA(destino)).thenReturn(Optional.of(LocalDate.of(2022, 10, 9)));
+		when(viaje3.fechaLlegadaA(origen)).thenReturn(Optional.of(LocalDate.of(2022, 10, 5)));
 		
 		// Exercise
 		List<Ruta> result = condRuta.validarViajes(listado, origen);
@@ -69,7 +70,7 @@ class CondicionRutaTest {
 		//Verify
 		// Solo debe haber una ruta resultante en este validar de condicion, siendo la ruta que encuentre de viaje1
 		assertTrue(result.size() == 1);
-		assertTrue(result.getFirst().getViaje() == v1);
+		assertTrue(result.getFirst().getViaje() == viaje1);
 		
 	}
 	
@@ -82,20 +83,20 @@ class CondicionRutaTest {
 		//viaje 1 no cumple, no pasa por el puerto origen
 		when(viaje1.pasaPor(destino)).thenReturn(true);
 		when(viaje1.pasaPor(origen)).thenReturn(false);
-		when(viaje1.fechaLlegadaA(destino)).thenReturn(LocalDate.of(2022, 10, 10));
-		when(viaje1.fechaLlegadaA(origen)).thenReturn(LocalDate.of(2022, 10, 7));
+		when(viaje1.fechaLlegadaA(destino)).thenReturn(Optional.of(LocalDate.of(2022, 10, 10)));
+		when(viaje1.fechaLlegadaA(origen)).thenReturn(Optional.of(LocalDate.of(2022, 10, 7)));
 		
 		//viaje 2 no cumple, pasa por origen despues de pasar por destino.
 		when(viaje2.pasaPor(destino)).thenReturn(true);
 		when(viaje2.pasaPor(origen)).thenReturn(true);
-		when(viaje2.fechaLlegadaA(destino)).thenReturn(LocalDate.of(2022, 10, 10));
-		when(viaje2.fechaLlegadaA(origen)).thenReturn(LocalDate.of(2022, 10, 11));
+		when(viaje2.fechaLlegadaA(destino)).thenReturn(Optional.of(LocalDate.of(2022, 10, 10)));
+		when(viaje2.fechaLlegadaA(origen)).thenReturn(Optional.of(LocalDate.of(2022, 10, 11)));
 		
 		//viaje3 no cumple, no pasa por el puerto destino.
 		when(viaje3.pasaPor(destino)).thenReturn(false);
 		when(viaje3.pasaPor(origen)).thenReturn(true);
-		when(viaje3.fechaLlegadaA(destino)).thenReturn(LocalDate.of(2022, 10, 9));
-		when(viaje3.fechaLlegadaA(origen)).thenReturn(LocalDate.of(2022, 10, 5));
+		when(viaje3.fechaLlegadaA(destino)).thenReturn(Optional.of(LocalDate.of(2022, 10, 9)));
+		when(viaje3.fechaLlegadaA(origen)).thenReturn(Optional.of(LocalDate.of(2022, 10, 5)));
 		
 		// Exercise
 		List<Ruta> result = condRuta.validarViajes(listado, origen);
