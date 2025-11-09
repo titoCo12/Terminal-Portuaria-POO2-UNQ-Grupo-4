@@ -1,5 +1,7 @@
 package unq.edu.po2.servicio;
 
+import java.time.LocalDate;
+
 import unq.edu.po2.container.Container;
 
 public class AlmacenamientoExcedente implements Servicio {
@@ -12,10 +14,8 @@ public class AlmacenamientoExcedente implements Servicio {
 
 	@Override
 	public double getMontoFinal(Container container) {
-		/*
-		 * Sería la cantidad de días que lleva el buque en la terminal * monto
-		 */
-		return 0;
+		long diasExcedidos = Duration.between(orden.getFechaLlegada(), LocalDate.now()).toDays();
+		return  diasExcedidos * monto;
 	}
 
 	
