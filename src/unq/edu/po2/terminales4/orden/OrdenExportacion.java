@@ -8,35 +8,12 @@ import unq.edu.po2.terminales4.terminal.Terminal;
 
 public class OrdenExportacion extends Orden {
 
+	private LocalDate fechaSalida;
 
-
-	public OrdenExportacion(String nombreChofer, String patenteCamion, LocalDate fechaSalida, LocalDate fechaLlegada,
-			String idContainer, Puerto puertoOrigen, Puerto puertoDestino, Cliente cliente) {
-		super(nombreChofer, patenteCamion, fechaSalida, fechaLlegada, idContainer, puertoOrigen, puertoDestino, cliente);
-		
-	}
-
-	@Override
-	public void validarTransporte() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void validarHorario() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Cliente getCliente() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void enviarFactura() {
-		// TODO Auto-generated method stub
+	public OrdenExportacion(String nombreChofer, String patenteCamion, LocalDate fechaTurno, LocalDate fechaLlegada,
+			String idContainer, Puerto puertoOrigen, Puerto puertoDestino, Cliente cliente, LocalDate fechaSalida) {
+		super(nombreChofer, patenteCamion, fechaTurno, fechaLlegada, idContainer, puertoOrigen, puertoDestino, cliente);
+		this.fechaSalida = fechaSalida;
 		
 	}
 
@@ -50,5 +27,20 @@ public class OrdenExportacion extends Orden {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	
+
+	public LocalDate getFechaSalida() {
+		return this.fechaSalida;
+	}
+
+	@Override
+	public void enviarFactura() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 
 }
