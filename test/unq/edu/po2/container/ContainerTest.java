@@ -3,7 +3,7 @@ package unq.edu.po2.container;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-//import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import unq.edu.po2.cliente.Cliente;
@@ -21,7 +21,7 @@ class ContainerTest {
 	Contenedor contenedor = mock(Contenedor.class);
 	Producto productoNuevo = mock(Producto.class);
 	
-	/*@BeforeEach
+	@BeforeEach
 	public void setUp() {
 		when(cliente.getNombre()).thenReturn("Bruno Diaz");
 		
@@ -36,15 +36,10 @@ class ContainerTest {
 		when(dry.getBL()).thenReturn(contenido);
 		when(tanque.getBL()).thenReturn(productoNuevo);
 		when(reefer.getBL()).thenReturn(producto);
-		}*/
+		}
 	
 	@Test
 	public void tanqueTieneProductoNuevo() {
-		
-	    when(productoNuevo.getPesoKilos()).thenReturn(200);
-	    when(productoNuevo.getTipoProducto()).thenReturn("Gasóleo A");
-	    
-	    when(tanque.getBL()).thenReturn(productoNuevo);
 	    
 	    ContenidoCarga carga = tanque.getBL();
 	    
