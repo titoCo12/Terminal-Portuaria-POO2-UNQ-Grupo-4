@@ -25,7 +25,7 @@ public class Contenedor implements ContenidoCarga {
 		return contenidos.stream().mapToInt(ContenidoCarga::getPesoKilos).sum();
 	}
 	
-	//Sólo el dry se puede subdividir con un servicio extra "Desconsolidado" por eso usé "Collectors.joining(", ")"
+	//Sólo el dry se puede subdividir con un servicio extra "Desconsolidado" por eso usé "distinct().collect(Collectors.joining(", ")"
 	@Override
 	public String getTipoProducto() {
 		return contenidos.stream().map(ContenidoCarga::getTipoProducto).distinct().collect(Collectors.joining(", "));

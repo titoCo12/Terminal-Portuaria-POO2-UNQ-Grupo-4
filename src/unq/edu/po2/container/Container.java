@@ -8,9 +8,7 @@ public abstract class Container {
 	int largoMetros;
 	int alturaMetros;
 	int pesoKilos;
-	//Solo por el contructor porque en el uml no lo conoce PREGUNTAR
-	ContenidoCarga carga; 
-	//Solo por el contructor porque en el uml no lo conoce PREGUNTAR
+	ContenidoCarga carga;
 	
 	public Container( Cliente cliente, int idNum, int ancho, int largo, int altura, int peso, ContenidoCarga carga) {
 		identificador = setIdentificador(cliente, idNum);
@@ -42,7 +40,9 @@ public abstract class Container {
 		return nombre.replaceAll("\\s+", "").toUpperCase();
 	}
 	
-	// Voy a suponer que van a poner el apellido o al menos nombres mayores a 4 letras
+	/* Voy a suponer que van a poner el apellido o al menos nombres mayores a 4 letras, 
+	 * se puede hacer igual que agregue letras como los números.
+	 */
 	public String getCuatroLetras(String nombre) {
 		
 		return nombre.substring(0, 4);
