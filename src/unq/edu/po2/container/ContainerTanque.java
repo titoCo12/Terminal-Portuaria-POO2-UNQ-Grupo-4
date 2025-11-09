@@ -8,6 +8,6 @@ public class ContainerTanque extends Container{
 		super(cliente, idNum, ancho, largo, altura, peso, producto);
 	}
 	
-	//¿Es necesario validar que no tenga más de un tipo de producto? si lo especifican cero que sí
+	//¿Es necesario validar que no tenga más de un tipo de producto?
 
 }
