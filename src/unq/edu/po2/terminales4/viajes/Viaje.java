@@ -1,6 +1,7 @@
 package unq.edu.po2.terminales4.viajes;
 import unq.edu.po2.terminales4.posicion.*;
 import unq.edu.po2.terminales4.buque.*;
+import unq.edu.po2.terminales4.circuito.*;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -19,11 +20,11 @@ public class Viaje {
 		this.circuito = circ;
 		this.buque = buque;
 		this.naviera = naviera;
-		this.cronograma = this.crearCronograma();
+		this.crearCronograma();
 	}
 	
 	private void crearCronograma() {
-		//TODO: Implementar metodo que genere cronograma en base a fecha de inicio y circuito.
+		//TODO: Implementar metodo que genere cronograma en base a fecha de inicio y circuito y lo asigne.
 	}
 	
 	public String getCodigo() {
