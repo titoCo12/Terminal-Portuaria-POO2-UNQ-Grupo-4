@@ -2,7 +2,7 @@ package unq.edu.po2.servicio;
 
 import unq.edu.po2.container.Container;
 
-public class Pesado implements Servicio {
+public class Pesado extends Servicio {
 	
 	double monto;
 	

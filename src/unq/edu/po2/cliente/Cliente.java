@@ -17,9 +17,8 @@ public class Cliente {
 	public void recibirNotificacion(LocalDateTime fecha) {
         
     }
-	/*
+	
     public void recibirFactura(Factura factura) {
         
     }
-	*/
 }
