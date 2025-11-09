@@ -64,7 +64,7 @@ class CondicionRutaTest {
 		when(viaje3.fechaLlegadaA(origen)).thenReturn(Optional.of(LocalDate.of(2022, 10, 5)));
 		
 		// Exercise
-		List<Ruta> result = condRuta.validarViajes(listado, origen);
+		List<Ruta> result = condRuta.validarViajes(listado, origen); 
 		
 		
 		//Verify
@@ -255,8 +255,8 @@ class CondicionRutaTest {
 		when(r3.getCodigo()).thenReturn("cod1");
 		when(r4.getCodigo()).thenReturn("cod4");
 		
-		List<Ruta> primerResultado = new ArrayList(Arrays.asList(r1, r2)); 
-		List<Ruta> segundoResultado = new ArrayList(Arrays.asList(r3, r4));
+		List<Ruta> primerResultado = new ArrayList<>(Arrays.asList(r1, r2)); 
+		List<Ruta> segundoResultado = new ArrayList<>(Arrays.asList(r3, r4));
 		when(cond1.validarViajes(listado, origen)).thenReturn(primerResultado);
 		when(cond2.validarViajes(listado, origen)).thenReturn(segundoResultado);
 		
@@ -288,8 +288,8 @@ class CondicionRutaTest {
 		when(r3.getCodigo()).thenReturn("cod3");
 		when(r4.getCodigo()).thenReturn("cod4");
 		
-		List<Ruta> primerResultado = new ArrayList(Arrays.asList(r1, r2)); 
-		List<Ruta> segundoResultado = new ArrayList(Arrays.asList(r3, r4));
+		List<Ruta> primerResultado = new ArrayList<>(Arrays.asList(r1, r2)); 
+		List<Ruta> segundoResultado = new ArrayList<>(Arrays.asList(r3, r4));
 		when(cond1.validarViajes(listado, origen)).thenReturn(primerResultado);
 		when(cond2.validarViajes(listado, origen)).thenReturn(segundoResultado);
 		
@@ -318,8 +318,8 @@ class CondicionRutaTest {
 		when(r3.getCodigo()).thenReturn("cod1");
 		when(r4.getCodigo()).thenReturn("cod4");
 		
-		List<Ruta> primerResultado = new ArrayList(Arrays.asList(r1, r2)); 
-		List<Ruta> segundoResultado = new ArrayList(Arrays.asList(r3, r4));
+		List<Ruta> primerResultado = new ArrayList<>(Arrays.asList(r1, r2)); 
+		List<Ruta> segundoResultado = new ArrayList<>(Arrays.asList(r3, r4));
 		when(cond1.validarViajes(listado, origen)).thenReturn(primerResultado);
 		when(cond2.validarViajes(listado, origen)).thenReturn(segundoResultado);
 		
