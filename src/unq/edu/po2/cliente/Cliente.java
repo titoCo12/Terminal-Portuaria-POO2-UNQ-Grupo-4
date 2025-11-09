@@ -1,5 +1,7 @@
 package unq.edu.po2.cliente;
 
+import java.time.LocalDateTime;
+
 public class Cliente {
 	String nombre;
 	
@@ -11,14 +13,13 @@ public class Cliente {
         return nombre;
     }
 	
-	/* Solo pruebo container por ahora
-	 public void recibirNotificacion(LocalDateTime fecha) {
+	
+	public void recibirNotificacion(LocalDateTime fecha) {
         
     }
 
     public void recibirFactura(Factura factura) {
         
     }
-	 */
 
 }
