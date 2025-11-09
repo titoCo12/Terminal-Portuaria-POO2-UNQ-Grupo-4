@@ -55,7 +55,9 @@ public abstract class Container {
 		return carga.getPesoKilos();
 	}
 	
-	public abstract ContenidoCarga getBL();
+	protected ContenidoCarga getBL() {
+		return carga;
+	}
 	
 	protected String getIdentificador() {
 		return identificador;
