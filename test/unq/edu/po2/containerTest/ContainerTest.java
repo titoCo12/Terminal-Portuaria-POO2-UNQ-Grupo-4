@@ -16,6 +16,11 @@ class ContainerTest {
 	Producto arroz = new Producto("Arroz", 40);
 	Producto fideos = new Producto("Fideos", 50);
 	
+	@BeforeEach
+	public void setUp() {
+		
+	}
+	
 	
 	@Test
     public void test() {
