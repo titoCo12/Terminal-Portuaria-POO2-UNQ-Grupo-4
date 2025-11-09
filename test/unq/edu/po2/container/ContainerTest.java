@@ -123,12 +123,6 @@ class ContainerTest {
 	    String identificador = cReefer.getIdentificador();
 	    assertEquals("HOME2025119", identificador);
 	}
-	/*
-	- consumo de reefer
-	- local date time en reefer
-	- probar getTipoProducto y getPesoKilos en producto, contenedor y contenido
-	
-	*/
 	
 	@Test
 	public void conumoReefer() {
@@ -140,7 +134,26 @@ class ContainerTest {
 		
 		assertEquals(500.0, consumoXHora);
 	}
+	/*
+	- local date time en reefer
+	- probar getTipoProducto y getPesoKilos en producto, contenedor y contenido
 	
+	*/
+	
+	@Test
+	public void tiempoDeConexionYDesconexion() {
+		when(reefer.getMomentoConexion()).thenReturn(LocalDateTime.of(2022, 12, 18, 12, 00));
+		when(reefer.getMomentoDesconexion()).thenReturn(LocalDateTime.of(2026, 06, 11, 18, 00));
+		
+		LocalDateTime conexion = reefer.getMomentoConexion();
+		LocalDateTime desconexion = reefer.getMomentoDesconexion();
+		
+		verify(reefer).getMomentoConexion();
+		verify(reefer).getMomentoDesconexion();
+		
+		assertEquals(LocalDateTime.of(2022, 12, 18, 12, 00), conexion);
+		assertEquals(LocalDateTime.of(2026, 06, 11, 18, 00), desconexion);
+	}
 
 }
 
