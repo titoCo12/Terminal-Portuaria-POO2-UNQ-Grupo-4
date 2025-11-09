@@ -24,8 +24,8 @@ public abstract class Container {
 	/**
 	 * Setea el identificador del container
 	 * @param cliente Cliente
-	 * @param n es número, parte del identificador
-	 * @return identificador de 11 caracteres, 4 letras  y 7 números
+	 * @param n es int, 7 números
+	 * @return String, identificador de 11 caracteres, 4 letras  y 7 números
 	 */
 	private String setIdentificador(Cliente cliente, int n) {
 		
