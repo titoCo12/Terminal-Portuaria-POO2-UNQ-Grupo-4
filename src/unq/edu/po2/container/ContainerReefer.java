@@ -7,7 +7,7 @@ import unq.edu.po2.cliente.Cliente;
 public class ContainerReefer extends Container{
 	
 	int celciusDeseado;
-	double consumo;
+	double consumo = 0.0;
 	LocalDateTime momentoConexion;
 	LocalDateTime momentoDesconexion;
 
@@ -16,6 +16,14 @@ public class ContainerReefer extends Container{
 		celciusDeseado = temperaturaDeseada;
 		momentoConexion = tiempoConexion;
 		momentoDesconexion = tiempoDesconexion;
+	}
+	
+	public void setConsumo(double consumo) {
+		this.consumo = consumo;
+	}
+	
+	public void aumentarConsumo(double masConsumo) {
+		consumo += masConsumo;
 	}
 	
 	public double getConsumoXHora() {
