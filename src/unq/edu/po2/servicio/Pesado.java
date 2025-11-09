@@ -12,8 +12,7 @@ public class Pesado implements Servicio {
 
 	@Override
 	public double getMontoFinal(Container container) {
-		// TODO Auto-generated method stub
-		return 0;
+		return monto;
 	}
 
 }
