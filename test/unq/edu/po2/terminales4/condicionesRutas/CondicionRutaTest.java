@@ -1,6 +1,5 @@
 package unq.edu.po2.terminales4.condicionesRutas;
 
-import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -211,7 +210,7 @@ class CondicionRutaTest {
 	}
 	
 	
-	@Test
+	@Test 
 	void condicionLlegadaSinResultados() {
 		
 		//SetUp
@@ -235,5 +234,107 @@ class CondicionRutaTest {
 		// Solo viaje1 cumple la condicion, de este viaje debe salir una sola ruta
 		assertTrue(result.size() == 0);
 	}
+	
+	
+	//lo unico que falta verificar es que las condiciones and y or funcionen como
+	// interseccion y union respectivamente.
+	@Test
+	void condicionANDSeCumple() {
+		
+		//SetUp
+		CondicionRuta cond1 = mock(CondicionDestino.class);
+		CondicionRuta cond2 = mock(CondicionLlegada.class);
+		condRuta = new CondicionAND(cond1, cond2);
+		
+		Ruta r1 = mock(Ruta.class);
+		Ruta r2 = mock(Ruta.class);
+		Ruta r3 = mock(Ruta.class);
+		Ruta r4 = mock(Ruta.class);
+		when(r1.getCodigo()).thenReturn("cod1");
+		when(r2.getCodigo()).thenReturn("cod2");
+		when(r3.getCodigo()).thenReturn("cod1");
+		when(r4.getCodigo()).thenReturn("cod4");
+		
+		List<Ruta> primerResultado = new ArrayList(Arrays.asList(r1, r2)); 
+		List<Ruta> segundoResultado = new ArrayList(Arrays.asList(r3, r4));
+		when(cond1.validarViajes(listado, origen)).thenReturn(primerResultado);
+		when(cond2.validarViajes(listado, origen)).thenReturn(segundoResultado);
+		
+		//Exercise
+		List<Ruta> result = condRuta.validarViajes(listado, origen);
+		
+		//Verify
+		// Debe quedarse con r1/r3, ya que tienen el mismo codigo, es decir, por mas que sean
+		// instancias distintas son la misma ruta y cumplen ambas condiciones.
+		assertTrue(result.size() == 1);
+		assertTrue(result.getFirst().getCodigo() == "cod1");
+	}
+	
+	
+	@Test
+	void condicionANDNoCumple() {
+		
+		//SetUp
+		CondicionRuta cond1 = mock(CondicionDestino.class);
+		CondicionRuta cond2 = mock(CondicionLlegada.class);
+		condRuta = new CondicionAND(cond1, cond2);
+		
+		Ruta r1 = mock(Ruta.class);
+		Ruta r2 = mock(Ruta.class);
+		Ruta r3 = mock(Ruta.class);
+		Ruta r4 = mock(Ruta.class);
+		when(r1.getCodigo()).thenReturn("cod1");
+		when(r2.getCodigo()).thenReturn("cod2");
+		when(r3.getCodigo()).thenReturn("cod3");
+		when(r4.getCodigo()).thenReturn("cod4");
+		
+		List<Ruta> primerResultado = new ArrayList(Arrays.asList(r1, r2)); 
+		List<Ruta> segundoResultado = new ArrayList(Arrays.asList(r3, r4));
+		when(cond1.validarViajes(listado, origen)).thenReturn(primerResultado);
+		when(cond2.validarViajes(listado, origen)).thenReturn(segundoResultado);
+		
+		//Exercise
+		List<Ruta> result = condRuta.validarViajes(listado, origen);
+		
+		//Verify
+		// No hay ruta que cumpla ambas condiciones por ende no retiene ninguna
+		assertTrue(result.isEmpty());
+	}
 
+	@Test
+	void condicionORCumplen() {
+		
+		//SetUp
+		CondicionRuta cond1 = mock(CondicionDestino.class);
+		CondicionRuta cond2 = mock(CondicionLlegada.class);
+		condRuta = new CondicionOR(cond1, cond2);
+		
+		Ruta r1 = mock(Ruta.class);
+		Ruta r2 = mock(Ruta.class);
+		Ruta r3 = mock(Ruta.class);
+		Ruta r4 = mock(Ruta.class);
+		when(r1.getCodigo()).thenReturn("cod1");
+		when(r2.getCodigo()).thenReturn("cod2");
+		when(r3.getCodigo()).thenReturn("cod1");
+		when(r4.getCodigo()).thenReturn("cod4");
+		
+		List<Ruta> primerResultado = new ArrayList(Arrays.asList(r1, r2)); 
+		List<Ruta> segundoResultado = new ArrayList(Arrays.asList(r3, r4));
+		when(cond1.validarViajes(listado, origen)).thenReturn(primerResultado);
+		when(cond2.validarViajes(listado, origen)).thenReturn(segundoResultado);
+		
+		//Exercise
+		List<Ruta> result = condRuta.validarViajes(listado, origen);
+		
+		//Verify
+		// Debe quedarse con 3, ya que, r1 y r3 son la misma ruta, solo la guarda una vez
+		assertTrue(result.size() == 3);
+		
+		// codigos de r1, r2, r3 y r4
+		List<String> codigos = result.stream().map(Ruta::getCodigo).toList();
+		assertTrue(codigos.containsAll(List.of("cod1", "cod2", "cod4")));
+		 
+	}
+	//testear que el OR no tenga resultados seria forzar a las condiciones "hoja" a no devolver 
+	// nada en su validar viaje
 }
