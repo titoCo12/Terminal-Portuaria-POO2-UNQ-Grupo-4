@@ -63,4 +63,8 @@ public abstract class Container {
 		return identificador;
 	}
 	
+	public int getDimensionesCubicas() {
+		return anchoMetros * largoMetros * alturaMetros;
+	}
+	
 }

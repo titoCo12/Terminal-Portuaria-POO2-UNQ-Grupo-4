@@ -6,7 +6,7 @@ public class AlmacenamientoExcedente implements Servicio {
 	
 	double monto;
 	
-	public AlmacenamientoExcedente(double monto) {
+	public AlmacenamientoExcedente(double montoMayor) {
 		this.monto = monto;
 	}
 
@@ -15,5 +15,8 @@ public class AlmacenamientoExcedente implements Servicio {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	
+	
 
 }

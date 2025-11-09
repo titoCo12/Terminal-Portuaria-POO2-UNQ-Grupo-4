@@ -4,16 +4,25 @@ import unq.edu.po2.container.Container;
 
 public class Lavado implements Servicio {
 	
-	double precio;
+	double precioMenor;
+	double precioMayor;
+	final int dimensionesAComparar = 70;
 	
-	public Lavado(double precio) {
-		this.precio = precio;
+	
+	public Lavado(double precioMenor, double precioMayor) {
+		this.precioMenor = precioMenor;
+		this.precioMayor = precioMayor;
 	}
 
 	@Override
 	public double getMontoFinal(Container container) {
-		// TODO Auto-generated method stub
-		return 0;
+		int dimensionescubicas = container.getDimensionesCubicas();
+		
+		if (dimensionescubicas > dimensionesAComparar) {
+			return precioMayor;
+		} else {
+			return precioMenor;
+		}
 	}
 
 }
