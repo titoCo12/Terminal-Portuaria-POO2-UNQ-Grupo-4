@@ -134,11 +134,6 @@ class ContainerTest {
 		
 		assertEquals(500.0, consumoXHora);
 	}
-	/*
-	- local date time en reefer
-	- probar getTipoProducto y getPesoKilos en producto, contenedor y contenido
-	
-	*/
 	
 	@Test
 	public void tiempoDeConexionYDesconexion() {
@@ -153,6 +148,35 @@ class ContainerTest {
 		
 		assertEquals(LocalDateTime.of(2022, 12, 18, 12, 00), conexion);
 		assertEquals(LocalDateTime.of(2026, 06, 11, 18, 00), desconexion);
+	}
+	
+	@Test
+	public void tipoYPesoEnProducto() {
+		when(producto.getTipoProducto()).thenReturn("Tecnologia");
+		when(producto.getPesoKilos()).thenReturn(2000);
+		
+		String tipo = producto.getTipoProducto();
+		int peso = producto.getPesoKilos();
+		
+		assertEquals("Tecnologia", tipo);
+		assertEquals(2000, peso);
+		
+	}
+
+	@Test
+	public void tipoYPesoEnContenedor() {
+		ContenidoCarga contenido2 = mock(ContenidoCarga.class);
+		
+		when(contenido.getTipoProducto()).thenReturn("Metalurgico");
+		when(contenido.getPesoKilos()).thenReturn(600);
+		when(contenido2.getPesoKilos()).thenReturn(700);
+		
+		String tipo = contenido.getTipoProducto();
+		int peso = contenido.getPesoKilos() + contenido2.getPesoKilos();
+		
+		assertEquals("Metalurgico", tipo);
+		assertEquals(1300, peso);
+		
 	}
 
 }
