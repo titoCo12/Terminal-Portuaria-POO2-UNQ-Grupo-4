@@ -27,9 +27,11 @@ class ContainerTest {
 	
 	@BeforeEach
 	public void setUp() {
+		when(producto.getPesoKilos()).thenReturn(500);
+		when(producto.getTipoProducto()).thenReturn("Comida");
 		
+		when(contenedor.getPesoKilos()).thenReturn(300);
 	}
-	
 	
 	@Test
     public void test() {
