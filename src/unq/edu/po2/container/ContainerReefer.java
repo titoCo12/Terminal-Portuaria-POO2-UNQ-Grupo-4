@@ -11,7 +11,7 @@ public class ContainerReefer extends Container{
 	LocalDateTime momentoConexion;
 	LocalDateTime momentoDesconexion;
 
-	public ContainerReefer(Cliente cliente, int idNum, int ancho, int largo, int altura, int peso, Producto producto, int temperaturaDeseada, LocalDateTime tiempoConexion, LocalDateTime tiempoDesconexion) {
+	public ContainerReefer(Cliente cliente, int idNum, int ancho, int largo, int altura, int peso, ContenidoCarga producto, int temperaturaDeseada, LocalDateTime tiempoConexion, LocalDateTime tiempoDesconexion) {
 		super(cliente, idNum, ancho, largo, altura, peso, producto);
 		celciusDeseado = temperaturaDeseada;
 		momentoConexion = tiempoConexion;

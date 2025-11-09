@@ -50,7 +50,7 @@ public abstract class Container {
 	
 	public abstract double costoServicios();
 	
-	protected int getPesoCarga() {
+	public int getPesoCarga() {
 		
 		return carga.getPesoKilos();
 	}

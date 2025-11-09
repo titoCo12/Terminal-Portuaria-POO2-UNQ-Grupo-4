@@ -11,11 +11,7 @@ import unq.edu.po2.container.*;
 
 
 class ContainerTest {
-	/*
-	Cliente clienteBruno = new Cliente("Bruno Diaz");
-	Producto arroz = new Producto("Arroz", 40);
-	Producto fideos = new Producto("Fideos", 50);
-	*/
+	
 	Cliente cliente = mock(Cliente.class);
 	Container container = mock(Container.class);
 	ContainerDry dry = mock(ContainerDry.class);
@@ -32,20 +28,24 @@ class ContainerTest {
 		when(producto.getTipoProducto()).thenReturn("Comida");
 		when(productoNuevo.getPesoKilos()).thenReturn(200);
 		when(productoNuevo.getTipoProducto()).thenReturn("Gasóleo A");
-		
+		/*
 		when(contenido.getPesoKilos()).thenReturn(300);
-		when(contenido.getTipoProducto()).thenReturn("Cucharas");
+		when(contenido.getTipoProducto()).thenReturn("Electrodomésticos");
 		
-		when(dry.getBL()).thenReturn(contenido);
-		when(reefer.getBL()).thenReturn(producto);
+		when(dry.getBL()).thenReturn(contenido);*/
 		when(tanque.getBL()).thenReturn(productoNuevo);
 		
+		
+		when(reefer.getBL()).thenReturn(producto);
 		}
 	
 	@Test
     public void test() {
-        
-        
+		ContenidoCarga BL = tanque.getBL();
+		
+		verify(tanque).getBL();
+		
+		assertEquals(productoNuevo, BL);
     }
 
 
