@@ -27,23 +27,23 @@ public abstract class Container {
 	 * @param n es int, 7 números
 	 * @return String, identificador de 11 caracteres, 4 letras  y 7 números
 	 */
-	private String setIdentificador(Cliente cliente, int n) {
+	public String setIdentificador(Cliente cliente, int n) {
 		
 		return generarCodCliente(cliente.getNombre()) + String.format("%07d", n);
 	}
 	
-	private String generarCodCliente(String nombre) {
+	public String generarCodCliente(String nombre) {
 		
 		return getCuatroLetras(normalizarNombre(nombre));
 	}
 	
-	private String normalizarNombre(String nombre) {
+	public String normalizarNombre(String nombre) {
 		
 		return nombre.replaceAll("\\s+", "").toUpperCase();
 	}
 	
 	// Voy a suponer que van a poner el apellido o al menos nombres mayores a 4 letras
-	private String getCuatroLetras(String nombre) {
+	public String getCuatroLetras(String nombre) {
 		
 		return nombre.substring(0, 4);
 	}

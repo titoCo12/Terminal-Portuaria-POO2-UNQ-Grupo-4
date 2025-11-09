@@ -3,6 +3,8 @@ package unq.edu.po2.container;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,9 +21,11 @@ class ContainerTest {
 	ContenidoCarga contenido;
 	Producto producto;
 	Contenedor contenedor;
+    
 	
 	@BeforeEach
 	public void setUp() {
+		
 		cliente = mock(Cliente.class);
 		container = mock(Container.class);
 		dry = mock(ContainerDry.class);
@@ -30,10 +34,22 @@ class ContainerTest {
 		contenido = mock(ContenidoCarga.class);
 		producto = mock(Producto.class);
 		contenedor = mock(Contenedor.class);
-		/*
-		when(cliente.getNombre()).thenReturn("Bruno Diaz");
-		*/
+		
 		}
+	
+	@Test
+	public void containerTieneContenidoYPeso() {
+		when(contenido.getPesoKilos()).thenReturn(3000);
+		when(contenido.getTipoProducto()).thenReturn("Madera");
+		when(container.getBL()).thenReturn(contenido);
+		
+		ContenidoCarga carga = container.getBL();
+	    
+	    verify(container).getBL();
+	    
+	    assertEquals(3000, carga.getPesoKilos());
+	    assertEquals("Madera", carga.getTipoProducto());
+	}
 	
 	@Test
 	public void tanqueTieneGasoleoConPeso() {
@@ -77,6 +93,54 @@ class ContainerTest {
 	    assertEquals(500, carga.getPesoKilos());
 	    assertEquals("Comida", carga.getTipoProducto());
 	}
+	
+	@Test
+	public void identificadorEnDry() {
+		when(cliente.getNombre()).thenReturn("Bruno Diaz");
+		
+	    ContainerDry Cdry = new ContainerDry(cliente, 1234567, 6, 6, 12, 100, contenido);
+	    
+	    String identificador = Cdry.getIdentificador();
+	    assertEquals("BRUN1234567", identificador);
+	}
+	
+	@Test 
+	public void identificadorEnTanque() {
+		when(cliente.getNombre()).thenReturn("Ricardo Tapia");
+		
+	    ContainerTanque cTanque = new ContainerTanque(cliente, 567, 6, 6, 12, 100, contenido);
+	    
+	    String identificador = cTanque.getIdentificador();
+	    assertEquals("RICA0000567", identificador);
+	}
+	
+	@Test
+	public void identificadorEnReefer() {
+		when(cliente.getNombre()).thenReturn("Homero Simpson");
+		
+		ContainerReefer cReefer = new ContainerReefer(cliente, 2025119, 6, 6, 12, 100, contenido, 0, LocalDateTime.of(2022, 12, 18, 12, 00), LocalDateTime.of(2026, 06, 11, 12, 00));
+		
+	    String identificador = cReefer.getIdentificador();
+	    assertEquals("HOME2025119", identificador);
+	}
+	/*
+	- consumo de reefer
+	- local date time en reefer
+	- probar getTipoProducto y getPesoKilos en producto, contenedor y contenido
+	
+	*/
+	
+	@Test
+	public void conumoReefer() {
+		when(reefer.getConsumoXHora()).thenReturn(500.0);
+		
+		double consumoXHora = reefer.getConsumoXHora();
+		
+		verify(reefer).getConsumoXHora();
+		
+		assertEquals(500.0, consumoXHora);
+	}
+	
 
 }
 
