@@ -75,6 +75,9 @@ public abstract class Container {
 		return identificador;
 	}
 	
+	//solo para reporte
+	public abstract String getTipo();
+	
 	public int getDimensionesCubicas() {
 		return anchoMetros * largoMetros * alturaMetros;
 	}
