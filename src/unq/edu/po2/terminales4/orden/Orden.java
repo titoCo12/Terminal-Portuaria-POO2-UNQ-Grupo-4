@@ -76,7 +76,7 @@ public abstract class Orden {
 	}
 
 
-	protected Container getContainer() {
+	public Container getContainer() {
 		return this.container;
 	}
 	
