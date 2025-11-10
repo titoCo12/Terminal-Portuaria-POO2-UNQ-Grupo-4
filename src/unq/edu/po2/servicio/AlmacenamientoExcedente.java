@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 
 import unq.edu.po2.container.Container;
+import unq.edu.po2.terminales4.orden.Orden;
 
 public class AlmacenamientoExcedente extends Servicio {
 	
@@ -14,9 +15,10 @@ public class AlmacenamientoExcedente extends Servicio {
 		this.orden = orden;
 	}
 
+	
 	@Override
 	public double getMontoFinal(Container container) {
-		long diasExcedidos = Duration.between(orden.getFechaLlegada(), LocalDate.now()).toDays();
+		long diasExcedidos = Duration.between(orden.getFechaLLegada(), orden.getFechaRetirada()).toDays();
 		return  diasExcedidos * monto;
 	}
 
