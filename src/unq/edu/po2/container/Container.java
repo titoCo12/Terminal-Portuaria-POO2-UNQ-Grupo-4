@@ -29,6 +29,10 @@ public abstract class Container {
 	public void agregarServicio(Servicio servicio) {
 		this.servicios.add(servicio);
 	}
+	
+	
+	//Hacer getDesgloseServicios()
+	
 	/**
 	 * Setea el identificador del container
 	 * @param cliente Cliente
