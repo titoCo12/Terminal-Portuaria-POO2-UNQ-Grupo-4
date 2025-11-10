@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import unq.edu.po2.cliente.Cliente;
+import unq.edu.po2.container.Container;
+import unq.edu.po2.factura.Factura;
 import unq.edu.po2.servicio.Servicio;
 import unq.edu.po2.terminales4.posicion.Puerto;
 import unq.edu.po2.terminales4.terminal.Terminal;
@@ -13,28 +15,27 @@ public abstract class Orden {
 	protected String patenteCamion;
 	protected LocalDate fechaTurno;
 	protected LocalDate fechaLLegada;
-	protected String idContainer;
 	protected Puerto puertoOrigen;
 	protected Puerto puertoDestino;
 	protected Cliente cliente;
 	protected ArrayList<Servicio> servicios;
+	private Container container;
 	
 	public Orden(String dniChofer, String patenteCamion, LocalDate fechaTurno, LocalDate fechaLlegada,
-			String idContainer, Puerto puertoOrigen, Puerto puertoDestino, Cliente cliente) {
+			Puerto puertoOrigen, Puerto puertoDestino, Container container, Cliente cliente) {
 		this.dniChofer = dniChofer;
 		this.patenteCamion = patenteCamion;
 		this.fechaTurno = fechaTurno;
 		this.fechaLLegada = fechaLlegada;
-		this.idContainer = idContainer;
 		this.puertoOrigen = puertoOrigen;
 		this.puertoDestino = puertoDestino;
+		this.container = container;
 		this.cliente = cliente;
 		this.servicios = new ArrayList<Servicio>();
 		
 	}
 	
 	
-	public abstract void enviarFactura();
 	public abstract String getTitulo();
 	public boolean correspondeATerminal(Terminal terminalGesionada) {
 		return terminalGesionada.getPuerto().getNombre().equals(this.getPuertoDestino().getNombre()) ;
@@ -61,10 +62,7 @@ public abstract class Orden {
 	}
 
 
-	protected String getIdContainer() {
-		return idContainer;
-	}
-
+	
 
 	protected Puerto getPuertoOrigen() {
 		return puertoOrigen;
@@ -85,7 +83,19 @@ public abstract class Orden {
 		return servicios;
 	}
 
-
+	protected Container getContainer() {
+		return this.container;
+	}
 	
+	public void enviarFactura() {
+		Factura factura = this.crearFactura();
+		this.getCliente().recibirFactura(factura);
+		
+	}
+
+	private Factura crearFactura() {
+		// TODO Auto-generated method stub
+		return new Factura();
+	}
 
 }
