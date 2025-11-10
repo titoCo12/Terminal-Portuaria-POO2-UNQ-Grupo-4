@@ -18,7 +18,7 @@ public class AlmacenamientoExcedente extends Servicio {
 	
 	@Override
 	public double getMontoFinal(Container container) {
-		long diasExcedidos = Duration.between(orden.getFechaLLegada(), orden.getFechaRetirada()).toDays();
+		long diasExcedidos = Duration.between(orden.getFechaLLegada(), orden.getFechaRetiroCarga()).toDays();
 		return  diasExcedidos * monto;
 	}
 
