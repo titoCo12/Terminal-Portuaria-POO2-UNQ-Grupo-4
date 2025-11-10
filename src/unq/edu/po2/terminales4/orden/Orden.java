@@ -18,7 +18,6 @@ public abstract class Orden {
 	protected Puerto puertoOrigen;
 	protected Puerto puertoDestino;
 	protected Cliente cliente;
-	protected ArrayList<Servicio> servicios;
 	private Container container;
 	
 	public Orden(String dniChofer, String patenteCamion, LocalDate fechaTurno, LocalDate fechaLlegada,
@@ -31,7 +30,6 @@ public abstract class Orden {
 		this.puertoDestino = puertoDestino;
 		this.container = container;
 		this.cliente = cliente;
-		this.servicios = new ArrayList<Servicio>();
 		
 	}
 	
@@ -78,10 +76,6 @@ public abstract class Orden {
 	}
 
 
-	protected ArrayList<Servicio> getServicios() {
-		return servicios;
-	}
-
 	protected Container getContainer() {
 		return this.container;
 	}
@@ -94,7 +88,7 @@ public abstract class Orden {
 
 	private Factura crearFactura() {
 		// TODO Auto-generated method stub
-		return new Factura();
+		return new Factura(this);
 	}
 
 }

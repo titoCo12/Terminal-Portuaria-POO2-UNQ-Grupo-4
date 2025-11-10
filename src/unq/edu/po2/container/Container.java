@@ -1,6 +1,10 @@
 package unq.edu.po2.container;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import unq.edu.po2.cliente.Cliente;
+import unq.edu.po2.servicio.*;
 
 public abstract class Container {
 	String identificador;
@@ -9,6 +13,7 @@ public abstract class Container {
 	int alturaMetros;
 	int pesoKilos;
 	ContenidoCarga carga;
+	List<Servicio> servicios;
 	
 	public Container( Cliente cliente, int idNum, int ancho, int largo, int altura, int peso, ContenidoCarga carga) {
 		identificador = setIdentificador(cliente, idNum);
@@ -17,8 +22,13 @@ public abstract class Container {
 		alturaMetros = altura;
 		pesoKilos = peso;
 		this.carga = carga;
+		this.servicios = new ArrayList<Servicio>();
+		
 	}
 	
+	public void agregarServicio(Servicio servicio) {
+		this.servicios.add(servicio);
+	}
 	/**
 	 * Setea el identificador del container
 	 * @param cliente Cliente

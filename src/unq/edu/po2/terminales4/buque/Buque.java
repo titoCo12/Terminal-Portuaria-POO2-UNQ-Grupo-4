@@ -51,7 +51,7 @@ public class Buque{
 	}
 
 	protected void avisarArriboATerminal() {
-		this.terminalDestino.preavisoBuque();
+		this.terminalDestino.preavisoBuque(this.getOrdenesQueCorrespondenA(terminalDestino));
 		
 	}
 	
@@ -66,9 +66,8 @@ public class Buque{
 		this.fase.depart();
 	}
 
-	public void enviarFacturas() {
-		this.ordenes.stream().forEach(orden -> orden.enviarFactura());
-		
+	public void enviarFacturas() {		
+		this.getOrdenesQueCorrespondenA(this.terminalDestino).forEach(orden -> orden.enviarFactura());
 	}
 	
 	public List<Orden> getOrdenesQueCorrespondenA(Terminal terminal) {

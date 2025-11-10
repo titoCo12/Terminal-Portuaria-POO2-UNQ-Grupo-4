@@ -19,9 +19,11 @@ class BuqueTest {
 	Terminal terminalDestino;
 	Posicion posicionBuque, posicionTerminal;
 	List<Orden> ordenes;
+	Orden orden;
 	
 	@BeforeEach
 	void setUp() throws Exception {
+		orden = mock(Orden.class);
 		ordenes = new ArrayList<Orden>();
 		terminalDestino = mock(Terminal.class);
 		posicionBuque = mock(Posicion.class);
@@ -29,6 +31,7 @@ class BuqueTest {
 		ordenes.add(mock(Orden.class));
 		buque = new Buque("Gran Buque");
 		buque.terminalDestino(terminalDestino);
+		ordenes.add(orden);
 	}
 
 	@Test
@@ -38,7 +41,7 @@ class BuqueTest {
 		
 		buque.actualizarPosicion(posicionBuque);
 		
-		verify(terminalDestino).preavisoBuque();
+		verify(terminalDestino).preavisoBuque(ordenes);
 	}
 	
 	@Test
@@ -78,13 +81,13 @@ class BuqueTest {
 		buque.iniciarTrabajo();
 		//enviar mensaje a buque que puse salir
 		buque.depart();
-		verify(terminalDestino, times(1)).preavisoBuque();
-		verify(terminalDestino, never()).buqueSaliendo();
+		verify(terminalDestino, times(1)).preavisoBuque(ordenes);
+		verify(terminalDestino, never()).buqueSaliendo(buque);
 		
 		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(3);
 		//buque saliendo esta a mas de 1km , debe comunicar a la terminal
 		buque.actualizarPosicion(posicionBuque);
-		verify(terminalDestino, times(1)).buqueSaliendo();
+		verify(terminalDestino, times(1)).buqueSaliendo(buque);
 		
 	}
 	
@@ -92,7 +95,7 @@ class BuqueTest {
 	void testNoSeDebeInvocarBuqueSaliendoEnFaseInbound() {
 		when(terminalDestino.posicion()).thenReturn(posicionTerminal);
 		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(30);
-		verify(terminalDestino, never()).buqueSaliendo();
+		verify(terminalDestino, never()).buqueSaliendo(buque);
 		
 		
 	}
