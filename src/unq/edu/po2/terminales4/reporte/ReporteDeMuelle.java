@@ -15,15 +15,12 @@ public class ReporteDeMuelle extends Reporte{
 		//puerto de referencia
 		this.escribir("puerto: " + term.getPuerto().getNombre() + "\n");
 		//fecha de llegada al puerto
-		this.escribir("llegada: ");
-		this.escribir(fecha + " \n");
+		this.escribir("llegada: " + fecha + " \n");
 		//fecha de salida del puerto
 		//sale el mismo dia que llega
-		this.escribir("salida: ");
-		this.escribir(fecha + " \n");
+		this.escribir("salida: " + fecha + " \n");
 		//cantidad de containers operados
-		this.escribir("containers operados: ");
-		this.escribir(Integer.toString(ordenes.size()));
+		this.escribir("containers operados: " + Integer.toString(ordenes.size()));
 	}
 	
 	public void visitOrden(Orden orden, Terminal term) {}
