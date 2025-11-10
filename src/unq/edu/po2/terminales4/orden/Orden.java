@@ -35,12 +35,11 @@ public abstract class Orden {
 		
 	}
 	
-	
 	public abstract String getTitulo();
+	
 	public boolean correspondeATerminal(Terminal terminalGesionada) {
 		return terminalGesionada.getPuerto().getNombre().equals(this.getPuertoDestino().getNombre()) ;
 	}
-
 
 	protected  String getDniChofer() {
 		return dniChofer;

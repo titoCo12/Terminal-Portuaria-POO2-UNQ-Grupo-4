@@ -1,6 +1,7 @@
 package unq.edu.po2.terminales4.buque;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import unq.edu.po2.terminales4.orden.Orden;
 import unq.edu.po2.terminales4.posicion.Posicion;
@@ -20,6 +21,10 @@ public class Buque{
 		this.fase = new FaseOutbound(this);
 	}
 
+	public String getNombre() {
+		return this.nombre;
+	}
+	
 	public void agregarOrden(Orden orden) {
 		this.ordenes.add(orden);
 	}
@@ -65,4 +70,10 @@ public class Buque{
 		this.ordenes.stream().forEach(orden -> orden.enviarFactura());
 		
 	}
+	
+	public List<Orden> getOrdenesQueCorrespondenA(Terminal terminal) {
+        return ordenes.stream()
+            .filter(o -> o.correspondeATerminal(terminal))
+            .collect(Collectors.toList());
+    }
 }
