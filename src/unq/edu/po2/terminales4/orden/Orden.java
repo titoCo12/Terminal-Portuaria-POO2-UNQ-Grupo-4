@@ -56,7 +56,7 @@ public abstract class Orden {
 	}
 
 
-	public LocalDate getFechaLLegada() {
+	public LocalDate getFechaLlegada() {
 		return fechaLLegada;
 	}
 
