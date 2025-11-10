@@ -8,6 +8,10 @@ public class ContainerTanque extends Container{
 		super(cliente, idNum, ancho, largo, altura, peso, producto);
 	}
 	
+	public String getTipo() {
+		return "Tanque";
+	}
+	
 	//¿Es necesario validar que no tenga más de un tipo de producto?
 
 }

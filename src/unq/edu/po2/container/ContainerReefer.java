@@ -18,6 +18,10 @@ public class ContainerReefer extends Container{
 		momentoDesconexion = tiempoDesconexion;
 	}
 	
+	public String getTipo() {
+		return "Reefer";
+	}
+	
 	public void setConsumo(double consumo) {
 		this.consumo = consumo;
 	}
