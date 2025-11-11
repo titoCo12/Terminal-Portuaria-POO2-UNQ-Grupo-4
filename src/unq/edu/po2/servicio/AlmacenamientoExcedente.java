@@ -25,19 +25,12 @@ public class AlmacenamientoExcedente implements Servicio {
 		
 		return  diasExcedidos * monto;
 	}
-	//Esto existe por porque lo tiene la interfaz
+	//Esto existe por porque lo tiene la interface
 	@Override
 	public double getMontoFinal(Container container) {
 		
 		return 0;
 	}
-	
-	/*
-	 * Todos estuvimos de acuerdo en que necesito getMontoFinal(Orden orden)
-	 * pero como en la interfaz está: getMontoFinal(Container container), también lo necesito implementar,
-	 * no puedo hacer que devuelva null o 0, ¿de verdád no es más fácil convertir Servicio en
-	 * una clase abstracta y pasarme orden cuando armo el excedente?
-	 */
 
 	@Override
 	public String getNombre() {
