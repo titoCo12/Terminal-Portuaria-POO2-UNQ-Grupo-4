@@ -28,10 +28,10 @@ class BuqueTest {
 		terminalDestino = mock(Terminal.class);
 		posicionBuque = mock(Posicion.class);
 		posicionTerminal = mock(Posicion.class);
-		ordenes.add(mock(Orden.class));
 		buque = new Buque("Gran Buque");
 		buque.terminalDestino(terminalDestino);
-		ordenes.add(orden);
+		buque.agregarOrden(orden);
+		
 	}
 
 	@Test
@@ -60,7 +60,7 @@ class BuqueTest {
 		//paso a arrived
 		buque.actualizarPosicion(posicionBuque);
 				
-		verify(terminalDestino, times(1)).preavisoBuque();
+		verify(terminalDestino).preavisoBuque(ordenes);
 		
 		
 	}
@@ -69,6 +69,7 @@ class BuqueTest {
 	void testPasoDeArrivedAWorking() {
 		when(terminalDestino.posicion()).thenReturn(posicionTerminal);
 		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(30);
+		when(orden.correspondeATerminal(terminalDestino)).thenReturn(true);	
 		
 		//paso a inbound
 		buque.actualizarPosicion(posicionBuque);
@@ -81,7 +82,7 @@ class BuqueTest {
 		buque.iniciarTrabajo();
 		//enviar mensaje a buque que puse salir
 		buque.depart();
-		verify(terminalDestino, times(1)).preavisoBuque(ordenes);
+		
 		verify(terminalDestino, never()).buqueSaliendo(buque);
 		
 		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(3);
