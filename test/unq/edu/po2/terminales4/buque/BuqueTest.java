@@ -37,7 +37,7 @@ class BuqueTest {
 	@Test
 	void testPasoDeOutbounAInboundMandarAvisoATerminal() {
 		when(terminalDestino.posicion()).thenReturn(posicionTerminal);
-		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(30);
+		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(30d);
 		
 		buque.actualizarPosicion(posicionBuque);
 		
@@ -47,16 +47,16 @@ class BuqueTest {
 	@Test
 	void testPasoDeInboundAArrived() {
 		when(terminalDestino.posicion()).thenReturn(posicionTerminal);
-		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(30);
+		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(30d);
 		
 		//paso a inbound
 		buque.actualizarPosicion(posicionBuque);
 		
 		//me acerco para evaluar la otra rama del if , si llego a terminal
-		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(10);
+		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(10d);
 		buque.actualizarPosicion(posicionBuque);
 		
-		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(0);
+		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(0d);
 		//paso a arrived
 		buque.actualizarPosicion(posicionBuque);
 				
@@ -68,13 +68,13 @@ class BuqueTest {
 	@Test
 	void testPasoDeArrivedAWorking() {
 		when(terminalDestino.posicion()).thenReturn(posicionTerminal);
-		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(30);
+		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(30d);
 		when(orden.correspondeATerminal(terminalDestino)).thenReturn(true);	
 		
 		//paso a inbound
 		buque.actualizarPosicion(posicionBuque);
 		
-		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(0);
+		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(0d);
 		//paso a arrived
 		buque.actualizarPosicion(posicionBuque);
 		
@@ -85,7 +85,7 @@ class BuqueTest {
 		
 		verify(terminalDestino, never()).buqueSaliendo(buque);
 		
-		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(3);
+		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(3d);
 		//buque saliendo esta a mas de 1km , debe comunicar a la terminal
 		buque.actualizarPosicion(posicionBuque);
 		verify(terminalDestino, times(1)).buqueSaliendo(buque);
@@ -95,7 +95,7 @@ class BuqueTest {
 	@Test
 	void testNoSeDebeInvocarBuqueSaliendoEnFaseInbound() {
 		when(terminalDestino.posicion()).thenReturn(posicionTerminal);
-		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(30);
+		when(posicionBuque.distanciaEnKmA(posicionTerminal)).thenReturn(30d);
 		verify(terminalDestino, never()).buqueSaliendo(buque);
 		
 		

@@ -12,7 +12,7 @@ public abstract class FaseBuque {
 	public abstract void iniciarTrabajo();
 	public abstract void depart();
 	
-	public  abstract void  evaluarDistanciaADestino(int distancia);
+	public  abstract void  evaluarDistanciaADestino(double distancia);
 	
 
 	public abstract void informarExportaciones();

@@ -13,13 +13,13 @@ public class FaseInbound extends FaseBuque {
 
 	}
 
-	private boolean estaEnTerminal(int distanciaADestino) {
+	private boolean estaEnTerminal(double distanciaADestino) {
 		
 		return distanciaADestino == 0;
 	}
 
 	@Override
-	public void evaluarDistanciaADestino(int distancia) {
+	public void evaluarDistanciaADestino(double distancia) {
 		if(this.estaEnTerminal(distancia)) {
 			this.siguienteFase();
 		}		

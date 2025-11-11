@@ -13,12 +13,12 @@ public class FaseOutbound extends FaseBuque{
 		
 	}
 	
-	private boolean entrandoEnSiguienteFase(int distancia) {
+	private boolean entrandoEnSiguienteFase(double distancia) {
 		return distancia < 50 && distancia > 0; 
 	}
 
 	@Override
-	public void evaluarDistanciaADestino(int distancia) {
+	public void evaluarDistanciaADestino(double distancia) {
 		if(this.entrandoEnSiguienteFase(distancia)) {
 			this.siguienteFase();
 		}
