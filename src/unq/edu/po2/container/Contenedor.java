@@ -18,10 +18,6 @@ public class Contenedor implements ContenidoCarga {
 	@Override
 	public int getPesoKilos() {
 		
-		return pesoDeContenidos(contenidos);
-	}
-	
-	public int pesoDeContenidos(List<ContenidoCarga> contenidos) {
 		return contenidos.stream().mapToInt(ContenidoCarga::getPesoKilos).sum();
 	}
 	
