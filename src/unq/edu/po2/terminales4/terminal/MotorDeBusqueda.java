@@ -18,7 +18,7 @@ public class MotorDeBusqueda {
 	public MotorDeBusqueda(List<Viaje> viajes, List<Circuito> circs ) {
 		this.publicaciones = viajes;
 		this.circuitos = circs;
-		this.criterio = new CriterioMenorTiempo();
+		this.criterio = new CriterioMenorTiempo(); 
 	}
 	
 	public void agregarViaje(Viaje v) {

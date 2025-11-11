@@ -1,8 +1,10 @@
 package unq.edu.po2.terminales4.terminal;
 
-import java.util.List;
+
+import java.util.*;
 
 import unq.edu.po2.terminales4.buque.*;
+import unq.edu.po2.terminales4.circuito.*;
 import unq.edu.po2.terminales4.condicionesRutas.*;
 import unq.edu.po2.terminales4.orden.*;
 import unq.edu.po2.terminales4.posicion.*;
@@ -38,6 +40,10 @@ public class Terminal {
 	
 	public List<Ruta> busquedaRutas(CondicionRuta condicion) {
 		return this.motorBusqueda.busquedaRutas(this.getPuerto(), condicion);
+	} 
+	
+	public Optional<Circuito> mejorCircuito(Puerto destino, CriterioCircuito criterio) {
+		return motorBusqueda.mejorCircuito(this.getPuerto(), destino, criterio);
 	}
 
 }
