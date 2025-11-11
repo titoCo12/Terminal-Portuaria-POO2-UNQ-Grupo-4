@@ -41,7 +41,7 @@ public class MotorDeBusqueda {
 		//filtra por los que contengan ese "conjunto de tramos" de origen a destino primero
 		List<Circuito> filtrados = circuitos.stream().filter(c -> c.contieneRuta(origen, destino)).toList();
 		
-		return this.criterio.mejorCircuito(filtrados, origen, destino);
+		return this.criterio.mejorCircuito(filtrados, origen, destino); 
 	}
 	
 }

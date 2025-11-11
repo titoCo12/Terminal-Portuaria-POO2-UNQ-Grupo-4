@@ -20,7 +20,7 @@ public class Circuito {
 	public Circuito(String nombreCircuito, Puerto puertoInicial) {
 		this.tramos = new ArrayList<Tramo>();
 		this.inicio = puertoInicial;
-		this.fin = puertoInicial;
+		this.fin = puertoInicial; 
 	}
 
 	public Object getOrigen() {
@@ -74,13 +74,17 @@ public class Circuito {
 	}
 
 	public boolean contieneRuta(Puerto origen, Puerto destino) {
-		//TODO
-		return true;
+		List<Puerto> recorrido = this.puertosDelCircuito();
+		boolean cond = false;
+		if (recorrido.contains(origen) && recorrido.contains(destino)) {
+			cond = recorrido.indexOf(origen) < recorrido.indexOf(destino);
+		}
+		return cond;
 	}
 	
 	public int diasDesdeHasta(Puerto origen, Puerto destino) {
 		//TODO
-		return 0;
+		return 0; 
 	}
 	
 	public Double precioDesdeHasta(Puerto origen, Puerto destino) {
@@ -89,8 +93,8 @@ public class Circuito {
 	}
 	
 	public int terminalesEntre(Puerto origen, Puerto destino) {
-		//TODO
-		return 0;
+		List<Puerto> recorrido = this.puertosDelCircuito();
+		return recorrido.indexOf(destino) - recorrido.indexOf(origen) - 1;
 	}
 
 
