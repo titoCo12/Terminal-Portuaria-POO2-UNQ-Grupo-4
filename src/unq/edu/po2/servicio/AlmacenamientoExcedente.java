@@ -26,7 +26,7 @@ public class AlmacenamientoExcedente implements Servicio {
 		
 		return  diasExcedidos * monto;
 	}
-	//Esto existe por porque lo tiene la interface
+	//Esto existe porque lo tiene la interface
 	@Override
 	public double getMontoFinal(Container container) {
 		
