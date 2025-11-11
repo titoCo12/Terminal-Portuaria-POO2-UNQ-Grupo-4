@@ -26,9 +26,7 @@ public class ReporteDeAduana extends Reporte{
 		this.escribir("<ul>\n");
 		
 		//listar los containers (orden = un container)
-		for (Orden ord : ordenes) {
-			this.visitOrden(ord, term);
-		}
+		ordenes.forEach(o -> this.visitOrden(o, term));
 		
 		//cerramos lista y html
 		this.escribir("</ul>\n</body>\n</html>");
