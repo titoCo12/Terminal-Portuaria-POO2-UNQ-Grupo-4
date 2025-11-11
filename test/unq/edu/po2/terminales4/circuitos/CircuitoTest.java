@@ -41,7 +41,7 @@ class CircuitoTest {
 		
 		circuito.agregarPuerto(segundoPuerto, diasHastaSegundoPuerto, precioHastaSegundoPuerto);
 		assertEquals(puertoInicial, circuito.getOrigen());
-		assertEquals(diasHastaSegundoPuerto, circuito.getDuracion());
+		assertEquals(diasHastaSegundoPuerto, circuito.getDuracionDias());
 	}
 	
 	@Test
@@ -49,7 +49,7 @@ class CircuitoTest {
 		circuito.agregarPuerto(segundoPuerto, diasHastaSegundoPuerto, precioHastaSegundoPuerto);
 		circuito.agregarPuerto(tercerPuerto, diasHastaTercerPuerto, precioHastaTercerPuerto);
 		assertEquals(puertoInicial, circuito.getOrigen());
-		assertEquals(diasHastaSegundoPuerto + diasHastaTercerPuerto, circuito.getDuracion());
+		assertEquals(diasHastaSegundoPuerto + diasHastaTercerPuerto, circuito.getDuracionDias());
 	}
 	
 	@Test
@@ -80,5 +80,7 @@ class CircuitoTest {
 		circuito.agregarPuerto(tercerPuerto, diasHastaTercerPuerto, precioHastaTercerPuerto);
 		assertEquals(diasHastaSegundoPuerto + diasHastaTercerPuerto, circuito.diasHasta(tercerPuerto));
 	}
+	
+	
 	
 }
