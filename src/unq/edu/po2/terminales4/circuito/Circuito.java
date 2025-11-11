@@ -83,13 +83,14 @@ public class Circuito {
 	}
 	
 	public int diasDesdeHasta(Puerto origen, Puerto destino) {
-		//TODO
-		return 0; 
+		return this.diasHasta(destino) - this.diasHasta(origen);
 	}
 	
 	public Double precioDesdeHasta(Puerto origen, Puerto destino) {
-		//TODO
-		return 1.0;
+		Double valorOrigen = this.tramosHasta(origen).stream().mapToDouble(t -> t.precioTramo()).sum();
+		Double valorDestino = this.tramosHasta(destino).stream().mapToDouble(t -> t.precioTramo()).sum();
+		return valorDestino - valorOrigen;
+		//si el origen es el primer tramo del circuito, su valor va a ser 0 obviamente :)
 	}
 	
 	public int terminalesEntre(Puerto origen, Puerto destino) {
