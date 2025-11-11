@@ -13,9 +13,11 @@ import unq.edu.po2.terminales4.viajes.*;
 public class Terminal {
 
 	private MotorDeBusqueda motorBusqueda;
+	private Puerto puerto;
 	
-	public Terminal(MotorDeBusqueda motor) {
+	public Terminal(MotorDeBusqueda motor, Puerto puerto) {
 		this.motorBusqueda = motor;
+		this.puerto = puerto;
 	}
 	
 	
@@ -34,8 +36,7 @@ public class Terminal {
 	}
 
 	public Puerto getPuerto() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.puerto;
 	}
 	
 	public List<Ruta> busquedaRutas(CondicionRuta condicion) {
@@ -43,7 +44,7 @@ public class Terminal {
 	} 
 	
 	public Optional<Circuito> mejorCircuito(Puerto destino, CriterioCircuito criterio) {
-		return motorBusqueda.mejorCircuito(this.getPuerto(), destino, criterio);
+		return motorBusqueda.mejorCircuito(this.getPuerto(), destino, criterio); 
 	}
 
 }
