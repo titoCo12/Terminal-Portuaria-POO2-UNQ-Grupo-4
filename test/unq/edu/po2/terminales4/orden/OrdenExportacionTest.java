@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import unq.edu.po2.cliente.Cliente;
+import unq.edu.po2.container.Container;
 import unq.edu.po2.terminales4.camion.Camion;
 import unq.edu.po2.terminales4.posicion.Puerto;
 
@@ -22,6 +23,7 @@ class OrdenExportacionTest {
 	Cliente cliente;
 	String patenteCamion, dniChofer;
 	Camion camion;
+	Container container;
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -33,11 +35,13 @@ class OrdenExportacionTest {
 		puertoDestino = mock(Puerto.class);
 		cliente = mock(Cliente.class);
 		camion = mock(Camion.class);
+		container = mock(Container.class);
 		patenteCamion = "AZ401FR";
 		dniChofer = "12345678";
 		
 		
-		ordenExportacion = new OrdenExportacion(dniChofer, patenteCamion, fechaTurno, fechaLlegada, idContainer, puertoOrigen, puertoDestino, cliente, fechaSalida);
+		
+		ordenExportacion = new OrdenExportacion(dniChofer, patenteCamion, fechaTurno, fechaLlegada, puertoOrigen, puertoDestino, container, cliente, fechaSalida);
 		
 		
 		

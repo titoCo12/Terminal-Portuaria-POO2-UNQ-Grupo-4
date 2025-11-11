@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import unq.edu.po2.cliente.Cliente;
+import unq.edu.po2.container.Container;
 import unq.edu.po2.terminales4.camion.Camion;
 import unq.edu.po2.terminales4.posicion.Puerto;
 import unq.edu.po2.terminales4.terminal.Terminal;
@@ -18,40 +19,54 @@ class OrdenImportacionTest {
 
 	OrdenImportacion ordenImportacion;
 	LocalDate fechaTurno, fechaLlegada, fechaSalida;
-	Puerto puertoOrigen, puertoDestinoEnOrden;
-	String idContainer;
+	Puerto puertoOrigen, puertoDestinoEnOrden, puertoBsAs;
 	Cliente cliente;
 	String patenteCamion, dniChofer;
 	Camion camion;
 	Terminal terminalGestionada;
+	Container container;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		
 		fechaTurno = LocalDate.now().plusDays(2);
 		fechaLlegada = LocalDate.now().plusDays(30);
-		idContainer = "merk1234567";
 		puertoOrigen = mock(Puerto.class);
+		puertoBsAs = mock(Puerto.class);
 		puertoDestinoEnOrden = mock(Puerto.class);
 		cliente = mock(Cliente.class);
 		camion = mock(Camion.class);
+		container = mock(Container.class);
 		terminalGestionada = mock(Terminal.class);
 		patenteCamion = "AZ401FR";
 		dniChofer = "12345678";
 		
-		ordenImportacion = new OrdenImportacion(dniChofer, patenteCamion, fechaTurno, fechaLlegada, idContainer, puertoOrigen, puertoDestinoEnOrden, cliente);
+		ordenImportacion = new OrdenImportacion(dniChofer, patenteCamion, fechaTurno, fechaLlegada, puertoOrigen, puertoDestinoEnOrden, container, cliente);
 		
 	}
 
-//	@Test
-//	void testOrdenPerteneceATreminalGestionada() {
-//		when(puertoDestinoEnOrden.getNombre()).thenReturn("Pto BsAs");
-//		when(terminalGestionada.getPuerto().getNombre()).thenReturn("Pto BsAs");
-//		boolean corresponde = ordenImportacion.correspondeATerminal(terminalGestionada);
-//		
-//		assertTrue(corresponde);
-//		
-//	}
+	@Test
+	void testOrdenPerteneceATreminalGestionada() {
+		when(puertoDestinoEnOrden.getNombre()).thenReturn("Pto BsAs");
+		when(terminalGestionada.getPuerto()).thenReturn(puertoBsAs);
+		when(puertoBsAs.getNombre()).thenReturn("Pto BsAs");
+		boolean corresponde = ordenImportacion.correspondeATerminal(terminalGestionada);
+		
+		assertTrue(corresponde);
+		
+	}
+	
+	@Test
+	void testOrdenNoPerteneceATreminalGestionada() {
+		when(puertoDestinoEnOrden.getNombre()).thenReturn("Pto Rosario");
+		when(terminalGestionada.getPuerto()).thenReturn(puertoBsAs);
+		when(puertoBsAs.getNombre()).thenReturn("Pto BsAs");
+		boolean corresponde = ordenImportacion.correspondeATerminal(terminalGestionada);
+		
+		assertFalse(corresponde);
+		
+	}
+	
 	@Test
 	void testTitulo() {
 		String titulo = ordenImportacion.getTitulo();
@@ -82,15 +97,15 @@ class OrdenImportacionTest {
 	
 	@Test 
 	void testFechaLlegada() {
-		LocalDate fechaLlegadaEnOrden = ordenImportacion.getFechaLLegada();
+		LocalDate fechaLlegadaEnOrden = ordenImportacion.getFechaLlegada();
 		assertEquals(fechaLlegada, fechaLlegadaEnOrden);
 	}
 	
 	
 	@Test 
-	void testIdContainer() {
-		String idContainerEnOrden = ordenImportacion.getIdContainer();
-		assertEquals(idContainer, idContainerEnOrden);
+	void testContainer() {
+		Container containerEnOrden = ordenImportacion.getContainer();
+		assertEquals(container, containerEnOrden);
 	}
 	
 	@Test
