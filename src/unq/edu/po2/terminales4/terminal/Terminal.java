@@ -1,8 +1,12 @@
 package unq.edu.po2.terminales4.terminal;
 
 
+import java.time.LocalDate;
 import java.util.*;
 
+import unq.edu.po2.chofer.*;
+import unq.edu.po2.cliente.*;
+import unq.edu.po2.container.*;
 import unq.edu.po2.empresaTransportista.EmpresaTransportista;
 import unq.edu.po2.terminales4.buque.*;
 import unq.edu.po2.terminales4.camion.Camion;
@@ -10,6 +14,7 @@ import unq.edu.po2.terminales4.circuito.*;
 import unq.edu.po2.terminales4.condicionesRutas.*;
 import unq.edu.po2.terminales4.orden.*;
 import unq.edu.po2.terminales4.posicion.*;
+import unq.edu.po2.terminales4.reporte.*;
 import unq.edu.po2.terminales4.viajes.*;
 	
 public class Terminal {
@@ -17,6 +22,7 @@ public class Terminal {
 	private MotorDeBusqueda motorBusqueda;
 	private Puerto puerto;
 	private List<EmpresaTransportista> empresas = new ArrayList<>();
+	private List<Container> containersAlmacenados = new ArrayList<>();
 	
 	public Terminal(MotorDeBusqueda motor, Puerto puerto, List<EmpresaTransportista> empresas) {
 		this.motorBusqueda = motor;
@@ -24,15 +30,28 @@ public class Terminal {
 		this.empresas = empresas;
 	}
 	
+	//la asignacion de turno no debe ser considerada en el trabajo
+	public Orden registrarExportacion(String patenteCamion, String dniChofer, Cliente cliente, 
+			Container contenedor, Puerto destino, Viaje viaje) throws Exception {
+		if (!viaje.pasaPor(destino) || !viaje.pasaPor(this.puerto)) {
+			throw new Exception("Viaje no pasa por los puertos origen y destino");
+		}
+		if (viaje.fechaLlegadaA(this.puerto).get().isAfter(viaje.fechaLlegadaA(destino).get())) {
+			throw new Exception("Viaje pasa por puerto destino antes de pasar por puerto origen (esta terminal)");
+		}
+		Orden orden = new OrdenExportacion(dniChofer, patenteCamion, LocalDate.now().plusDays(1), 
+				viaje.fechaLlegadaA(destino).get(), this.puerto, destino, contenedor, cliente,
+				viaje.fechaLlegadaA(this.puerto).get());
+		return orden;
+	}
+	
 	
 	public void preavisoBuque(List<Orden> list) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	public Posicion posicion() {
-		// TODO Auto-generated method stub
-		return null;
+		return puerto.getPosicion();
 	}
 	
 	public void buqueSaliendo(Buque buqueSaliendo) {
@@ -56,11 +75,27 @@ public class Terminal {
 	}
 	
 	public boolean validarCamion(Camion camion) {
-		
+		return empresas.stream().anyMatch(e -> e.esCamionHabilitado(camion));
 	}
 	
 	public boolean validarChofer(Chofer chofer) {
+		return empresas.stream().anyMatch(e -> e.esChoferHabilitado(chofer));
+	}
+	
+	public void almacenarContainer(Container container) {
+		this.containersAlmacenados.add(container);
+	}
+	
+	public void removerContainer(Container container) {
+		this.containersAlmacenados.remove(container);
+	}
+	
+	public String generarReporte(Buque buque, Reporte reporte) {
+		buque.acceptReporte(reporte, this);
+		return reporte.devolverReporte();
 		
 	}
+	
+	
 
 }
