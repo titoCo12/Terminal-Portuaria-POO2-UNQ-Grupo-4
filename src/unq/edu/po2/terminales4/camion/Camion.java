@@ -26,7 +26,7 @@ public class Camion {
 	}
 	
 	public void entregarCarga(Terminal terminal, Orden orden, this) {
-		//Le agrego a la terminal el container con la orden
+		//Le agrego a la terminal el container con la orden y saco la carga con esa orden de la lista
 	}
 	
 	public void recibirCarga(Container container) {
