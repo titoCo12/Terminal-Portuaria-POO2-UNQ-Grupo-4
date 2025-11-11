@@ -22,7 +22,7 @@ public class AlmacenamientoExcedente implements Servicio {
 	 * como Pesado, que solo devuelve el monto y no usa Container
 	 */
 	public double getMontoFinal(Orden orden) {
-		long diasExcedidos = Duration.between(orden.getFechaLLegada(), orden.getFechaRetiroCarga()).toDays();
+		long diasExcedidos = Duration.between(orden.getFechaLlegada(), orden.getFechaRetiroCarga()).toDays();
 		
 		return  diasExcedidos * monto;
 	}

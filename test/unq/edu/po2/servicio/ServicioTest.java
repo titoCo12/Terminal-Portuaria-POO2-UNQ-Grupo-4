@@ -3,6 +3,8 @@ package unq.edu.po2.servicio;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -70,6 +72,20 @@ class ServicioTest {
 		verify(excedente).getMontoFinal(orden);
 		
 		assertEquals(1500.0, monto);
+	}
+	
+	@Test
+	void mejorMontoFinalDeAlmacenamientoExcedente() {
+		when(orden.getFechaLlegada()).thenReturn(LocalDate.of(2025, 11, 10));
+		when(orden.getFechaRetiroCarga()).thenReturn(LocalDate.of(2025, 11, 12));
+		
+		double montoExcedente = excedente.monto = 1500.0;
+		double monto = excedente.getMontoFinal(orden);
+		
+		verify(excedente).getMontoFinal(orden);
+		
+		assertEquals(3000.0, monto);
+		
 	}
 
 }

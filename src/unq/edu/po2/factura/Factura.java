@@ -7,7 +7,7 @@ import unq.edu.po2.terminales4.orden.Orden;
 
 public class Factura {
 	
-	private Map<String, Double> items = new LinkedHashMap<>();
+	Map<String, Double> items = new LinkedHashMap<>();
 	Orden orden;
 	
 	public Factura(Orden orden) {
