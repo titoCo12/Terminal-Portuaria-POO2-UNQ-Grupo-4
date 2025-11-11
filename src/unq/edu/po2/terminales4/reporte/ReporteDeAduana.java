@@ -26,13 +26,13 @@ public class ReporteDeAduana extends Reporte{
 		this.escribir("<ul>\n");
 		
 		//listar los containers (orden = un container)
-		ordenes.forEach(o -> this.visitOrden(o, term));
+		ordenes.forEach(o -> this.visitOrden(o));
 		
 		//cerramos lista y html
 		this.escribir("</ul>\n</body>\n</html>");
 	}
 	
-	public void visitOrden(Orden orden, Terminal term) {
+	public void visitOrden(Orden orden) {
 		String id = orden.getContainer().getIdentificador();
 		String tipo = orden.getContainer().getTipo();
 		//anotar como elemento de la lista 

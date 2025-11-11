@@ -9,7 +9,7 @@ public abstract class Reporte {
 	private StringBuilder reporte;
 	
 	public abstract void visitBuque(Buque buque, Terminal term);
-	public abstract void visitOrden(Orden orden, Terminal term);
+	public abstract void visitOrden(Orden orden);
 	
 	public void escribir(String info) {
 		reporte.append(info);

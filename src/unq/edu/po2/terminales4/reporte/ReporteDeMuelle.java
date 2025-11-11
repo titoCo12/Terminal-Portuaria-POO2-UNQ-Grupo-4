@@ -10,6 +10,7 @@ public class ReporteDeMuelle extends Reporte{
 	public void visitBuque(Buque buque, Terminal term) {
 		List<Orden> ordenes = buque.getOrdenesQueCorrespondenA(term);
 		String fecha = ordenes.getFirst().getFechaLlegada().toString();
+		
 		//nombre del buque
 		this.escribir(buque.getNombre() + ": \n");
 		//puerto de referencia
@@ -23,6 +24,6 @@ public class ReporteDeMuelle extends Reporte{
 		this.escribir("containers operados: " + Integer.toString(ordenes.size()));
 	}
 	
-	public void visitOrden(Orden orden, Terminal term) {}
+	public void visitOrden(Orden orden) {}
 	
 }

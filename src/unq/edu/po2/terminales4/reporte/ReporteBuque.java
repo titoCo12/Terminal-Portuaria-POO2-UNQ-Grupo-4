@@ -17,15 +17,15 @@ public class ReporteBuque extends Reporte{
 		
 		//abre reporte para imports
 		this.escribir("<report>\n <import>");
-		imps.forEach(o -> this.visitOrden(o, term));
+		imps.forEach(o -> this.visitOrden(o));
 		//cierra para imports, abre para exports
 		this.escribir(" </import>\n <export>\n");
-		exps.forEach(o -> this.visitOrden(o, term));
+		exps.forEach(o -> this.visitOrden(o));
 		//cierra para exports y reporte
 		this.escribir(" </export>\n</report>");
 	}
 	
-	public void visitOrden(Orden orden, Terminal term) {
+	public void visitOrden(Orden orden) {
 		this.escribir("  <item>" + orden.getContainer().getIdentificador() + "<item>\n");
 	}
 	
