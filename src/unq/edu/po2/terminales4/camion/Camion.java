@@ -5,7 +5,6 @@ import java.util.List;
 
 import unq.edu.po2.chofer.Chofer;
 import unq.edu.po2.container.*;
-import unq.edu.po2.empresaTransportista.EmpresaTransportista;
 import unq.edu.po2.terminales4.orden.Orden;
 import unq.edu.po2.terminales4.terminal.Terminal;
 
@@ -25,7 +24,7 @@ public class Camion {
 		return chofer;
 	}
 	
-	public void entregarCarga(Terminal terminal, Orden orden, this) {
+	public void entregarCarga(Terminal terminal, Orden orden, Camion camion) {
 		//Le agrego a la terminal el container con la orden y saco la carga con esa orden de la lista
 	}
 	
