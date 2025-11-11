@@ -14,12 +14,12 @@ public class AlmacenamientoExcedente implements Servicio {
 		this.monto = monto;
 	}
 	/*
-	 * Todos estuvimos de acuerdo en que necesito getMontoFinal(Orden orden)
-	 * pero como en la interfaz está: getMontoFinal(Container container), también lo necesito implementar,
-	 * no puedo hacer que devuelva null o 0, ¿de verdád no es más fácil convertir Servicio en
-	 * una clase abstracta y pasarme orden cuando armo el excedente? o crear AlmacenamientoExcedente
-	 * con (double monto, Orden orden) para sacarme getMontoFinal(Orden orden) y usar
-	 * getMontoFinal(Container container) a pesar de que no se use Container
+	 * Todos estuvimos de acuerdo en que necesito getMontoFinal(Orden orden) pero como
+	 * en la interfaz está: getMontoFinal(Container container), también lo necesito implementar,
+	 * no puedo hacer que devuelva null o 0, ¿está bien AlmacenamientoExcedente con 
+	 * (double monto, Orden orden) para sacarme getMontoFinal(Orden orden) y usar 
+	 * getMontoFinal(Container container) a pesar de que no se use Container? 
+	 * como Pesado, que solo devuelve el monto y no usa Container
 	 */
 	public double getMontoFinal(Orden orden) {
 		long diasExcedidos = Duration.between(orden.getFechaLLegada(), orden.getFechaRetiroCarga()).toDays();
