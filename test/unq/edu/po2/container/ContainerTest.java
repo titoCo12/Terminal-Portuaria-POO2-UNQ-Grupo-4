@@ -181,7 +181,7 @@ class ContainerTest {
 	}
 	
 	@Test
-	void dryPesado() {
+	void desgloseServiciosDry() {
 		when(dry.getDesgloseServicios()).thenReturn("Pesado: 500.0");
 		
 		String montoFinal = dry.getDesgloseServicios();
