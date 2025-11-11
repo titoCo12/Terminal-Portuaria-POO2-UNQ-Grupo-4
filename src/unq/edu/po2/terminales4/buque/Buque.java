@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import unq.edu.po2.terminales4.orden.Orden;
-import unq.edu.po2.terminales4.posicion.Posicion;
-import unq.edu.po2.terminales4.terminal.Terminal;
+import unq.edu.po2.terminales4.orden.*;
+import unq.edu.po2.terminales4.posicion.*;
+import unq.edu.po2.terminales4.reporte.*;
+import unq.edu.po2.terminales4.terminal.*;
 
 public class Buque{
 
@@ -77,4 +78,8 @@ public class Buque{
             .filter(o -> o.correspondeATerminal(terminal))
             .collect(Collectors.toList());
     }
+	
+	public void acceptReporte(Reporte reporte, Terminal terminal) {
+		reporte.visitBuque(this, terminal);
+	}
 }
