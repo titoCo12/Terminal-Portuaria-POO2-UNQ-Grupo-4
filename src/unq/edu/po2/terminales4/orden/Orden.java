@@ -19,6 +19,7 @@ public abstract class Orden {
 	protected Puerto puertoDestino;
 	protected Cliente cliente;
 	private Container container;
+	LocalDate fechaRetiroCarga;
 	
 	public Orden(String dniChofer, String patenteCamion, LocalDate fechaTurno, LocalDate fechaLlegada,
 			Puerto puertoOrigen, Puerto puertoDestino, Container container, Cliente cliente) {
@@ -89,6 +90,14 @@ public abstract class Orden {
 	private Factura crearFactura() {
 		// TODO Auto-generated method stub
 		return new Factura(this);
+	}
+	
+	public void setFechaRetiroCarga(LocalDate fechaRetiroCarga) {
+		this.fechaRetiroCarga = fechaRetiroCarga;
+	}
+
+	public LocalDate getFechaRetiroCarga() {
+		return fechaRetiroCarga;
 	}
 
 }
