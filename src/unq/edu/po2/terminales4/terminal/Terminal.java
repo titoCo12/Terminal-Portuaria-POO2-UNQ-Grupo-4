@@ -3,6 +3,7 @@ package unq.edu.po2.terminales4.terminal;
 
 import java.util.*;
 
+import unq.edu.po2.empresaTransportista.EmpresaTransportista;
 import unq.edu.po2.terminales4.buque.*;
 import unq.edu.po2.terminales4.circuito.*;
 import unq.edu.po2.terminales4.condicionesRutas.*;
@@ -14,10 +15,12 @@ public class Terminal {
 
 	private MotorDeBusqueda motorBusqueda;
 	private Puerto puerto;
+	private List<EmpresaTransportista> empresas;
 	
-	public Terminal(MotorDeBusqueda motor, Puerto puerto) {
+	public Terminal(MotorDeBusqueda motor, Puerto puerto, Lista<EmpresaTransportista> empresas) {
 		this.motorBusqueda = motor;
 		this.puerto = puerto;
+		this.empresas = empresas;
 	}
 	
 	
@@ -45,6 +48,18 @@ public class Terminal {
 	
 	public Optional<Circuito> mejorCircuito(Puerto destino, CriterioCircuito criterio) {
 		return motorBusqueda.mejorCircuito(this.getPuerto(), destino, criterio); 
+	}
+	
+	public void llegadaDeCamion(Orden orden, Camion camion) {
+		orden.manejarLlegada(camion, this);
+	}
+	
+	public boolean validarCamion(Camion camion) {
+		
+	}
+	
+	public boolean validarChofer(Chofer chofer) {
+		
 	}
 
 }
