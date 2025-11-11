@@ -36,7 +36,7 @@ public class ReporteDeAduana extends Reporte{
 		String id = orden.getContainer().getIdentificador();
 		String tipo = orden.getContainer().getTipo();
 		//anotar como elemento de la lista 
-		this.escribir("<li> id:" + id + "- tipo: " + tipo + "</li>\n");
+		this.escribir("<li> id:" + id + " - tipo: " + tipo + "</li>\n");
 	}
 	
 	//tipica boilerplate para todo archivo html
