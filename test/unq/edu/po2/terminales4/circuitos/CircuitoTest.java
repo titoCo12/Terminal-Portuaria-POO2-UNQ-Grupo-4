@@ -12,7 +12,7 @@ import unq.edu.po2.terminales4.posicion.Puerto;
 class CircuitoTest {
 
 	Circuito circuito;
-	Puerto puertoInicial, segundoPuerto, tercerPuerto;
+	Puerto puertoInicial, segundoPuerto, tercerPuerto, puertoNoPerteneciente;
 	int diasHastaSegundoPuerto, diasHastaTercerPuerto;
 	double precioHastaSegundoPuerto, precioHastaTercerPuerto;
 	
@@ -50,6 +50,35 @@ class CircuitoTest {
 		circuito.agregarPuerto(tercerPuerto, diasHastaTercerPuerto, precioHastaTercerPuerto);
 		assertEquals(puertoInicial, circuito.getOrigen());
 		assertEquals(diasHastaSegundoPuerto + diasHastaTercerPuerto, circuito.getDuracion());
+	}
+	
+	@Test
+	void testPasaPorPuertoVerdadero() {
+		circuito.agregarPuerto(segundoPuerto, diasHastaSegundoPuerto, precioHastaSegundoPuerto);
+		circuito.agregarPuerto(tercerPuerto, diasHastaTercerPuerto, precioHastaTercerPuerto);
+		assertTrue(circuito.pasaPor(segundoPuerto));
+	}
+	
+	@Test
+	void testPasaPorPuertoFalso() {
+		puertoNoPerteneciente = mock(Puerto.class);
+		circuito.agregarPuerto(segundoPuerto, diasHastaSegundoPuerto, precioHastaSegundoPuerto);
+		circuito.agregarPuerto(tercerPuerto, diasHastaTercerPuerto, precioHastaTercerPuerto);
+		assertFalse(circuito.pasaPor(puertoNoPerteneciente));
+	}
+	
+	@Test
+	void diasHastaSegundoPuertoEs5() {
+		circuito.agregarPuerto(segundoPuerto, diasHastaSegundoPuerto, precioHastaSegundoPuerto);
+		circuito.agregarPuerto(tercerPuerto, diasHastaTercerPuerto, precioHastaTercerPuerto);
+		assertEquals(diasHastaSegundoPuerto, circuito.diasHasta(segundoPuerto));
+	}
+	
+	@Test
+	void diasHastaTercerPuertoEs17() {
+		circuito.agregarPuerto(segundoPuerto, diasHastaSegundoPuerto, precioHastaSegundoPuerto);
+		circuito.agregarPuerto(tercerPuerto, diasHastaTercerPuerto, precioHastaTercerPuerto);
+		assertEquals(diasHastaSegundoPuerto + diasHastaTercerPuerto, circuito.diasHasta(tercerPuerto));
 	}
 	
 }
