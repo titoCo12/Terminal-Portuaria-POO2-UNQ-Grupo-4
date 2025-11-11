@@ -43,7 +43,9 @@ public abstract class Container {
 	 */
 	public String setIdentificador(Cliente cliente, int n) {
 		
-		return generarCodCliente(cliente.getNombre()) + String.format("%07d", n);
+		String numeroRecortado = String.format("%07d", n % 10_000_000);
+		
+		return generarCodCliente(cliente.getNombre()) + numeroRecortado;
 	}
 	
 	public String generarCodCliente(String nombre) {
