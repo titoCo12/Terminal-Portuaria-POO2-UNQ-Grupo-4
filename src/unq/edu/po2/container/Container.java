@@ -16,7 +16,7 @@ public abstract class Container {
 	ContenidoCarga carga;
 	List<Servicio> servicios;
 	
-	public Container( Cliente cliente, int idNum, int ancho, int largo, int altura, int peso, ContenidoCarga carga) {
+	public Container(Cliente cliente, int idNum, int ancho, int largo, int altura, int peso, ContenidoCarga carga) {
 		identificador = setIdentificador(cliente, idNum);
 		anchoMetros = ancho;
 		largoMetros = largo;
@@ -48,12 +48,12 @@ public abstract class Container {
 		return generarCodCliente(cliente.getNombre()) + numeroRecortado;
 	}
 	
-	public String generarCodCliente(String nombre) {
+	protected String generarCodCliente(String nombre) {
 		
 		return getCuatroLetras(normalizarNombre(nombre));
 	}
 	
-	public String normalizarNombre(String nombre) {
+	protected String normalizarNombre(String nombre) {
 		
 		return nombre.replaceAll("\\s+", "").toUpperCase();
 	}
@@ -61,7 +61,7 @@ public abstract class Container {
 	/* Voy a suponer que van a poner el apellido o al menos nombres mayores a 4 letras, 
 	 * se puede hacer igual que agregue letras como los números.
 	 */
-	public String getCuatroLetras(String nombre) {
+	protected String getCuatroLetras(String nombre) {
 		
 		return nombre.substring(0, 4);
 	}
