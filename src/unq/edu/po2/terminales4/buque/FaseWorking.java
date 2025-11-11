@@ -27,7 +27,7 @@ public class FaseWorking extends FaseBuque {
 
 
 	@Override
-	public void evaluarDistanciaADestino(int distancia) {
+	public void evaluarDistanciaADestino(double distancia) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -13,7 +13,7 @@ public class FaseDeparting extends FaseBuque {
 	}
 
 	@Override
-	public void evaluarDistanciaADestino(int distancia) {
+	public void evaluarDistanciaADestino(double distancia) {
 		if(distancia > 1) {
 			this.buque.avisarSalidaATerminal();
 			this.siguienteFase();
