@@ -9,8 +9,8 @@ public class ReporteDeAduana extends Reporte{
 
 	
 	public void visitBuque(Buque buque, Terminal term) {
-		List<Orden> ordenes = buque.getOrdenesQueCorrespondenA(term);
-		String fecha = ordenes.getFirst().getFechaLlegada().toString(); 
+		List<Orden> ordenes = this.ordenesDe(buque, term);
+		String fecha = this.fechaLlegadaDe(ordenes);
 		
 		//boilerplate de html con tags, head y elementos meta tipicos
 		this.escribir(this.boilerplateHTML());

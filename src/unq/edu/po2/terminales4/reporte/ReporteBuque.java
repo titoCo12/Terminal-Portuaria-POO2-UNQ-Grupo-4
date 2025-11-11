@@ -10,10 +10,10 @@ public class ReporteBuque extends Reporte{
 	
 	public void visitBuque(Buque buque, Terminal term) {
 		//agarra imports y exports que le corresponden a esta terminal de ese buque
-		List<Orden> ordenes = buque.getOrdenesQueCorrespondenA(term);
+		List<Orden> ordenes = this.ordenesDe(buque, term);
 		//separo en imports y exports
-		List<Orden> imps = ordenes.stream().filter(o -> o.getTitulo() == "import").toList();
-		List<Orden> exps = ordenes.stream().filter(o -> o.getTitulo() == "export").toList();
+		List<Orden> imps = ordenes.stream().filter(o -> o.getTitulo().equals("import")).toList();
+		List<Orden> exps = ordenes.stream().filter(o -> o.getTitulo().equals("export")).toList();
 		
 		//abre reporte para imports
 		this.escribir("<report>\n <import>");
