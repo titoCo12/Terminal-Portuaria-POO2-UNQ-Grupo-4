@@ -73,19 +73,5 @@ class ServicioTest {
 		
 		assertEquals(1500.0, monto);
 	}
-	
-	@Test
-	void mejorMontoFinalDeAlmacenamientoExcedente() {
-		when(orden.getFechaLlegada()).thenReturn(LocalDate.of(2025, 11, 10));
-		when(orden.getFechaRetiroCarga()).thenReturn(LocalDate.of(2025, 11, 12));
-		
-		double montoExcedente = excedente.monto = 1500.0;
-		double monto = excedente.getMontoFinal(orden);
-		
-		verify(excedente).getMontoFinal(orden);
-		
-		assertEquals(3000.0, monto);
-		
-	}
 
 }

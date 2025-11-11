@@ -20,6 +20,9 @@ public class Naviera {
 	}
 	
 	public int mejorTiempoLlegadaA(Puerto puertoA, Puerto puertoB) {
-		
+		List<Circuito> conectados = circuitosConectados(puertoA, puertoB);
+		return 
 	}
+	
+	public List
 }
