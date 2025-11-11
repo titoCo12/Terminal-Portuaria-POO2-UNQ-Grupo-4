@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import unq.edu.po2.cliente.*;
+import unq.edu.po2.servicio.*;
 
 
 class ContainerTest {
@@ -125,7 +126,7 @@ class ContainerTest {
 	}
 	
 	@Test
-	public void conumoReefer() {
+	public void consumoReefer() {
 		when(reefer.getConsumoXHora()).thenReturn(500.0);
 		
 		double consumoXHora = reefer.getConsumoXHora();
@@ -177,6 +178,17 @@ class ContainerTest {
 		assertEquals("Metalurgico", tipo);
 		assertEquals(1300, peso);
 		
+	}
+	
+	@Test
+	void dryPesado() {
+		when(dry.getDesgloseServicios()).thenReturn("Pesado: 500.0");
+		
+		String montoFinal = dry.getDesgloseServicios();
+		
+		verify(dry).getDesgloseServicios();
+		
+		assertEquals("Pesado: 500.0", montoFinal);
 	}
 
 }
