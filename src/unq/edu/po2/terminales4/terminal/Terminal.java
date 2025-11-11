@@ -17,7 +17,7 @@ public class Terminal {
 	private Puerto puerto;
 	private List<EmpresaTransportista> empresas;
 	
-	public Terminal(MotorDeBusqueda motor, Puerto puerto, Lista<EmpresaTransportista> empresas) {
+	public Terminal(MotorDeBusqueda motor, Puerto puerto, List<EmpresaTransportista> empresas) {
 		this.motorBusqueda = motor;
 		this.puerto = puerto;
 		this.empresas = empresas;
