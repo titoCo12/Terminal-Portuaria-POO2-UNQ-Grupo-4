@@ -16,14 +16,7 @@ public class OrdenImportacion extends Orden{
 	}
 
 	@Override
-	public void enviarFactura() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public String getTitulo() {
-		// TODO Auto-generated method stub
 		return "import";
 	}
 

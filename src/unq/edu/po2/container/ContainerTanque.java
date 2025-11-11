@@ -7,5 +7,9 @@ public class ContainerTanque extends Container{
 	public ContainerTanque(Cliente cliente, int idNum, int ancho, int largo, int altura, int peso, ContenidoCarga producto) {
 		super(cliente, idNum, ancho, largo, altura, peso, producto);
 	}
-
+	
+	public String getTipo() {
+		return "Tanque";
+	}
 }
+

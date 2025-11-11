@@ -1,5 +1,6 @@
 package unq.edu.po2.terminales4.buque;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,7 @@ public class Buque{
 
 	public Buque(String nombre) {
 		this.nombre = nombre;
+		this.ordenes = new ArrayList<Orden>();
 		this.fase = new FaseOutbound(this);
 	}
 

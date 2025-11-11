@@ -4,9 +4,7 @@ import java.time.LocalDate;
 
 import unq.edu.po2.cliente.Cliente;
 import unq.edu.po2.container.Container;
-import unq.edu.po2.factura.Factura;
 import unq.edu.po2.terminales4.posicion.Puerto;
-import unq.edu.po2.terminales4.terminal.Terminal;
 
 public class OrdenExportacion extends Orden {
 
@@ -24,11 +22,7 @@ public class OrdenExportacion extends Orden {
 		return "export";
 	}
 
-	@Override
-	public boolean correspondeATerminal(Terminal terminalGestionada) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 
 	
 
