@@ -5,6 +5,7 @@ import java.util.*;
 
 import unq.edu.po2.empresaTransportista.EmpresaTransportista;
 import unq.edu.po2.terminales4.buque.*;
+import unq.edu.po2.terminales4.camion.Camion;
 import unq.edu.po2.terminales4.circuito.*;
 import unq.edu.po2.terminales4.condicionesRutas.*;
 import unq.edu.po2.terminales4.orden.*;
