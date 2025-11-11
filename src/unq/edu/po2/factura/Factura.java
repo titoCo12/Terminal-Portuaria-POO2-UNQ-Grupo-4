@@ -6,17 +6,14 @@ import java.util.Map;
 import unq.edu.po2.terminales4.orden.Orden;
 
 public class Factura {
+	
 	private Map<String, Double> items = new LinkedHashMap<>();
+	Orden orden;
 	
 	public Factura(Orden orden) {
-		// TODO Auto-generated constructor stub
+		this.orden = orden;
 	}
 
-	/*
-	 * Qué corno hago con las fechas? la fecha de llegada que está en la orden?
-	 * Si es así, necesito agregarla a los items y que Factura conozca la orden para eso
-	 * Creo que es necesario que el cliente conozca la factura para que la pueda recibir
-	 */
 	public void agregarItem(String servicio, double monto) {
 		
 		items.put(servicio, monto);

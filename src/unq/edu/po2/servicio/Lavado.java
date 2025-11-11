@@ -2,7 +2,7 @@ package unq.edu.po2.servicio;
 
 import unq.edu.po2.container.Container;
 
-public class Lavado extends Servicio {
+public class Lavado implements Servicio {
 	
 	double precioMenor;
 	double precioMayor;
@@ -16,13 +16,18 @@ public class Lavado extends Servicio {
 
 	@Override
 	public double getMontoFinal(Container container) {
-		int dimensionescubicas = container.getDimensionesCubicas();
+		int dimensionesCubicas = container.getDimensionesCubicas();
 		
-		if (dimensionescubicas > dimensionesAComparar) {
+		if (dimensionesCubicas > dimensionesAComparar) {
 			return precioMayor;
 		} else {
 			return precioMenor;
 		}
+	}
+
+	@Override
+	public String getNombre() {
+		return "Lavado";
 	}
 
 }

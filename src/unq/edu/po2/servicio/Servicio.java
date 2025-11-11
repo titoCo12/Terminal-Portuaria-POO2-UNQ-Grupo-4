@@ -1,16 +1,12 @@
 package unq.edu.po2.servicio;
 
-import unq.edu.po2.container.Container;
-import unq.edu.po2.terminales4.orden.Orden;
+import unq.edu.po2.container.*;
 
-public abstract class Servicio {
+public interface Servicio {
 	
-	Orden orden;
+	public double getMontoFinal(Container container);
 	
-	public abstract double getMontoFinal(Container container);
-	
-	public void setOrden(Orden orden) {
-		this.orden = orden;
-	}
+	public String getNombre();
+	// si hago return this.getClass().getSimpleName(); deja de ser interface
 
 }

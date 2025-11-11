@@ -5,7 +5,7 @@ import java.time.Duration;
 import unq.edu.po2.container.Container;
 import unq.edu.po2.container.ContainerReefer;
 
-public class Electricidad extends Servicio {
+public class Electricidad implements Servicio {
 	
 	double precioPorKw;
 	
@@ -20,6 +20,12 @@ public class Electricidad extends Servicio {
 		long horas = Duration.between(reefer.getMomentoConexion(), reefer.getMomentoDesconexion()).toHours();
 
 		return horas * reefer.getConsumoXHora() * precioPorKw;
+	}
+
+	@Override
+	public String getNombre() {
+		// TODO Auto-generated method stub
+		return "Electricidad";
 	}
 
 }

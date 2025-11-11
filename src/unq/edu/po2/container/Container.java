@@ -2,6 +2,7 @@ package unq.edu.po2.container;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import unq.edu.po2.cliente.Cliente;
 import unq.edu.po2.servicio.*;
@@ -30,8 +31,9 @@ public abstract class Container {
 		this.servicios.add(servicio);
 	}
 	
-	
-	//Hacer getDesgloseServicios()
+	public String getDesgloseServicios() {
+		return servicios.stream().map(s -> s.getNombre() + ": " + s.getMontoFinal(this)).collect(Collectors.joining(", "));
+	}
 	
 	/**
 	 * Setea el identificador del container

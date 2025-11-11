@@ -2,7 +2,7 @@ package unq.edu.po2.servicio;
 
 import unq.edu.po2.container.Container;
 
-public class Pesado extends Servicio {
+public class Pesado implements Servicio {
 	
 	double monto;
 	
@@ -13,6 +13,11 @@ public class Pesado extends Servicio {
 	@Override
 	public double getMontoFinal(Container container) {
 		return monto;
+	}
+
+	@Override
+	public String getNombre() {
+		return "Pesado";
 	}
 
 }
