@@ -71,7 +71,7 @@ public class Terminal {
 	}
 	
 	public void llegadaDeCamion(Orden orden, Camion camion) {
-		orden.manejarLlegada(camion, this);
+		orden.manejarLlegada(camion);
 	}
 	
 	public boolean validarCamion(Camion camion) {
