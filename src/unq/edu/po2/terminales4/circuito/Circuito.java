@@ -70,9 +70,28 @@ public class Circuito {
 	}
 
 	private boolean esOrigen(Tramo tramo, Puerto puerto) {
-		return tramo.getOrigen().equals(puerto);
+		return tramo.getOrigen().equals(puerto); 
 	}
 
+	public boolean contieneRuta(Puerto origen, Puerto destino) {
+		//TODO
+		return true;
+	}
+	
+	public int diasDesdeHasta(Puerto origen, Puerto destino) {
+		//TODO
+		return 0;
+	}
+	
+	public Double precioDesdeHasta(Puerto origen, Puerto destino) {
+		//TODO
+		return 1.0;
+	}
+	
+	public int terminalesEntre(Puerto origen, Puerto destino) {
+		//TODO
+		return 0;
+	}
 
 
 }
