@@ -10,9 +10,10 @@ public class Posicion {
 		this.coordY = coordY;
 	}
 
-	public int distanciaEnKmA(Posicion posicionPuertoDestino) {
-		// TODO Auto-generated method stub
-		return 0;
+	public double distanciaEnKmA(Posicion posicionPuertoDestino) {
+		int diferenciaCoordX = this.coordX - posicionPuertoDestino.coordX;
+		int diferenciaCoordY = this.coordY - posicionPuertoDestino.coordY;
+		return Math.sqrt(diferenciaCoordX * diferenciaCoordX + diferenciaCoordY * diferenciaCoordY);
 	}
 
 }

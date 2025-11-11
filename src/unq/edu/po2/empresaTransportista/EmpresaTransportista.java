@@ -26,4 +26,12 @@ public class EmpresaTransportista {
 		return camionesHabilitados.contains(camion.getPatente());
 	}
 	
+	public void agregarCamion(Camion camion) {
+		camionesHabilitados.add(camion.getPatente());
+	}
+	
+	public void agregarChofer(Chofer chofer) {
+		choferesHabilitados.add(chofer.getDni());
+	}
+	
 }
