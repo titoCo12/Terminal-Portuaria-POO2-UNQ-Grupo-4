@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import unq.edu.po2.container.*;
+import unq.edu.po2.terminales4.orden.Orden;
 
 class ServicioTest {
 	Lavado lavado;
@@ -14,7 +15,7 @@ class ServicioTest {
 	Pesado pesado;
 	AlmacenamientoExcedente excedente;
 	ContainerReefer reefer;
-	//Orden orden;
+	Orden orden;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -23,7 +24,7 @@ class ServicioTest {
 		pesado = mock(Pesado.class);
 		excedente = mock(AlmacenamientoExcedente.class);
 		reefer = mock(ContainerReefer.class);
-		//orden = mock(Orden.class);
+		orden = mock(Orden.class);
 	}
 
 	@Test
@@ -62,11 +63,11 @@ class ServicioTest {
 	
 	@Test
 	void montoFinalDeAlmacenamientoExcedente() {
-		when(excedente.getMontoFinal(reefer)).thenReturn(1500.0);
+		when(excedente.getMontoFinal(orden)).thenReturn(1500.0);
 		
-		double monto = excedente.getMontoFinal(reefer);
+		double monto = excedente.getMontoFinal(orden);
 		
-		verify(excedente).getMontoFinal(reefer);
+		verify(excedente).getMontoFinal(orden);
 		
 		assertEquals(1500.0, monto);
 	}
