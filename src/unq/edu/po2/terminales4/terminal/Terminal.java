@@ -15,7 +15,7 @@ public class Terminal {
 
 	private MotorDeBusqueda motorBusqueda;
 	private Puerto puerto;
-	private List<EmpresaTransportista> empresas;
+	private List<EmpresaTransportista> empresas = new ArrayList<>();
 	
 	public Terminal(MotorDeBusqueda motor, Puerto puerto, List<EmpresaTransportista> empresas) {
 		this.motorBusqueda = motor;
