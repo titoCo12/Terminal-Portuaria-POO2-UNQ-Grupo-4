@@ -11,7 +11,5 @@ public class ContainerTanque extends Container{
 	public String getTipo() {
 		return "Tanque";
 	}
-	
-	//¿Es necesario validar que no tenga más de un tipo de producto?
-
 }
+

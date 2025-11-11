@@ -41,8 +41,5 @@ public class ContainerReefer extends Container{
 	public LocalDateTime getMomentoDesconexion() {
 		return momentoDesconexion;
 	}
-	
-	//¿Es necesario validar que no tenga más de un tipo de producto?
-	
 
 }

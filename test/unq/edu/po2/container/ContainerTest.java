@@ -125,7 +125,7 @@ class ContainerTest {
 	}
 	
 	@Test
-	public void conumoReefer() {
+	public void consumoReefer() {
 		when(reefer.getConsumoXHora()).thenReturn(500.0);
 		
 		double consumoXHora = reefer.getConsumoXHora();
@@ -177,6 +177,17 @@ class ContainerTest {
 		assertEquals("Metalurgico", tipo);
 		assertEquals(1300, peso);
 		
+	}
+	
+	@Test
+	void desgloseServiciosDry() {
+		when(dry.getDesgloseServicios()).thenReturn("Pesado: 500.0");
+		
+		String montoFinal = dry.getDesgloseServicios();
+		
+		verify(dry).getDesgloseServicios();
+		
+		assertEquals("Pesado: 500.0", montoFinal);
 	}
 
 }

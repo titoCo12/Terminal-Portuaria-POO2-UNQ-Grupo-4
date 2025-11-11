@@ -17,10 +17,10 @@ public class Cliente {
 	
 	
 	public void recibirNotificacion(LocalDateTime fecha) {
-        //Pre-aviso de la llegada del buque
+        //Pre-aviso de la llegada del buque, no hace nada.
     }
 	
     public void recibirFactura(Factura factura) {
-        // recibir correo en el mail
+        // recibir correo en el mail, no hace nada.
     }
 }
