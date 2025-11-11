@@ -21,4 +21,14 @@ public class Circuito {
 		return this.inicio;
 	}
 
+	public void agregarPuerto(Puerto puertoNuevo, int diasHastaSiguientePuerto, double precioHastaSiguientePuerto) {
+		Tramo tramoNuevo = new Tramo(this.fin, puertoNuevo, precioHastaSiguientePuerto, diasHastaSiguientePuerto);
+		this.tramos.add(tramoNuevo);
+		this.fin = puertoNuevo;
+	}
+
+	public int getDuracion() {
+		return this.tramos.stream().mapToInt(tramo -> tramo.tiempoEnDias()).sum();
+	}
+
 }
