@@ -12,14 +12,14 @@ public class ReporteDeMuelle extends Reporte{
 		String fecha = this.fechaLlegadaDe(ordenes);
 		
 		//nombre del buque
-		this.escribir(buque.getNombre() + ": \n");
+		this.escribir("buque: " + buque.getNombre() + "\n");
 		//puerto de referencia
 		this.escribir("puerto: " + term.getPuerto().getNombre() + "\n");
 		//fecha de llegada al puerto
-		this.escribir("llegada: " + fecha + " \n");
+		this.escribir("llegada: " + fecha + "\n"); 
 		//fecha de salida del puerto
 		//sale el mismo dia que llega
-		this.escribir("salida: " + fecha + " \n");
+		this.escribir("salida: " + fecha + "\n");
 		//cantidad de containers operados
 		this.escribir("containers operados: " + Integer.toString(ordenes.size()));
 	}
