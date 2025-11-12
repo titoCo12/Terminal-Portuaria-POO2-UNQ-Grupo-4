@@ -29,19 +29,30 @@ public class MotorDeBusqueda {
 		circuitos.add(c);
 	}
 	
+	public int cantViajes() {
+		return this.publicaciones.size();
+	}
+	
+	public int cantCircuitos() {
+		return this.circuitos.size();
+	}	
 	
 	public List<Ruta> busquedaRutas(Puerto origen, CondicionRuta condicion) {
 		return condicion.validarViajes(publicaciones, origen);
 	}
 	
 	
+	
 	public Optional<Circuito> mejorCircuito(Puerto origen, Puerto destino, CriterioCircuito criterio) {
 		this.criterio = criterio;
-		
 		//filtra por los que contengan ese "conjunto de tramos" de origen a destino primero
 		List<Circuito> filtrados = circuitos.stream().filter(c -> c.contieneRuta(origen, destino)).toList();
 		
 		return this.criterio.mejorCircuito(filtrados, origen, destino); 
+	}
+	
+	public CriterioCircuito getCriterio() {
+		return this.criterio;
 	}
 	
 }
