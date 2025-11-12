@@ -39,21 +39,21 @@ class CircuitoTest {
 
 	@Test
 	void testConstructorPuertoOrigen() {
-		assertEquals(puertoInicial, circuitoCon2Puertos.getOrigenCircuito());
+		assertEquals(puertoInicial, circuitoCon2Puertos.getOrigen());
 	}
 	
 	
 	@Test
 	void testAgregarSegundoPuertoAlCircuitoTiempo5Dias() {
 		
-		assertEquals(puertoInicial, circuitoCon2Puertos.getOrigenCircuito());
+		assertEquals(puertoInicial, circuitoCon2Puertos.getOrigen());
 		assertEquals(diasHastaSegundoPuerto, circuitoCon2Puertos.getDuracionDias());
 	}
 	
 	@Test
 	void testAgregarTercerPuertoAlCircuitoTiempo5Dias() {
 		
-		assertEquals(puertoInicial, circuitoCon3Puertos.getOrigenCircuito());
+		assertEquals(puertoInicial, circuitoCon3Puertos.getOrigen());
 		assertEquals(diasHastaSegundoPuerto + diasHastaTercerPuerto, circuitoCon3Puertos.getDuracionDias());
 	}
 	
