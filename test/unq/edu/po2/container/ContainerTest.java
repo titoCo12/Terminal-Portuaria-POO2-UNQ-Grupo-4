@@ -131,7 +131,7 @@ class ContainerTest {
 		
 		dry.agregarServicio(pesado);
 		
-		List<Servicio> servicios = dry.getDesgloseServicios();
+		List<Servicio> servicios = dry.getServicios();
 		
 		assertEquals(1, servicios.size());
 		assertEquals(pesado, servicios.get(0));
