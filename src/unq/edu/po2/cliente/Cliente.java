@@ -15,8 +15,6 @@ public class Cliente {
         return nombre;
     }
 	
-	//metodos solo para atajar en tests
-	
 	public void recibirNotificacion(LocalDateTime fecha) {
         //Pre-aviso de la llegada del buque, no hace nada.
     }
