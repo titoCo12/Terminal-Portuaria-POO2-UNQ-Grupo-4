@@ -136,6 +136,23 @@ class ContainerTest {
 		assertEquals(1, servicios.size());
 		assertEquals(pesado, servicios.get(0));
 	}
-
+	
+	@Test
+	void dimensionesCubicas() {
+		int dimensiones = dry.getDimensionesCubicas();
+		
+		assertEquals(216, dimensiones);
+	}
+	
+	@Test
+	void agregarContenido() {
+		Producto pollo = new Producto("Comida", 100);
+		
+		assertEquals(2, contenedor.getContenidos().size());
+		
+		contenedor.agregarContenido(pollo);
+		
+		assertEquals(3, contenedor.getContenidos().size());
+	}
 }
 

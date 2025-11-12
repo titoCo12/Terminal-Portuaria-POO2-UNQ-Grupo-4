@@ -3,19 +3,26 @@ package unq.edu.po2.terminales4.orden;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import unq.edu.po2.chofer.Chofer;
 import unq.edu.po2.cliente.Cliente;
 import unq.edu.po2.container.Container;
 import unq.edu.po2.factura.Factura;
 import unq.edu.po2.factura.Item;
+import unq.edu.po2.servicio.AlmacenamientoExcedente;
+import unq.edu.po2.servicio.Pesado;
+import unq.edu.po2.servicio.Servicio;
 import unq.edu.po2.terminales4.camion.Camion;
 import unq.edu.po2.terminales4.circuito.Circuito;
 import unq.edu.po2.terminales4.posicion.Puerto;
@@ -24,8 +31,8 @@ import unq.edu.po2.terminales4.viajes.Viaje;
 
 class OrdenImportacionTest {
 
-	OrdenImportacion ordenImportacion;
-	LocalDate fechaTurno, fechaLlegada, fechaSalida;
+	OrdenImportacion ordenImportacion, ordenImportacionSinExcesoDeDias;
+	LocalDate fechaTurnoExcedidoEn2Dias, fechaLlegada, fechaSalida, fechaTurnoSinExcesoDeDias;
 	Puerto puertoOrigen, puertoDestinoEnOrden, puertoBsAs;
 	Cliente cliente;
 	String patenteCamion, dniChofer;
@@ -36,12 +43,15 @@ class OrdenImportacionTest {
 	Terminal terminal;
 	Factura factura;
 	Circuito circuito;
+	Chofer chofer;
+	Servicio pesado, lavado;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		
-		fechaTurno = LocalDate.now().plusDays(2);
-		fechaLlegada = LocalDate.now().plusDays(30);
+		fechaTurnoExcedidoEn2Dias = LocalDate.now().plusDays(2);
+		fechaTurnoSinExcesoDeDias = LocalDate.now(); 
+		fechaLlegada = LocalDate.now();
 		puertoOrigen = mock(Puerto.class);
 		puertoBsAs = mock(Puerto.class);
 		puertoDestinoEnOrden = mock(Puerto.class);
@@ -53,11 +63,26 @@ class OrdenImportacionTest {
 		terminal = mock(Terminal.class);
 		factura = mock(Factura.class);
 		circuito = mock(Circuito.class);
+		chofer = mock(Chofer.class);
+		pesado = mock(Servicio.class);
+		lavado = mock(Servicio.class);
+
 		patenteCamion = "AZ401FR";
 		dniChofer = "12345678";
+		container.agregarServicio(pesado);
+		container.agregarServicio(lavado);
 		
-		ordenImportacion = new OrdenImportacion(dniChofer, patenteCamion, fechaTurno, fechaLlegada, puertoOrigen, puertoDestinoEnOrden, container, cliente, viaje);
 		
+		
+		ordenImportacion = new OrdenImportacion(dniChofer, patenteCamion, fechaTurnoExcedidoEn2Dias, fechaLlegada, puertoOrigen, puertoDestinoEnOrden, container, cliente, viaje);
+		when(circuito.precioDesdeHasta(puertoOrigen, puertoDestinoEnOrden)).thenReturn(1400d);
+		when(viaje.getCircuito()).thenReturn(circuito);
+		when(camion.getPatente()).thenReturn(patenteCamion);
+		when(chofer.getDni()).thenReturn(dniChofer);
+		when(camion.getChofer()).thenReturn(chofer);
+		
+		ordenImportacionSinExcesoDeDias = new OrdenImportacion(dniChofer, patenteCamion, fechaTurnoSinExcesoDeDias, fechaLlegada, puertoOrigen, puertoDestinoEnOrden, container, cliente, viaje);
+
 	}
 
 	@Test
@@ -105,7 +130,7 @@ class OrdenImportacionTest {
 	@Test 
 	void testFechaTurno() {
 		LocalDate turnoEnOrden = ordenImportacion.getFechaTurno();
-		assertEquals(fechaTurno, turnoEnOrden);
+		assertEquals(fechaTurnoExcedidoEn2Dias, turnoEnOrden);
 	}
 	
 	
@@ -150,11 +175,64 @@ class OrdenImportacionTest {
 	
 	@Test
 	void testAgregarItemsDeOrdenEnFactura() {
-		when(circuito.precioDesdeHasta(puertoOrigen, puertoDestinoEnOrden)).thenReturn(1400d);
 		when(viaje.getCircuito()).thenReturn(circuito);
 		ordenImportacion.agregarItems(factura);
 		verify(factura, times(1)).agregarItem(any(Item.class));
 		
 	}
 	
+	@Test
+	void testAgregar3ServiciosAFactura() {
+		List<Servicio> s = new ArrayList<Servicio>();
+		s.add(pesado);
+		s.add(lavado);
+		when(container.getServicios()).thenReturn(s);
+		ordenImportacion.agregarItems(factura);
+		verify(container, times(1)).getServicios();
+		verify(factura, times(3)).agregarItem(any(Item.class));
+	}
+	
+	@Test
+	void testEnviarFacturaCliente() {
+		when(circuito.precioDesdeHasta(puertoOrigen, puertoDestinoEnOrden)).thenReturn(1400d);
+		when(viaje.getCircuito()).thenReturn(circuito);
+		ordenImportacion.enviarFactura();
+		verify(cliente, times(1)).recibirFactura(any(Factura.class));
+	}
+	
+	@Test
+	void testCamionYChoferCoincideConOrden() {
+		
+		ordenImportacion.manejarLlegada(terminalGestionada, camion);
+
+		verify(container, times(1)).agregarServicio(any(AlmacenamientoExcedente.class));
+	}
+	
+	@Test
+	void testCamionYChoferEnOrden_NoCoincideChofer_NoSeEjecutaAlmacenamientoNiHook() {
+		
+		when(chofer.getDni()).thenReturn("OTRO_DNI");
+		ordenImportacion.manejarLlegada(terminalGestionada, camion);
+		
+		verify(container, never()).agregarServicio(any(AlmacenamientoExcedente.class));
+	}
+	
+	@Test
+	void testCamionYChoferEnOrden_NoCoincidePatente_NoSeEjecutaAlmacenamientoNiHook() {
+		
+		when(camion.getPatente()).thenReturn("OTRAPATENTE");
+		ordenImportacion.manejarLlegada(terminalGestionada, camion);
+		
+		verify(container, never()).agregarServicio(any(AlmacenamientoExcedente.class));
+	}
+	
+	@Test
+	void testNoHayAlmacenamientoExcedente_NOHayExcesoDeDias() {
+		
+		ordenImportacionSinExcesoDeDias.manejarLlegada(terminalGestionada, camion);
+
+		verify(container, never()).agregarServicio(any(AlmacenamientoExcedente.class));
+	}
+	
+
 }

@@ -5,10 +5,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Contenedor implements ContenidoCarga {
-	List<ContenidoCarga> contenidos = new ArrayList<>();
+	List<ContenidoCarga> contenidos;
 	
 	public Contenedor(List<ContenidoCarga> contenidos) {
-		this.contenidos = contenidos;
+		this.contenidos = new ArrayList<>(contenidos);
+	}
+	
+	public List<ContenidoCarga> getContenidos(){
+		return contenidos;
 	}
 	
 	public void agregarContenido(ContenidoCarga contenido) {

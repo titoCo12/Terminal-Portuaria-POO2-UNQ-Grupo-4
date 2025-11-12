@@ -94,16 +94,25 @@ public abstract class Orden {
 					));
 	}
 	
-	//patron template
+	//patron template si no coincide el camion o chofer no se hace nada
 	public final void manejarLlegada(Terminal term, Camion cam) {
 		if (this.condicionTransporte(cam)) {
 			this.accionContainer(term);
+			this.accionHook();
 		}
-		this.accionHook();
 	}
 	
-	public boolean condicionTransporte(Camion cam) {
-		return cam.getPatente() == this.getPatenteCamion() && cam.getChofer().getDni() == this.getDniChofer();
+	private boolean condicionTransporte(Camion cam) {
+		return this.esMismoCamionQueEnOrden(cam) && this.esMismoChoferQueEnOrden(cam);
+	}
+	
+		
+	private boolean esMismoChoferQueEnOrden(Camion cam) {
+		return cam.getChofer().getDni().equals(this.getDniChofer());
+	}
+
+	private boolean esMismoCamionQueEnOrden(Camion cam) {
+		return cam.getPatente().equals(this.getPatenteCamion());
 	}
 	
 	public abstract void accionContainer(Terminal term);

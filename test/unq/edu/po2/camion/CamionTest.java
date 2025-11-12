@@ -16,7 +16,7 @@ class CamionTest {
 	Camion camion;
 	Orden orden;
 	Terminal terminal;
-
+//.
 	@BeforeEach
 	void setUp() throws Exception {
 		
