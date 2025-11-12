@@ -27,7 +27,7 @@ public class Terminal {
 	public Terminal(MotorDeBusqueda motor, Puerto puerto, List<EmpresaTransportista> empresas) {
 		this.motorBusqueda = motor;
 		this.puerto = puerto;
-		this.empresas = empresas; 
+		this.empresas = empresas;  
 	}
 	
 	//la asignacion de turno no debe ser considerada en el trabajo
@@ -47,7 +47,7 @@ public class Terminal {
 	
 	
 	public void preavisoBuque(List<Orden> list) {
-		// TODO Auto-generated method stub
+		list.stream().forEach(o -> o.getCliente().recibirNotificacion(o.getFechaLlegada()));
 	}
 
 	public Posicion posicion() {
@@ -92,6 +92,10 @@ public class Terminal {
 	
 	public void removerContainer(Container container) {
 		this.containersAlmacenados.remove(container);
+	}
+	
+	public List<Container> getContainersAlmacenados() {
+		return this.containersAlmacenados;
 	}
 	
 	public String generarReporte(Buque buque, Reporte reporte) {

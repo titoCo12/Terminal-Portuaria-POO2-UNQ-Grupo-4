@@ -1,6 +1,6 @@
 package unq.edu.po2.cliente;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import unq.edu.po2.factura.Factura;
 
@@ -15,7 +15,7 @@ public class Cliente {
         return nombre;
     }
 	
-	public void recibirNotificacion(LocalDateTime fecha) {
+	public void recibirNotificacion(LocalDate fecha) {
         //Pre-aviso de la llegada del buque, no hace nada.
     }
 	

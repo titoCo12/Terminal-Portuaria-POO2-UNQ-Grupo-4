@@ -68,7 +68,7 @@ public abstract class Orden {
 		return puertoDestino;
 	}
 
-	protected Cliente getCliente() {
+	public Cliente getCliente() {
 		return cliente;
 	}
 

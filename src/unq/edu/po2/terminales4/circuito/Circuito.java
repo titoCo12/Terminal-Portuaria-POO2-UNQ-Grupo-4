@@ -15,7 +15,7 @@ public class Circuito {
 		this.tramos = new ArrayList<Tramo>();
 		this.inicio = puertoInicial;
 		this.fin = puertoInicial; 
-	}
+	} 
 
 	public Puerto getOrigen() {
 		return this.inicio;
@@ -70,7 +70,7 @@ public class Circuito {
 	
 	
 	//privados
-	private List<Puerto> puertosDelCircuito() {
+	public List<Puerto> puertosDelCircuito() {
 		List<Puerto> puertosDelCircuito = new ArrayList<Puerto>();
 		this.tramos.stream().forEach(tramo -> {
 			//Agregando el origen, ya tengo los puertos ordenados. El circuito debe estar cerrado

@@ -2,6 +2,7 @@ package unq.edu.po2.terminales4.viajes;
 import unq.edu.po2.terminales4.posicion.*;
 import unq.edu.po2.terminales4.buque.*;
 import unq.edu.po2.terminales4.circuito.*;
+
 import java.time.LocalDate;
 import java.util.*;
 
@@ -14,12 +15,23 @@ public class Viaje {
 	public Viaje(LocalDate inicio, Circuito circ, Buque buque, Naviera naviera) {
 		this.codigo = String.valueOf(this.hashCode()); 
 		this.circuito = circ;
-		this.crearCronograma();  
+		this.crearCronograma(inicio);  
 	}
 	
-	private void crearCronograma() {
-		//TODO: Implementar metodo que genere cronograma en base a fecha de inicio y circuito y lo asigne.
+	
+	private void crearCronograma(LocalDate inicio) {
+		LocalDate fechaActual = inicio;
+		List<Puerto> puertos = this.circuito.puertosDelCircuito(); 
+		Map<Puerto, LocalDate> cronograma = new HashMap<Puerto, LocalDate>();
+			
+		for (Puerto p : puertos) {
+			fechaActual = fechaActual.plusDays(this.circuito.diasHasta(p));
+			cronograma.put(p, fechaActual);
+		}
+		
+		this.cronograma = cronograma;
 	}
+	
 	
 	public String getCodigo() {
 		return this.codigo;
@@ -50,7 +62,7 @@ public class Viaje {
 		return this.cronograma.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getValue))
 	            .map(Map.Entry::getKey)
 	            .toList();
-	}
+	} 
 	
 	public Circuito getCircuito() {
 		return this.circuito;
