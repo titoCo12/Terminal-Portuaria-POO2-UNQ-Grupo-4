@@ -20,7 +20,7 @@ public class Viaje {
 		this.circuito = circ;
 		this.buque = buque;
 		this.naviera = naviera;
-		this.crearCronograma();
+		this.crearCronograma(); 
 	}
 	
 	private void crearCronograma() {

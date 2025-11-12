@@ -56,8 +56,8 @@ class ServicioTest {
 	void montoFinalDePesado() {
 		when(pesado.getMontoFinal(reefer)).thenReturn(200.0);
 		
-		double monto = pesado.getMontoFinal(reefer);
-		
+		double monto = pesado.getMontoFinal(reefer); 
+		 
 		verify(pesado).getMontoFinal(reefer);
 		
 		assertEquals(200.0, monto);
@@ -67,9 +67,9 @@ class ServicioTest {
 	void montoFinalDeAlmacenamientoExcedente() {
 		when(excedente.getMontoFinal(orden)).thenReturn(1500.0);
 		
-		double monto = excedente.getMontoFinal(orden);
+		double monto = excedente.getMontoFinal(orden); 
 		
-		verify(excedente).getMontoFinal(orden);
+		verify(excedente).getMontoFinal(orden);  
 		
 		assertEquals(1500.0, monto);
 	}
