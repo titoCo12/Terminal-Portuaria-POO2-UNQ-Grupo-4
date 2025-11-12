@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import unq.edu.po2.cliente.Cliente;
 import unq.edu.po2.container.Container;
 import unq.edu.po2.factura.Factura;
+import unq.edu.po2.factura.Item;
 import unq.edu.po2.terminales4.camion.*;
 import unq.edu.po2.terminales4.posicion.Puerto;
 import unq.edu.po2.terminales4.terminal.Terminal;
@@ -87,9 +88,11 @@ public abstract class Orden {
 	}
 	
 	public void agregarItems(Factura factura) {
-		this.container.getDesgloseServicios()
+		this.container.getServicios()
 					.stream()
-					.forEach(s -> factura.agregarItem(s.getNombre(), s.getMontoFinal(container)));
+					.forEach( s -> factura.agregarItem(
+							new Item(s.getNombre(), s.getMontoFinal(container))
+					));
 	}
 	
 	public void setFechaRetiroCarga(LocalDate fechaRetiroCarga) {
