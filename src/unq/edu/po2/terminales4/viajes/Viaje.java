@@ -9,18 +9,12 @@ public class Viaje {
 
 	private String codigo;
 	private Circuito circuito;
-	private Buque buque;
-	private Naviera naviera;
-	private LocalDate inicio;
 	private Map<Puerto, LocalDate> cronograma;
 	
 	public Viaje(LocalDate inicio, Circuito circ, Buque buque, Naviera naviera) {
 		this.codigo = String.valueOf(this.hashCode()); 
-		this.inicio = inicio;
 		this.circuito = circ;
-		this.buque = buque;
-		this.naviera = naviera;
-		this.crearCronograma(); 
+		this.crearCronograma();  
 	}
 	
 	private void crearCronograma() {

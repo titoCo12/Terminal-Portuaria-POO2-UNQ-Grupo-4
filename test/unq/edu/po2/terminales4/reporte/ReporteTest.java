@@ -33,7 +33,7 @@ class ReporteTest {
 		buque = mock(Buque.class);
 		terminal = mock(Terminal.class);
 		o1 = mock(OrdenImportacion.class);
-		o2 = mock(OrdenImportacion.class);
+		o2 = mock(OrdenImportacion.class); 
 		o3 = mock(OrdenExportacion.class);
 		o4 = mock(OrdenExportacion.class);
 		ordenes = new ArrayList<Orden>();
