@@ -14,6 +14,7 @@ import unq.edu.po2.container.Container;
 import unq.edu.po2.terminales4.camion.Camion;
 import unq.edu.po2.terminales4.posicion.Puerto;
 import unq.edu.po2.terminales4.terminal.Terminal;
+import unq.edu.po2.terminales4.viajes.Viaje;
 
 class OrdenImportacionTest {
 
@@ -25,6 +26,7 @@ class OrdenImportacionTest {
 	Camion camion;
 	Terminal terminalGestionada;
 	Container container;
+	Viaje viaje;
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -38,10 +40,11 @@ class OrdenImportacionTest {
 		camion = mock(Camion.class);
 		container = mock(Container.class);
 		terminalGestionada = mock(Terminal.class);
+		viaje = mock(Viaje.class);
 		patenteCamion = "AZ401FR";
 		dniChofer = "12345678";
 		
-		ordenImportacion = new OrdenImportacion(dniChofer, patenteCamion, fechaTurno, fechaLlegada, puertoOrigen, puertoDestinoEnOrden, container, cliente);
+		ordenImportacion = new OrdenImportacion(dniChofer, patenteCamion, fechaTurno, fechaLlegada, puertoOrigen, puertoDestinoEnOrden, container, cliente, viaje);
 		
 	}
 
