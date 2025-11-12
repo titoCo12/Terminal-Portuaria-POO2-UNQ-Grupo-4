@@ -3,19 +3,24 @@ package unq.edu.po2.terminales4.terminal;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+
 import java.time.LocalDate;
 import java.util.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import unq.edu.po2.chofer.Chofer;
-import unq.edu.po2.cliente.Cliente;
+import unq.edu.po2.terminales4.reporte.*;
+import unq.edu.po2.chofer.*;
+import unq.edu.po2.cliente.*;
 import unq.edu.po2.container.*;
 import unq.edu.po2.empresaTransportista.*;
+import unq.edu.po2.terminales4.buque.*;
 import unq.edu.po2.terminales4.camion.*;
 import unq.edu.po2.terminales4.orden.*;
 import unq.edu.po2.terminales4.posicion.*;
-import unq.edu.po2.terminales4.viajes.Viaje;
+import unq.edu.po2.terminales4.reporte.ReporteDeMuelle;
+import unq.edu.po2.terminales4.viajes.*;
+import unq.edu.po2.terminales4.circuito.*;
+import unq.edu.po2.terminales4.condicionesRutas.CondicionRuta;
 
 class TerminalTest {
 
@@ -219,6 +224,90 @@ class TerminalTest {
 		verify(cli2, times(1)).recibirNotificacion(llegada);
 		verify(cli3, times(1)).recibirNotificacion(llegada);
 	
+	}
+	
+	@Test
+	void buqueSaliendoTest() {
+		//setup
+		Buque buque = mock(Buque.class);
+		//exercise
+		terminal.buqueSaliendo(buque);
+		//verify
+		//verificamos que al buque se le solicito enviar las facturas correspondientes
+		verify(buque, times(1)).enviarFacturas();
+	}
+	
+	@Test
+	void mejorCircuitoResultado() {
+		Puerto destino = mock(Puerto.class);
+		CriterioCircuito crit = mock(CriterioCircuito.class);
+		Circuito circ = mock(Circuito.class);
+		when(motor.mejorCircuito(ubicacion, destino, crit)).thenReturn(Optional.of(circ));
+		
+		assertEquals(circ, terminal.mejorCircuito(destino, crit).get());
+		
+	}
+	
+	@Test
+	void mejorCircuitoMotorSinCircuitos() {
+		Puerto destino = mock(Puerto.class);
+		CriterioCircuito crit = mock(CriterioCircuito.class);
+		when(motor.mejorCircuito(ubicacion, destino, crit)).thenReturn(Optional.empty());
+		
+		assertEquals(Optional.empty(), terminal.mejorCircuito(destino, crit));
+		
+	}
+	
+	@Test
+	void busquedaRutasTest() {
+		Ruta rut1 = mock(Ruta.class);
+		Ruta rut2 = mock(Ruta.class);
+		List<Ruta> rutas = Arrays.asList(rut1,rut2);
+		
+		CondicionRuta cond = mock(CondicionRuta.class);
+		
+		when(motor.busquedaRutas(ubicacion, cond)).thenReturn(rutas);	
+		
+		assertTrue(terminal.busquedaRutas(cond).size() == 2);
+		
+	}
+	
+	@Test
+	void generarReporteTest() {
+		
+		//setup
+		Buque buque = mock(Buque.class);
+		Orden o1 = mock(Orden.class);
+		Orden o2 = mock(Orden.class); 	
+		Reporte reporte = new ReporteDeMuelle();
+		
+		List<Orden> ordenes = new ArrayList<Orden>();
+		ordenes.add(o1);
+		ordenes.add(o2);
+		
+		when(buque.getNombre()).thenReturn("El Stugots");
+		when(buque.getOrdenesQueCorrespondenA(terminal)).thenReturn(ordenes);
+		when(o1.getFechaLlegada()).thenReturn(LocalDate.of(2000, 2, 2));
+		
+		when(ubicacion.getNombre()).thenReturn("Puerto de Nueva Jersey");
+		
+		//que el buque llame a "visitBuque()" de reporte
+		doAnswer(invoc -> {
+		        Reporte rep = invoc.getArgument(0);
+		        Terminal term = invoc.getArgument(1);
+		        rep.visitBuque(buque, term);
+		        return null;
+		    }).when(buque).acceptReporte(any(Reporte.class), any(Terminal.class));
+		
+		//exercise
+		String resultado = terminal.generarReporte(buque, reporte);
+	
+		//verify
+		assertEquals(resultado, "buque: El Stugots\n"
+				           + "puerto: Puerto de Nueva Jersey\n"
+				           + "llegada: 2000-02-02\n"
+				           + "salida: 2000-02-02\n"
+				           + "containers operados: 2");
 	}
 	
 
