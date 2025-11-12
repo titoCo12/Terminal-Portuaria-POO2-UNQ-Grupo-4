@@ -23,8 +23,7 @@ public class Circuito {
 		this.fin = puertoInicial; 
 	}
 
-	public Object getOrigen() {
-		// TODO Auto-generated method stub
+	public Puerto getOrigen() {
 		return this.inicio;
 	}
 
@@ -34,7 +33,7 @@ public class Circuito {
 		this.fin = puertoNuevo;
 	}
 
-	public int getDuracion() {
+	public int getDuracionDias() {
 		return this.tramos.stream().mapToInt(tramo -> tramo.tiempoEnDias()).sum();
 	}
 
@@ -44,19 +43,47 @@ public class Circuito {
 		
 	}
 
+	public int diasHasta(Puerto puerto) {
+		return this.tramosHasta(puerto).stream().mapToInt(tramo -> tramo.tiempoEnDias()).sum();
+	}
+	
+	public Double precioDesdeHasta(Puerto origen, Puerto destino) {
+		Double valorOrigen = this.tramosHasta(origen).stream().mapToDouble(t -> t.precioTramo()).sum();
+		Double valorDestino = this.tramosHasta(destino).stream().mapToDouble(t -> t.precioTramo()).sum();
+		return valorDestino - valorOrigen;
+		//si el origen es el primer tramo del circuito, su valor va a ser 0 obviamente :)
+	}
+	
+	public int diasDesdeHasta(Puerto origen, Puerto destino) {
+		return this.diasHasta(destino) - this.diasHasta(origen);
+	}
+	
+	
+	public boolean contieneRuta(Puerto origen, Puerto destino) {
+		List<Puerto> recorrido = this.puertosDelCircuito();
+		boolean cond = false;
+		if (recorrido.contains(origen) && recorrido.contains(destino)) {
+			cond = recorrido.indexOf(origen) < recorrido.indexOf(destino);
+		}
+		return cond;
+	}
+		
+	public int terminalesEntre(Puerto origen, Puerto destino) {
+		List<Puerto> recorrido = this.puertosDelCircuito();
+		return recorrido.indexOf(destino) - recorrido.indexOf(origen) - 1;
+	}
+	//privados
 	private List<Puerto> puertosDelCircuito() {
-		Set<Puerto> puertosDelCircuito = new HashSet<Puerto>();
+		List<Puerto> puertosDelCircuito = new ArrayList<Puerto>();
 		this.tramos.stream().forEach(tramo -> {
+			//Agregando el origen, ya tengo los puertos ordenados. El circuito debe estar cerrado
 			puertosDelCircuito.add(tramo.getOrigen());
-			puertosDelCircuito.add(tramo.getDestino());
 		});
 		return puertosDelCircuito.stream().toList();
 		
 	}
 
-	public int diasHasta(Puerto puerto) {
-		return this.tramosHasta(puerto).stream().mapToInt(tramo -> tramo.tiempoEnDias()).sum();
-	}
+	
 
 	private List<Tramo> tramosHasta(Puerto puerto) {
 		 List<Tramo> tramosHasta = new ArrayList<Tramo>();
@@ -73,30 +100,7 @@ public class Circuito {
 		return tramo.getOrigen().equals(puerto); 
 	}
 
-	public boolean contieneRuta(Puerto origen, Puerto destino) {
-		List<Puerto> recorrido = this.puertosDelCircuito();
-		boolean cond = false;
-		if (recorrido.contains(origen) && recorrido.contains(destino)) {
-			cond = recorrido.indexOf(origen) < recorrido.indexOf(destino);
-		}
-		return cond;
-	}
 	
-	public int diasDesdeHasta(Puerto origen, Puerto destino) {
-		return this.diasHasta(destino) - this.diasHasta(origen);
-	}
-	
-	public Double precioDesdeHasta(Puerto origen, Puerto destino) {
-		Double valorOrigen = this.tramosHasta(origen).stream().mapToDouble(t -> t.precioTramo()).sum();
-		Double valorDestino = this.tramosHasta(destino).stream().mapToDouble(t -> t.precioTramo()).sum();
-		return valorDestino - valorOrigen;
-		//si el origen es el primer tramo del circuito, su valor va a ser 0 obviamente :)
-	}
-	
-	public int terminalesEntre(Puerto origen, Puerto destino) {
-		List<Puerto> recorrido = this.puertosDelCircuito();
-		return recorrido.indexOf(destino) - recorrido.indexOf(origen) - 1;
-	}
 
 
 }
