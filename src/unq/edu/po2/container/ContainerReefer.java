@@ -3,6 +3,7 @@ package unq.edu.po2.container;
 import java.time.LocalDateTime;
 
 import unq.edu.po2.cliente.Cliente;
+import unq.edu.po2.servicio.*;
 
 public class ContainerReefer extends Container{
 	
@@ -18,6 +19,8 @@ public class ContainerReefer extends Container{
 		momentoConexion = tiempoConexion;
 		momentoDesconexion = tiempoDesconexion;
 		this.BL = producto;
+		
+		this.agregarServicio(new Electricidad(500.0));
 	}
 	
 	public String getTipo() {
