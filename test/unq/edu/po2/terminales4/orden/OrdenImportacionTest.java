@@ -1,7 +1,10 @@
 package unq.edu.po2.terminales4.orden;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -11,7 +14,10 @@ import org.junit.jupiter.api.Test;
 
 import unq.edu.po2.cliente.Cliente;
 import unq.edu.po2.container.Container;
+import unq.edu.po2.factura.Factura;
+import unq.edu.po2.factura.Item;
 import unq.edu.po2.terminales4.camion.Camion;
+import unq.edu.po2.terminales4.circuito.Circuito;
 import unq.edu.po2.terminales4.posicion.Puerto;
 import unq.edu.po2.terminales4.terminal.Terminal;
 import unq.edu.po2.terminales4.viajes.Viaje;
@@ -27,6 +33,9 @@ class OrdenImportacionTest {
 	Terminal terminalGestionada;
 	Container container;
 	Viaje viaje;
+	Terminal terminal;
+	Factura factura;
+	Circuito circuito;
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -41,6 +50,9 @@ class OrdenImportacionTest {
 		container = mock(Container.class);
 		terminalGestionada = mock(Terminal.class);
 		viaje = mock(Viaje.class);
+		terminal = mock(Terminal.class);
+		factura = mock(Factura.class);
+		circuito = mock(Circuito.class);
 		patenteCamion = "AZ401FR";
 		dniChofer = "12345678";
 		
@@ -129,6 +141,20 @@ class OrdenImportacionTest {
 		assertEquals(cliente, clienteEnOrden);
 	}
 
+	@Test
+	void testAccionContainerBorrarDeTerminal() {
+		ordenImportacion.accionContainer(terminal);
+		verify(terminal, times(1)).removerContainer(container);
+		
+	}
 	
+	@Test
+	void testAgregarItemsDeOrdenEnFactura() {
+		when(circuito.precioDesdeHasta(puertoOrigen, puertoDestinoEnOrden)).thenReturn(1400d);
+		when(viaje.getCircuito()).thenReturn(circuito);
+		ordenImportacion.agregarItems(factura);
+		verify(factura, times(1)).agregarItem(any(Item.class));
+		
+	}
 	
 }
