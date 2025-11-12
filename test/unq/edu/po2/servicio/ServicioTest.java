@@ -56,7 +56,7 @@ class ServicioTest {
 	void montoFinalDePesado() {
 		when(pesado.getMontoFinal(reefer)).thenReturn(200.0);
 		
-		double monto = pesado.getMontoFinal(reefer); 
+		double monto = pesado.getMontoFinal(reefer);  
 		 
 		verify(pesado).getMontoFinal(reefer);
 		

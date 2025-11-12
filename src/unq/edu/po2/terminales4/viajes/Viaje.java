@@ -15,7 +15,7 @@ public class Viaje {
 	private Map<Puerto, LocalDate> cronograma;
 	
 	public Viaje(LocalDate inicio, Circuito circ, Buque buque, Naviera naviera) {
-		this.codigo = String.valueOf(this.hashCode());
+		this.codigo = String.valueOf(this.hashCode()); 
 		this.inicio = inicio;
 		this.circuito = circ;
 		this.buque = buque;
@@ -56,5 +56,9 @@ public class Viaje {
 		return this.cronograma.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getValue))
 	            .map(Map.Entry::getKey)
 	            .toList();
+	}
+	
+	public Circuito getCircuito() {
+		return this.circuito;
 	}
 }

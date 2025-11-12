@@ -27,7 +27,7 @@ public class Terminal {
 	public Terminal(MotorDeBusqueda motor, Puerto puerto, List<EmpresaTransportista> empresas) {
 		this.motorBusqueda = motor;
 		this.puerto = puerto;
-		this.empresas = empresas;
+		this.empresas = empresas; 
 	}
 	
 	//la asignacion de turno no debe ser considerada en el trabajo
@@ -41,7 +41,7 @@ public class Terminal {
 		}
 		Orden orden = new OrdenExportacion(dniChofer, patenteCamion, LocalDate.now().plusDays(1), 
 				viaje.fechaLlegadaA(destino).get(), this.puerto, destino, contenedor, cliente,
-				viaje.fechaLlegadaA(this.puerto).get());
+				viaje.fechaLlegadaA(this.puerto).get(), viaje);
 		return orden;
 	}
 	
@@ -70,9 +70,13 @@ public class Terminal {
 		return motorBusqueda.mejorCircuito(this.getPuerto(), destino, criterio); 
 	}
 	
+	
 	public void llegadaDeCamion(Orden orden, Camion camion) {
-		orden.manejarLlegada(camion);
+		if (this.validarCamion(camion) && this.validarChofer(camion.getChofer())) {
+			orden.manejarLlegada(this, camion);
+		}
 	}
+	
 	
 	public boolean validarCamion(Camion camion) {
 		return empresas.stream().anyMatch(e -> e.esCamionHabilitado(camion));

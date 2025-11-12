@@ -1,14 +1,13 @@
 package unq.edu.po2.terminales4.orden;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-
 import unq.edu.po2.cliente.Cliente;
 import unq.edu.po2.container.Container;
 import unq.edu.po2.factura.Factura;
-import unq.edu.po2.servicio.Servicio;
+import unq.edu.po2.terminales4.camion.*;
 import unq.edu.po2.terminales4.posicion.Puerto;
 import unq.edu.po2.terminales4.terminal.Terminal;
+import unq.edu.po2.terminales4.viajes.Viaje;
 
 public abstract class Orden {
 	protected String dniChofer;
@@ -19,10 +18,11 @@ public abstract class Orden {
 	protected Puerto puertoDestino;
 	protected Cliente cliente;
 	private Container container;
-	LocalDate fechaRetiroCarga;
+	private LocalDate fechaRetiroCarga;
+	private Viaje viaje;
 	
 	public Orden(String dniChofer, String patenteCamion, LocalDate fechaTurno, LocalDate fechaLlegada,
-			Puerto puertoOrigen, Puerto puertoDestino, Container container, Cliente cliente) {
+			Puerto puertoOrigen, Puerto puertoDestino, Container container, Cliente cliente, Viaje viaje) {
 		this.dniChofer = dniChofer;
 		this.patenteCamion = patenteCamion;
 		this.fechaTurno = fechaTurno;
@@ -31,7 +31,7 @@ public abstract class Orden {
 		this.puertoDestino = puertoDestino;
 		this.container = container;
 		this.cliente = cliente;
-		
+		this.viaje = viaje;
 	}
 	
 	public abstract String getTitulo();
@@ -59,23 +59,17 @@ public abstract class Orden {
 		return fechaLLegada;
 	}
 
-
-	
-
 	protected Puerto getPuertoOrigen() {
 		return puertoOrigen;
 	}
-
 
 	protected Puerto getPuertoDestino() {
 		return puertoDestino;
 	}
 
-
 	protected Cliente getCliente() {
 		return cliente;
 	}
-
 
 	public Container getContainer() {
 		return this.container;
@@ -83,13 +77,19 @@ public abstract class Orden {
 	
 	public void enviarFactura() {
 		Factura factura = this.crearFactura();
-		this.getCliente().recibirFactura(factura);
-		
+		this.getCliente().recibirFactura(factura);	
 	}
-
-	private Factura crearFactura() {
-		// TODO Auto-generated method stub
-		return new Factura(this);
+	
+	public Factura crearFactura() {
+		Factura factura = new Factura();
+	    this.agregarItems(factura);
+	    return factura;
+	}
+	
+	public void agregarItems(Factura factura) {
+		this.container.getDesgloseServicios()
+					.stream()
+					.forEach(s -> factura.agregarItem(s.getNombre(), s.getMontoFinal(container)));
 	}
 	
 	public void setFechaRetiroCarga(LocalDate fechaRetiroCarga) {
@@ -99,5 +99,26 @@ public abstract class Orden {
 	public LocalDate getFechaRetiroCarga() {
 		return fechaRetiroCarga;
 	}
+	
+	//patron template
+	public final void manejarLlegada(Terminal term, Camion cam) {
+		if (this.condicionTransporte(cam)) {
+			this.accionContainer(term);
+		}
+		this.accionHook();
+	}
+	
+	public boolean condicionTransporte(Camion cam) {
+		return cam.getPatente() == this.getPatenteCamion() && cam.getChofer().getDni() == this.getDniChofer();
+	}
+	
+	public abstract void accionContainer(Terminal term);
+	
+	public void accionHook() {};
+	
+	public Viaje getViaje() {
+		return this.viaje;
+	}
+	
 
 }

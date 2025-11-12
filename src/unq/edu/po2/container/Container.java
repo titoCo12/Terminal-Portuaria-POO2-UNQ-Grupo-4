@@ -31,9 +31,9 @@ public abstract class Container {
 		this.servicios.add(servicio);
 	}
 	
-	public String getDesgloseServicios() {
-		return servicios.stream().map(s -> s.getNombre() + ": " + s.getMontoFinal(this)).collect(Collectors.joining(", "));
-	}
+	public List<Servicio> getDesgloseServicios() {
+		return this.servicios;
+	} 
 	
 	/**
 	 * Setea el identificador del container
