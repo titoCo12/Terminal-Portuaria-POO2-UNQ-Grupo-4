@@ -11,11 +11,13 @@ public class Viaje {
 	private String codigo;
 	private Circuito circuito;
 	private Map<Puerto, LocalDate> cronograma;
+	private Buque buque;
 	
 	public Viaje(LocalDate inicio, Circuito circ, Buque buque, Naviera naviera) {
 		this.codigo = String.valueOf(this.hashCode()); 
 		this.circuito = circ;
 		this.crearCronograma(inicio);  
+		this.buque = buque;
 	}
 	
 	
@@ -66,5 +68,9 @@ public class Viaje {
 	
 	public Circuito getCircuito() {
 		return this.circuito;
+	}
+
+	public Buque getBuque() {
+		return buque;
 	}
 }

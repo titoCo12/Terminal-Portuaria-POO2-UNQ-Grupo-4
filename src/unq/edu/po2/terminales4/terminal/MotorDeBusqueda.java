@@ -1,7 +1,9 @@
 package unq.edu.po2.terminales4.terminal;
 
+import java.time.LocalDate;
 import java.util.*;
 
+import unq.edu.po2.terminales4.buque.Buque;
 import unq.edu.po2.terminales4.circuito.*;
 import unq.edu.po2.terminales4.condicionesRutas.CondicionRuta;
 import unq.edu.po2.terminales4.posicion.*;
@@ -53,6 +55,16 @@ public class MotorDeBusqueda {
 	
 	public CriterioCircuito getCriterio() {
 		return this.criterio;
+	}
+
+	public Optional<LocalDate> salidaDeBuqueHasta(Buque buque, Puerto origen, Puerto destino) {
+		return  this
+				.publicaciones.stream()
+				.filter(v -> v.getBuque().equals(buque))
+				.filter(v -> v.pasaPor(origen) && v.pasaPor(destino))
+				.filter(v -> v.fechaLlegadaA(origen).get().isBefore(v.fechaLlegadaA(destino).get()))
+				.map(v -> v.fechaLlegadaA(origen).get())
+				.min(Comparator.naturalOrder());
 	}
 	
 }

@@ -110,6 +110,10 @@ public class Terminal {
 		return naviera.mejorTiempoHasta(this.getPuerto(), destino);
 	}
 	
+	public Optional<LocalDate> salidaDeBuqueHasta(Buque buque, Puerto destino){
+		return this.motorBusqueda.salidaDeBuqueHasta(buque, this.getPuerto(), destino);
+	}
+	
 	
 
 }
