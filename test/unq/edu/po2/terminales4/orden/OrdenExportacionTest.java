@@ -2,6 +2,8 @@ package unq.edu.po2.terminales4.orden;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.time.LocalDate;
 
@@ -12,6 +14,7 @@ import unq.edu.po2.cliente.Cliente;
 import unq.edu.po2.container.Container;
 import unq.edu.po2.terminales4.camion.Camion;
 import unq.edu.po2.terminales4.posicion.Puerto;
+import unq.edu.po2.terminales4.terminal.Terminal;
 import unq.edu.po2.terminales4.viajes.Viaje;
 
 class OrdenExportacionTest {
@@ -25,6 +28,7 @@ class OrdenExportacionTest {
 	Camion camion;
 	Container container;
 	Viaje viaje;
+	Terminal terminal;
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -38,6 +42,7 @@ class OrdenExportacionTest {
 		camion = mock(Camion.class);
 		container = mock(Container.class);
 		viaje = mock(Viaje.class);
+		terminal = mock(Terminal.class);
 		patenteCamion = "AZ401FR";
 		dniChofer = "12345678";
 		
@@ -62,5 +67,10 @@ class OrdenExportacionTest {
 		assertEquals("export", titulo);
 	} 
 	
-	
+	@Test
+	void testAccionContainerAlmacenarEnTerminal() {
+		ordenExportacion.accionContainer(terminal);
+		verify(terminal, times(1)).almacenarContainer(container);
+		
+	}
 }
