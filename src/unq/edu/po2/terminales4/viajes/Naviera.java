@@ -6,4 +6,8 @@ public class Naviera {
 	public Naviera (String nombre) {
 		this.nombre = nombre;
 	}
+	//Test
+	public String getNombre() {
+		return nombre;
+	}
 }
