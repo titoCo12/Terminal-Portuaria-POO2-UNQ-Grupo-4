@@ -109,9 +109,9 @@ class ReporteTest {
 		// algunos datos del constructor de container no nos interesan para esta parte
 		Container cont1 = new ContainerDry(cli1, 2349504, 0,0,0,0, mock(ContenidoCarga.class));
 		//veamos que pasa si le damos un id de mas de 7 caracteres..
-		Container cont2 = new ContainerTanque(cli2, 223455161,0,0,0,0, mock(ContenidoCarga.class));
+		Container cont2 = new ContainerTanque(cli2, 223455161,0,0,0,0, mock(Producto.class));
 		//veamos que pasa si le damos un id de menos de 7 caracteres..
-		Container cont3 = new ContainerReefer(cli3, 2003,0,0,0,0, mock(ContenidoCarga.class), 0, 
+		Container cont3 = new ContainerReefer(cli3, 2003,0,0,0,0, mock(Producto.class), 0, 
 				LocalDateTime.of(2000, 1, 1, 10, 10), LocalDateTime.of(2000, 1, 1, 10, 10));
 		
 		reporte = new ReporteDeAduana();
@@ -210,9 +210,9 @@ class ReporteTest {
 		// algunos datos del constructor de container no nos interesan para esta parte
 		Container cont1 = new ContainerDry(cli1, 2349504, 0,0,0,0, mock(ContenidoCarga.class));
 		//veamos que pasa si le damos un id de mas de 7 caracteres..
-		Container cont2 = new ContainerTanque(cli2, 223455161,0,0,0,0, mock(ContenidoCarga.class));
+		Container cont2 = new ContainerTanque(cli2, 223455161,0,0,0,0, mock(Producto.class));
 		//veamos que pasa si le damos un id de menos de 7 caracteres..
-		Container cont3 = new ContainerReefer(cli3, 2003,0,0,0,0, mock(ContenidoCarga.class), 0, 
+		Container cont3 = new ContainerReefer(cli3, 2003,0,0,0,0, mock(Producto.class), 0, 
 				LocalDateTime.of(2000, 1, 1, 10, 10), LocalDateTime.of(2000, 1, 1, 10, 10));
 		Container cont4 = new ContainerDry(cli4, 2532563, 0,0,0,0, mock(ContenidoCarga.class));
 		
