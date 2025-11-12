@@ -3,8 +3,6 @@ package unq.edu.po2.factura;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import unq.edu.po2.terminales4.orden.Orden;
-
 public class Factura {
 	
 	Map<String, Double> items = new LinkedHashMap<>();

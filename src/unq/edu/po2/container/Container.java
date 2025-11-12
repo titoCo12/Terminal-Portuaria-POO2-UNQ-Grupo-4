@@ -2,8 +2,6 @@ package unq.edu.po2.container;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import unq.edu.po2.cliente.Cliente;
 import unq.edu.po2.servicio.*;
 
@@ -13,16 +11,14 @@ public abstract class Container {
 	int largoMetros;
 	int alturaMetros;
 	int pesoKilos;
-	ContenidoCarga carga;
 	List<Servicio> servicios;
 	
-	public Container(Cliente cliente, int idNum, int ancho, int largo, int altura, int peso, ContenidoCarga carga) {
+	public Container(Cliente cliente, int idNum, int ancho, int largo, int altura, int peso) {
 		identificador = setIdentificador(cliente, idNum);
 		anchoMetros = ancho;
 		largoMetros = largo;
 		alturaMetros = altura;
 		pesoKilos = peso;
-		this.carga = carga;
 		this.servicios = new ArrayList<Servicio>();
 		
 	}
@@ -66,14 +62,9 @@ public abstract class Container {
 		return nombre.substring(0, 4);
 	}
 	
-	public int getPesoCarga() {
-		
-		return carga.getPesoKilos();
-	}
+	public abstract int getPesoCarga();
 	
-	public ContenidoCarga getBL() {
-		return carga;
-	}
+	public abstract ContenidoCarga getBL();
 	
 	public String getIdentificador() {
 		return identificador;
