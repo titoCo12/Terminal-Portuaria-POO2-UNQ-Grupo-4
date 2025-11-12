@@ -12,9 +12,9 @@ public class OrdenExportacion extends Orden {
 
 	private LocalDate fechaSalida;
 
-	public OrdenExportacion(String nombreChofer, String patenteCamion, LocalDate fechaTurno, LocalDate fechaLlegada,
+	public OrdenExportacion(String dniChofer, String patenteCamion, LocalDate fechaTurno, LocalDate fechaLlegada,
 			Puerto puertoOrigen, Puerto puertoDestino, Container container, Cliente cliente, LocalDate fechaSalida, Viaje viaje) {
-		super(nombreChofer, patenteCamion, fechaTurno, fechaLlegada, puertoOrigen, puertoDestino, container, cliente, viaje);
+		super(dniChofer, patenteCamion, fechaTurno, fechaLlegada, puertoOrigen, puertoDestino, container, cliente, viaje);
 		this.fechaSalida = fechaSalida;
 		
 	}

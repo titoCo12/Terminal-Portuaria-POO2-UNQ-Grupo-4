@@ -27,11 +27,11 @@ public class Terminal {
 	public Terminal(MotorDeBusqueda motor, Puerto puerto, List<EmpresaTransportista> empresas) {
 		this.motorBusqueda = motor;
 		this.puerto = puerto;
-		this.empresas = empresas;  
+		this.empresas = empresas;   
 	}
 	
 	//la asignacion de turno no debe ser considerada en el trabajo
-	public Orden registrarExportacion(String patenteCamion, String dniChofer, Cliente cliente, 
+	public OrdenExportacion registrarExportacion(String patenteCamion, String dniChofer, Cliente cliente, 
 			Container contenedor, Puerto destino, Viaje viaje) throws Exception {
 		if (!viaje.pasaPor(destino) || !viaje.pasaPor(this.puerto)) {
 			throw new Exception("Viaje no pasa por los puertos origen y destino");
@@ -39,7 +39,7 @@ public class Terminal {
 		if (viaje.fechaLlegadaA(this.puerto).get().isAfter(viaje.fechaLlegadaA(destino).get())) {
 			throw new Exception("Viaje pasa por puerto destino antes de pasar por puerto origen (esta terminal)");
 		}
-		Orden orden = new OrdenExportacion(dniChofer, patenteCamion, LocalDate.now().plusDays(1), 
+		OrdenExportacion orden = new OrdenExportacion(dniChofer, patenteCamion, LocalDate.now().plusDays(1), 
 				viaje.fechaLlegadaA(destino).get(), this.puerto, destino, contenedor, cliente,
 				viaje.fechaLlegadaA(this.puerto).get(), viaje);
 		return orden;
@@ -101,7 +101,6 @@ public class Terminal {
 	public String generarReporte(Buque buque, Reporte reporte) {
 		buque.acceptReporte(reporte, this);
 		return reporte.devolverReporte();
-		
 	}
 	
 	

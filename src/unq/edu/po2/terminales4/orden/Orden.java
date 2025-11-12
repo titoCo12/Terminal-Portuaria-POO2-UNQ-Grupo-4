@@ -19,7 +19,6 @@ public abstract class Orden {
 	protected Puerto puertoDestino;
 	protected Cliente cliente;
 	private Container container;
-	private LocalDate fechaRetiroCarga;
 	private Viaje viaje;
 	
 	public Orden(String dniChofer, String patenteCamion, LocalDate fechaTurno, LocalDate fechaLlegada,
@@ -41,17 +40,17 @@ public abstract class Orden {
 		return terminalGesionada.getPuerto().getNombre().equals(this.getPuertoDestino().getNombre()) ;
 	}
 
-	protected  String getDniChofer() {
+	public  String getDniChofer() {
 		return dniChofer;
 	}
 
 
-	protected String getPatenteCamion() {
+	public String getPatenteCamion() {
 		return patenteCamion;
 	}
 
 
-	protected LocalDate getFechaTurno() {
+	public LocalDate getFechaTurno() {
 		return fechaTurno;
 	}
 
@@ -60,11 +59,11 @@ public abstract class Orden {
 		return fechaLLegada;
 	}
 
-	protected Puerto getPuertoOrigen() {
+	public Puerto getPuertoOrigen() {
 		return puertoOrigen;
 	}
 
-	protected Puerto getPuertoDestino() {
+	public Puerto getPuertoDestino() {
 		return puertoDestino;
 	}
 
@@ -93,14 +92,6 @@ public abstract class Orden {
 					.forEach( s -> factura.agregarItem(
 							new Item(s.getNombre(), s.getMontoFinal(container))
 					));
-	}
-	
-	public void setFechaRetiroCarga(LocalDate fechaRetiroCarga) {
-		this.fechaRetiroCarga = fechaRetiroCarga;
-	}
-
-	public LocalDate getFechaRetiroCarga() {
-		return fechaRetiroCarga;
 	}
 	
 	//patron template

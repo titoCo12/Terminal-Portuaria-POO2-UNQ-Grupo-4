@@ -26,7 +26,7 @@ public class Viaje {
 			
 		for (Puerto p : puertos) {
 			fechaActual = fechaActual.plusDays(this.circuito.diasHasta(p));
-			cronograma.put(p, fechaActual);
+			cronograma.put(p, fechaActual); 
 		}
 		
 		this.cronograma = cronograma;
