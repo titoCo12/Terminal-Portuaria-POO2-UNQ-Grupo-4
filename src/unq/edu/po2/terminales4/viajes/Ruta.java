@@ -1,21 +1,16 @@
 package unq.edu.po2.terminales4.viajes;
 
-import java.time.LocalDate;
 import unq.edu.po2.terminales4.posicion.*;
 
 public class Ruta {
 
 	private Puerto origen;
 	private Puerto destino;
-	private LocalDate salida;
-	private LocalDate llegada;
 	private Viaje viaje;
 	
-	public Ruta(Puerto origen, Puerto destino, LocalDate salida, LocalDate llegada, Viaje viaje) {
+	public Ruta(Puerto origen, Puerto destino, Viaje viaje) {
 		this.origen = origen;
 		this.destino = destino;
-		this.salida = salida;
-		this.llegada = llegada;
 		this.viaje = viaje; 
 	}
 	
@@ -38,7 +33,7 @@ public class Ruta {
 		String cod = this.origen.getNombre();
 		cod += this.destino.getNombre();
 		cod += this.viaje.getCodigo();
-		return cod;
+		return cod; 
 	}
 	
 	

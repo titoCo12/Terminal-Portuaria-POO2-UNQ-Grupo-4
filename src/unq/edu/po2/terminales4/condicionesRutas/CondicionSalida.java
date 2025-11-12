@@ -32,7 +32,6 @@ public class CondicionSalida implements CondicionRuta {
 	    List<Ruta> rutas = new ArrayList<>();
 	    List<Puerto> puertos = viaje.getPuertos();
 	    int indiceOrigen = puertos.indexOf(origen);
-	    LocalDate fechaSalida = viaje.fechaLlegadaA(origen).get();
 	    
 	    //Si es el último, no hay rutas posibles
 	    if (!(indiceOrigen == puertos.size() - 1)) {
@@ -40,8 +39,7 @@ public class CondicionSalida implements CondicionRuta {
 	    	//Creamos todas las rutas posibles apartir del origen
 	    	for (int i = indiceOrigen + 1; i < puertos.size(); i++) {
 		        Puerto destino = puertos.get(i);
-		        LocalDate fechaLlegada = viaje.fechaLlegadaA(destino).get();
-		        rutas.add(new Ruta(origen, destino, fechaSalida, fechaLlegada, viaje));
+		        rutas.add(new Ruta(origen, destino, viaje));
 		    }
 	    }
 	    

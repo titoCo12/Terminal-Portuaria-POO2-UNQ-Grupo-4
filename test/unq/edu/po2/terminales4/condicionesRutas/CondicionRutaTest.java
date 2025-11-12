@@ -64,7 +64,7 @@ class CondicionRutaTest {
 		when(viaje3.fechaLlegadaA(origen)).thenReturn(Optional.of(LocalDate.of(2022, 10, 5)));
 		
 		// Exercise
-		List<Ruta> result = condRuta.validarViajes(listado, origen); 
+		List<Ruta> result = condRuta.validarViajes(listado, origen);  
 		
 		
 		//Verify

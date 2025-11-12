@@ -17,7 +17,7 @@ public class CondicionDestino implements CondicionRuta {
 	public List<Ruta> validarViajes(List<Viaje> viajes, Puerto origen) {
 	    Stream<Viaje> vs = viajes.stream().filter(v -> v.pasaPor(origen) && v.pasaPor(destino));
 		vs = vs.filter(v -> v.fechaLlegadaA(origen).get().isBefore(v.fechaLlegadaA(destino).get()));
-		return vs.map(v -> new Ruta(origen, destino, v.fechaLlegadaA(origen).get(), v.fechaLlegadaA(destino).get(), v)).toList();
+		return vs.map(v -> new Ruta(origen, destino, v)).toList();
 	} 
 
 	

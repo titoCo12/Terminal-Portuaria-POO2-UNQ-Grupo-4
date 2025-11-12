@@ -1,13 +1,7 @@
 package unq.edu.po2.terminales4.circuito;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.function.BooleanSupplier;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import unq.edu.po2.terminales4.posicion.Puerto;
 
@@ -104,12 +98,6 @@ public class Circuito {
 		 return tramosHasta;
 	
 	}
-
-	private boolean esOrigen(Tramo tramo, Puerto puerto) {
-		return tramo.getOrigen().equals(puerto); 
-	}
-
 	
-
 
 }
