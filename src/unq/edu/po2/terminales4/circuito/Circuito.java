@@ -86,12 +86,15 @@ public class Circuito {
 	
 
 	private List<Tramo> tramosHasta(Puerto puerto) {
-		 List<Tramo> tramosHasta = new ArrayList<Tramo>();
-		 this.tramos.stream().forEach(tramo -> {
-			 if(!this.esOrigen(tramo, puerto)) 
-				 //si no es el origen agrego el tramo. Si es el origen. NO agrego el tramo.
-				 tramosHasta.add(tramo); 
-		 });
+		List<Tramo> tramosHasta = new ArrayList<Tramo>();
+		
+		for(Tramo tramo : this.tramos) {
+			//si no es el origen agrego el tramo. Si es el origen. NO agrego el tramo.
+			if (tramo.getOrigen().equals(puerto)) {
+	            break;
+	        }
+			tramosHasta.add(tramo); 
+		 }
 		 return tramosHasta;
 	
 	}
