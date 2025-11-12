@@ -72,6 +72,8 @@ public class Circuito {
 		List<Puerto> recorrido = this.puertosDelCircuito();
 		return recorrido.indexOf(destino) - recorrido.indexOf(origen) - 1;
 	}
+	
+	
 	//privados
 	private List<Puerto> puertosDelCircuito() {
 		List<Puerto> puertosDelCircuito = new ArrayList<Puerto>();
@@ -79,11 +81,15 @@ public class Circuito {
 			//Agregando el origen, ya tengo los puertos ordenados. El circuito debe estar cerrado
 			puertosDelCircuito.add(tramo.getOrigen());
 		});
+		//agrego el ultimo destino si no estaba vacio
+		if (!this.tramos.isEmpty()) {
+	        puertosDelCircuito.add(this.tramos.get(this.tramos.size() - 1).getDestino());
+	    }
+		
 		return puertosDelCircuito.stream().toList();
 		
 	}
 
-	
 
 	private List<Tramo> tramosHasta(Puerto puerto) {
 		List<Tramo> tramosHasta = new ArrayList<Tramo>();
