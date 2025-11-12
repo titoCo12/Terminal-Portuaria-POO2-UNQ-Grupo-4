@@ -3,7 +3,6 @@ package unq.edu.po2.servicio;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +22,7 @@ class ServicioTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		lavado = new Lavado(100.0, 200.0);
-		electricidad = new Electricidad(300.0);
+		electricidad = new Electricidad(3.0);
 		pesado = new Pesado(400.0);
 		excedente = new AlmacenamientoExcedente(1500.0, 2);
 		reefer = mock(ContainerReefer.class);
@@ -63,13 +62,9 @@ class ServicioTest {
 	
 	@Test
 	void montoFinalDeAlmacenamientoExcedente() {
-		when(excedente.getMontoFinal(orden)).thenReturn(1500.0);
+		double monto = excedente.getMontoFinal(reefer);
 		
-		double monto = excedente.getMontoFinal(orden); 
-		
-		verify(excedente).getMontoFinal(orden);  
-		
-		assertEquals(1500.0, monto);
+		assertEquals(3000.0, monto);
 	}
 
 }
