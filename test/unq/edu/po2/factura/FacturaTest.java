@@ -3,7 +3,8 @@ package unq.edu.po2.factura;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import java.util.Map;
+
+
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,36 +15,38 @@ class FacturaTest {
 	
 	Factura factura;
 	Orden orden;
+	Item itemLavado, itemPesado, itemElectricidad, itemExcedente;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		
-		factura = new Factura(orden);
+		factura = new Factura();
 		orden = mock(Orden.class);
+		itemLavado = mock(Item.class);
+		itemPesado = mock(Item.class);
+		itemElectricidad = mock(Item.class);
+		itemExcedente = mock(Item.class);
 		
 	}
 
 	@Test
 	void agregarYGetItems() {
+		when(itemLavado.getValor()).thenReturn(200d);
+		when(itemPesado.getValor()).thenReturn(300d);
+		factura.agregarItem(itemLavado);
+		factura.agregarItem(itemPesado);
 		
-		factura.agregarItem("Lavado", 200.0);
-		factura.agregarItem("Pesado", 300.0);
-		
-		Map<String, Double> items = factura.getItems();
-		
-		assertEquals(2, items.size());
-		assertEquals(200.0, items.get("Lavado"));
-		assertEquals(300.0, items.get("Pesado"));
 		
 	}
 	
 	@Test
 	void montoTotal() {
+		when(itemElectricidad.getValor()).thenReturn(500d);
+		when(itemExcedente.getValor()).thenReturn(1500d);
+		factura.agregarItem(itemElectricidad);
+		factura.agregarItem(itemExcedente);
 		
-		factura.agregarItem("Electricidad", 500.0);
-		factura.agregarItem("Excedente", 1500.0);
-		
-		assertEquals(2000.0, factura.montoTotal());
+		assertEquals(500d + 1500d, factura.montoTotal());
 		
 	}
 

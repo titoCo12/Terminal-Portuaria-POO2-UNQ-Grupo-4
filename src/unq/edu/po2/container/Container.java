@@ -27,7 +27,7 @@ public abstract class Container {
 		this.servicios.add(servicio);
 	}
 	
-	public List<Servicio> getDesgloseServicios() {
+	public List<Servicio> getServicios() {
 		return this.servicios;
 	} 
 	

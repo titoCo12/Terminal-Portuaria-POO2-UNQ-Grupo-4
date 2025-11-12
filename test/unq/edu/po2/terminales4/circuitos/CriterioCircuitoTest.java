@@ -76,9 +76,9 @@ class CriterioCircuitoTest {
 		//Setup
 		criterio = new CriterioMenosTerminales();
 		
-		when(c1.terminalesEntre(origen, destino)).thenReturn(7);
-		when(c2.terminalesEntre(origen, destino)).thenReturn(12);
-		when(c3.terminalesEntre(origen, destino)).thenReturn(9);
+		when(c1.cantidadTerminalesEntre(origen, destino)).thenReturn(7);
+		when(c2.cantidadTerminalesEntre(origen, destino)).thenReturn(12);
+		when(c3.cantidadTerminalesEntre(origen, destino)).thenReturn(9);
 		
 		//Exercise
 		result = criterio.mejorCircuito(circuitos, origen, destino);

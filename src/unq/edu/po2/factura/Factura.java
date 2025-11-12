@@ -1,24 +1,24 @@
 package unq.edu.po2.factura;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+
+
+
 
 public class Factura {
+	List<Item> items;
 	
-	Map<String, Double> items = new LinkedHashMap<>();
-	
-
-	public void agregarItem(String servicio, double monto) {
-		items.put(servicio, monto);
+	public Factura() {
+		this.items = new ArrayList<Item>();
 	}
-	
-	public Map<String, Double> getItems() {
-		return items;
+
+	public void agregarItem(Item item) {
+		this.items.add(item);
 	}
 	
 	public double montoTotal() {
-		return items.values().stream().mapToDouble(Double::doubleValue).sum();
+		return this.items.stream().mapToDouble( i -> i.getValor()).sum();
 	}
-	
 }
 

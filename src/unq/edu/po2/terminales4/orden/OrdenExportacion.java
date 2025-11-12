@@ -26,7 +26,7 @@ public class OrdenExportacion extends Orden {
 	
 	@Override
 	public void accionContainer(Terminal term) {
-		term.almacenarContainer(getContainer());
+		term.almacenarContainer(this.getContainer());
 	}
 	
 	

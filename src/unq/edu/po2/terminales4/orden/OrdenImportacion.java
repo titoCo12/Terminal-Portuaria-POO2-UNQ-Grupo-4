@@ -29,7 +29,7 @@ public class OrdenImportacion extends Orden{
 	public void agregarItems(Factura factura) {
 		super.agregarItems(factura);
 		Double valor = this.getViaje().getCircuito().precioDesdeHasta(this.puertoOrigen, this.puertoDestino);
-		factura.agregarItem("valor de viaje", valor);
+		factura.agregarItem(new Item("Valor de viaje", valor));
 	}
 	
 	@Override
