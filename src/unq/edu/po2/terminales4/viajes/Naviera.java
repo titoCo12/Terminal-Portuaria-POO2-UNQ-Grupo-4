@@ -38,4 +38,7 @@ public class Naviera {
 				.min().getAsInt();
 	}
 	*/
+	public List<Circuito> getCircuitos(){
+		return circuitos;
+	}
 }
