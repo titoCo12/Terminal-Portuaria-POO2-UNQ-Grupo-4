@@ -62,7 +62,7 @@ public class Circuito {
 		return cond;
 	}
 		
-	public int terminalesEntre(Puerto origen, Puerto destino) {
+	public int cantidadTerminalesEntre(Puerto origen, Puerto destino) {
 		List<Puerto> recorrido = this.puertosDelCircuito();
 		return recorrido.indexOf(destino) - recorrido.indexOf(origen) - 1;
 	}

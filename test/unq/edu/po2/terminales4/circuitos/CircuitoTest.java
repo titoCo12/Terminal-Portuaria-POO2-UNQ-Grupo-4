@@ -106,6 +106,7 @@ class CircuitoTest {
 	void testPrecioDesdeHasta() {
 		assertEquals(precioHastaSegundoPuerto, circuitoCon3Puertos.precioDesdeHasta(puertoInicial, segundoPuerto));
 		assertEquals(precioHastaSegundoPuerto + precioHastaTercerPuerto, circuitoCon3Puertos.precioDesdeHasta(puertoInicial, tercerPuerto));
+		assertEquals(0, circuitoCon3Puertos.precioDesdeHasta(puertoInicial, puertoInicial));
 	}
 	
 	@Test
@@ -114,8 +115,11 @@ class CircuitoTest {
 	}
 	
 	@Test
-	void diasDesdeHasta() {
-		
+	void testDiasDesdeHasta() {
+		assertEquals(diasHastaSegundoPuerto, circuitoCon3Puertos.diasDesdeHasta(puertoInicial, segundoPuerto));
+		assertEquals(diasHastaSegundoPuerto + diasHastaTercerPuerto, circuitoCon3Puertos.diasDesdeHasta(puertoInicial, tercerPuerto));
+		assertEquals(0, circuitoCon3Puertos.diasDesdeHasta(puertoInicial, puertoInicial));
+
 	}
 	
 }
