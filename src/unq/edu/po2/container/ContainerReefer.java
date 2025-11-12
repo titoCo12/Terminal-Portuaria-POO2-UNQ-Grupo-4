@@ -23,6 +23,7 @@ public class ContainerReefer extends Container{
 		this.agregarServicio(new Electricidad(500.0));
 	}
 	
+	@Override
 	public String getTipo() {
 		return "Reefer";
 	}

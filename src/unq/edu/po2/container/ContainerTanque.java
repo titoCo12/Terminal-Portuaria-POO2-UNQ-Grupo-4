@@ -10,7 +10,7 @@ public class ContainerTanque extends Container{
 		super(cliente, idNum, ancho, largo, altura, peso);
 		BL = producto;
 	}
-	
+	@Override
 	public String getTipo() {
 		return "Tanque";
 	}

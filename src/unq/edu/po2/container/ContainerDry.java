@@ -11,6 +11,7 @@ public class ContainerDry extends Container{
 		BL = carga;
 	}
 	
+	@Override
 	public String getTipo() {
 		return "Dry";
 	}
