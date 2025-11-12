@@ -106,6 +106,10 @@ public class Terminal {
 		return reporte.devolverReporte();
 	}
 	
+	public int diasDeNavieraHasta(Naviera naviera, Puerto destino) {
+		return naviera.mejorTiempoHasta(this.getPuerto(), destino);
+	}
+	
 	
 
 }
