@@ -12,13 +12,13 @@ public class Producto implements ContenidoCarga {
 	@Override
 	public int getPesoKilos() {
 		
-		return pesoKilos;
+		return this.pesoKilos;
 	}
 
 	@Override
 	public String getTipoProducto() {
 		
-		return tipoProducto;
+		return this.tipoProducto;
 	}
 
 }

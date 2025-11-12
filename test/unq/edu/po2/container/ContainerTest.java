@@ -4,190 +4,137 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import unq.edu.po2.cliente.*;
+import unq.edu.po2.servicio.*;
 
 
 class ContainerTest {
 	
 	Cliente cliente;
-	Container container;
+	Producto arroz;
+	Producto milanesa;
+	Producto metal;
 	ContainerDry dry;
 	ContainerTanque tanque;
 	ContainerReefer reefer;
-	ContenidoCarga contenido;
-	Producto producto;
 	Contenedor contenedor;
     
 	
 	@BeforeEach
 	public void setUp() {
 		
-		cliente = mock(Cliente.class);
-		container = mock(Container.class);
-		dry = mock(ContainerDry.class);
-		tanque = mock(ContainerTanque.class);
-		reefer = mock(ContainerReefer.class);
-		contenido = mock(ContenidoCarga.class);
-		producto = mock(Producto.class);
-		contenedor = mock(Contenedor.class);
+		cliente = new Cliente("Bruno Diaz");
+		arroz = new Producto("Comida", 300);
+		milanesa = new Producto("Comida", 100);
+		metal = new Producto("Metal", 600);
+		dry = new ContainerDry(cliente, 5689400, 6, 6, 6, 500, milanesa);
+		tanque = new ContainerTanque(cliente, 5201456, 7, 7, 7, 800, metal);
+		reefer = new ContainerReefer(cliente, 2005034, 5, 5, 5, 600, arroz, 15, 
+					LocalDateTime.of(2022, 12, 18, 12, 00), 
+					LocalDateTime.of(2026, 06, 11, 12, 00));
+		contenedor = new Contenedor(List.of(arroz, milanesa));
 		
 		}
 	
 	@Test
-	public void containerTieneContenidoYPeso() {
-		when(contenido.getPesoKilos()).thenReturn(3000);
-		when(contenido.getTipoProducto()).thenReturn("Madera");
-		when(container.getBL()).thenReturn(contenido);
-		
-		ContenidoCarga carga = container.getBL();
-	    
-	    verify(container).getBL();
-	    
-	    assertEquals(3000, carga.getPesoKilos());
-	    assertEquals("Madera", carga.getTipoProducto());
-	}
-	
-	@Test
-	public void tanqueTieneGasoleoConPeso() {
-		when(tanque.getBL()).thenReturn(producto);
-		when(producto.getPesoKilos()).thenReturn(200);
-		when(producto.getTipoProducto()).thenReturn("Gasóleo A");
-	    
+	public void tanqueTieneMetalConPeso() {
 		ContenidoCarga carga = tanque.getBL();
-	    
-	    verify(tanque).getBL();
-	    
-	    assertEquals(200, carga.getPesoKilos());
-	    assertEquals("Gasóleo A", carga.getTipoProducto());
+		
+		assertEquals(600, carga.getPesoKilos());
+	    assertEquals("Metal", carga.getTipoProducto());
 	}
 	
 	@Test
 	public void dryTieneElectrodomesticosConPeso() {
-		when(contenido.getPesoKilos()).thenReturn(300);
-		when(contenido.getTipoProducto()).thenReturn("Electrodomésticos");
-		when(dry.getBL()).thenReturn(contenido);
-		
 		ContenidoCarga carga = dry.getBL();
-	    
-	    verify(dry).getBL();
-	    
-	    assertEquals(300, carga.getPesoKilos());
-	    assertEquals("Electrodomésticos", carga.getTipoProducto());
 		
+		assertEquals(100, carga.getPesoKilos());
+	    assertEquals("Comida", carga.getTipoProducto());
 	}
 	
 	@Test
 	public void reeferTieneComidaConPeso() {
-		when(producto.getPesoKilos()).thenReturn(500);
-		when(producto.getTipoProducto()).thenReturn("Comida");
-		when(reefer.getBL()).thenReturn(producto);
-		
 		ContenidoCarga carga = reefer.getBL();
-	    
-	    verify(reefer).getBL();
-	    
-	    assertEquals(500, carga.getPesoKilos());
+		
+		assertEquals(300, carga.getPesoKilos());
 	    assertEquals("Comida", carga.getTipoProducto());
 	}
 	
 	@Test
 	public void identificadorEnDry() {
-		when(cliente.getNombre()).thenReturn("Bruno Diaz");
+		String identificador = dry.getIdentificador();
 		
-	    ContainerDry Cdry = new ContainerDry(cliente, 1234567, 6, 6, 12, 100, contenido);
-	    
-	    String identificador = Cdry.getIdentificador();
-	    assertEquals("BRUN1234567", identificador);
+	    assertEquals("BRUN5689400", identificador);
 	}
 	
 	@Test 
 	public void identificadorEnTanque() {
-		when(cliente.getNombre()).thenReturn("Ricardo Tapia");
-		
-	    ContainerTanque cTanque = new ContainerTanque(cliente, 567, 6, 6, 12, 100, contenido);
+		String identificador = tanque.getIdentificador();
 	    
-	    String identificador = cTanque.getIdentificador();
-	    assertEquals("RICA0000567", identificador);
+	    assertEquals("BRUN5201456", identificador);
 	}
 	
 	@Test
 	public void identificadorEnReefer() {
-		when(cliente.getNombre()).thenReturn("Homero Simpson");
+		String identificador = reefer.getIdentificador();
 		
-		ContainerReefer cReefer = new ContainerReefer(cliente, 2025119, 6, 6, 12, 100, contenido, 0, LocalDateTime.of(2022, 12, 18, 12, 00), LocalDateTime.of(2026, 06, 11, 12, 00));
-		
-	    String identificador = cReefer.getIdentificador();
-	    assertEquals("HOME2025119", identificador);
+	    assertEquals("BRUN2005034", identificador);
 	}
 	
 	@Test
 	public void consumoReefer() {
-		when(reefer.getConsumoXHora()).thenReturn(500.0);
+		reefer.setConsumo(500.0);
 		
-		double consumoXHora = reefer.getConsumoXHora();
+		assertEquals(500.0, reefer.getConsumoXHora());
 		
-		verify(reefer).getConsumoXHora();
+		reefer.aumentarConsumo(200.0);
 		
-		assertEquals(500.0, consumoXHora);
+		assertEquals(700.0, reefer.getConsumoXHora());
 	}
 	
 	@Test
 	public void tiempoDeConexionYDesconexion() {
-		when(reefer.getMomentoConexion()).thenReturn(LocalDateTime.of(2022, 12, 18, 12, 00));
-		when(reefer.getMomentoDesconexion()).thenReturn(LocalDateTime.of(2026, 06, 11, 18, 00));
-		
 		LocalDateTime conexion = reefer.getMomentoConexion();
 		LocalDateTime desconexion = reefer.getMomentoDesconexion();
 		
-		verify(reefer).getMomentoConexion();
-		verify(reefer).getMomentoDesconexion();
-		
 		assertEquals(LocalDateTime.of(2022, 12, 18, 12, 00), conexion);
-		assertEquals(LocalDateTime.of(2026, 06, 11, 18, 00), desconexion);
+		assertEquals(LocalDateTime.of(2026, 06, 11, 12, 00), desconexion);
 	}
 	
 	@Test
-	public void tipoYPesoEnProducto() {
-		when(producto.getTipoProducto()).thenReturn("Tecnologia");
-		when(producto.getPesoKilos()).thenReturn(2000);
-		
-		String tipo = producto.getTipoProducto();
-		int peso = producto.getPesoKilos();
-		
-		assertEquals("Tecnologia", tipo);
-		assertEquals(2000, peso);
-		
+	public void tipoYPesoEnProductos() {
+		assertEquals("Comida", arroz.getTipoProducto());
+		assertEquals(300, arroz.getPesoKilos());
+		assertEquals("Metal", metal.getTipoProducto());
+		assertEquals(600, metal.getPesoKilos());
 	}
 
 	@Test
 	public void tipoYPesoEnContenedor() {
-		ContenidoCarga contenido2 = mock(ContenidoCarga.class);
+		//contenedor = new Contenedor(List.of(arroz, milanesa));
+		String tipo = contenedor.getTipoProducto();
+		int peso = contenedor.getPesoKilos();
 		
-		when(contenido.getTipoProducto()).thenReturn("Metalurgico");
-		when(contenido.getPesoKilos()).thenReturn(600);
-		when(contenido2.getPesoKilos()).thenReturn(700);
-		
-		String tipo = contenido.getTipoProducto();
-		int peso = contenido.getPesoKilos() + contenido2.getPesoKilos();
-		
-		assertEquals("Metalurgico", tipo);
-		assertEquals(1300, peso);
+		assertEquals("Comida", tipo);
+		assertEquals(400, peso);
 		
 	}
 	
 	@Test
 	void desgloseServiciosDry() {
-		when(dry.getDesgloseServicios()).thenReturn("Pesado: 500.0");
+		Servicio pesado = mock(Servicio.class);
 		
-		String montoFinal = dry.getDesgloseServicios();
+		dry.agregarServicio(pesado);
 		
-		verify(dry).getDesgloseServicios();
+		List<Servicio> servicios = dry.getDesgloseServicios();
 		
-		assertEquals("Pesado: 500.0", montoFinal);
+		assertEquals(1, servicios.size());
+		assertEquals(pesado, servicios.get(0));
 	}
 
 }
