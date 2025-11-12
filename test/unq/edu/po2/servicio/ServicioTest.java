@@ -21,10 +21,10 @@ class ServicioTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		lavado = mock(Lavado.class);
-		electricidad = mock(Electricidad.class);
-		pesado = mock(Pesado.class);
-		excedente = mock(AlmacenamientoExcedente.class);
+		lavado = new Lavado(100, 200);
+		electricidad = new Electricidad(300);
+		pesado = new Pesado(400);
+		excedente = new AlmacenamientoExcedente(1500, 2);
 		reefer = mock(ContainerReefer.class);
 		orden = mock(Orden.class);
 	}
