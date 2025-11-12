@@ -8,6 +8,7 @@ import unq.edu.po2.chofer.*;
 import unq.edu.po2.cliente.*;
 import unq.edu.po2.container.*;
 import unq.edu.po2.empresaTransportista.EmpresaTransportista;
+import unq.edu.po2.servicio.*;
 import unq.edu.po2.terminales4.buque.*;
 import unq.edu.po2.terminales4.camion.Camion;
 import unq.edu.po2.terminales4.circuito.*;
@@ -42,6 +43,8 @@ public class Terminal {
 		OrdenExportacion orden = new OrdenExportacion(dniChofer, patenteCamion, LocalDate.now().plusDays(1), 
 				viaje.fechaLlegadaA(destino).get(), this.puerto, destino, contenedor, cliente,
 				viaje.fechaLlegadaA(this.puerto).get(), viaje);
+		contenedor.agregarServicio(new Lavado(1000.0, 1800.0));
+		contenedor.agregarServicio(new Pesado(800.0));
 		return orden;
 	}
 	
