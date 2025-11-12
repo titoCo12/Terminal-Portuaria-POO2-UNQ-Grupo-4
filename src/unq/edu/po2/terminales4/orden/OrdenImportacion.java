@@ -1,8 +1,7 @@
 package unq.edu.po2.terminales4.orden;
 
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 import unq.edu.po2.cliente.Cliente;
 import unq.edu.po2.container.Container;
@@ -33,14 +32,20 @@ public class OrdenImportacion extends Orden{
 	}
 	
 	@Override
-	public void accionHook() {
-		int diasExcedidos = (int)Duration.between(LocalDateTime.now(), fechaTurno).toDays();
-		
-		if (diasExcedidos > 0) {
-			this.getContainer().agregarServicio(new AlmacenamientoExcedente(1000.0, diasExcedidos));
+	public void accionHook() {		
+		if (this.retiroFueraDeTermino()) {
+			this.getContainer().agregarServicio(new AlmacenamientoExcedente(1000.0, this.diasExcedidos()));
 		}
 	}
 	
+	private boolean retiroFueraDeTermino() {
+		return this.diasExcedidos() > 0;
+	}
+	
+	private int diasExcedidos() {
+		
+		return (int) ChronoUnit.DAYS.between(LocalDate.now(), fechaTurno);
+	}
 	
 	@Override
 	public String getTitulo() {
