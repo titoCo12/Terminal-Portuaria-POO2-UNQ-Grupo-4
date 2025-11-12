@@ -35,14 +35,16 @@ public class Buque{
 	public void terminalDestino(Terminal terminalDestino) {
 		this.terminalDestino = terminalDestino;
 	}
+	
 	public void actualizarPosicion(Posicion posicion) {
 		this.posicion = posicion;
 		this.fase.evaluarDistanciaADestino(posicion.distanciaEnKmA(this.posicionPuertoDestino()));
 	}
 
 	public Posicion posicion() {
-		return this.posicion;
+		return this.posicion; 
 	}
+	
 	private Posicion posicionPuertoDestino() {
 		
 		return this.terminalDestino.posicion();
@@ -61,6 +63,7 @@ public class Buque{
 	protected void avisarSalidaATerminal() {
 		this.terminalDestino.buqueSaliendo(this);
 	}
+	
 	public void iniciarTrabajo() {
 		this.fase.iniciarTrabajo();
 	}

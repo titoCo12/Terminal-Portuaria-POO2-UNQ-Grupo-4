@@ -58,7 +58,7 @@ class OrdenExportacionTest {
 		String titulo = ordenExportacion.getTitulo();
 		
 		assertEquals("export", titulo);
-	}
+	} 
 	
 	
 }

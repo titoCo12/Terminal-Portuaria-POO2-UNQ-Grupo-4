@@ -11,12 +11,6 @@ public abstract class FaseBuque {
 	protected abstract void siguienteFase();
 	public abstract void iniciarTrabajo();
 	public abstract void depart();
-	
 	public  abstract void  evaluarDistanciaADestino(double distancia);
-	
 
-	public abstract void informarExportaciones();
-	public abstract void realizarPagos(); 
-	public abstract void registrarImportaciones(); 
-	public abstract void registrarExportaciones();
 }

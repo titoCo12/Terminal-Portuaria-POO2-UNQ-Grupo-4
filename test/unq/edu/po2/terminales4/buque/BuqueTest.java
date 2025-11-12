@@ -1,6 +1,5 @@
 package unq.edu.po2.terminales4.buque;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;

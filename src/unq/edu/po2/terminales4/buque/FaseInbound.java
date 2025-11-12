@@ -28,39 +28,13 @@ public class FaseInbound extends FaseBuque {
 	@Override
 	public void depart() {
 		
-
 	}
-	
-	
 
 	@Override
 	public void iniciarTrabajo() {
 		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void informarExportaciones() {
-		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void realizarPagos() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void registrarImportaciones() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void registrarExportaciones() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }
