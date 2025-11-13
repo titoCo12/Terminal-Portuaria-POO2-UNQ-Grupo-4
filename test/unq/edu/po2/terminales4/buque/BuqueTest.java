@@ -1,5 +1,6 @@
 package unq.edu.po2.terminales4.buque;
 
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
@@ -98,6 +99,11 @@ class BuqueTest {
 		verify(terminalDestino, never()).buqueSaliendo(buque);
 		
 		
+	}
+	
+	@Test
+	void nombreDeBuque() {
+		assertEquals("Gran Buque", buque.getNombre());
 	}
 	
 }
