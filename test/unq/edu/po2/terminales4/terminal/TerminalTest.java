@@ -30,6 +30,8 @@ class TerminalTest {
 	private EmpresaTransportista emp1;
 	private EmpresaTransportista emp2;
 	private List<EmpresaTransportista> emps;
+	Buque buque;
+	
 	
 	@BeforeEach
 	void setUp() {
@@ -39,6 +41,7 @@ class TerminalTest {
 		emp2 = mock(EmpresaTransportista.class);
 		emps = new ArrayList<>();
 		emps.add(emp1); emps.add(emp2);
+		buque = mock(Buque.class);
 		
 		terminal = new Terminal(motor, ubicacion, emps);
 	}
@@ -228,8 +231,6 @@ class TerminalTest {
 	
 	@Test
 	void buqueSaliendoTest() {
-		//setup
-		Buque buque = mock(Buque.class);
 		//exercise
 		terminal.buqueSaliendo(buque);
 		//verify
@@ -276,7 +277,6 @@ class TerminalTest {
 	void generarReporteTest() {
 		
 		//setup
-		Buque buque = mock(Buque.class);
 		Orden o1 = mock(Orden.class);
 		Orden o2 = mock(Orden.class); 	
 		Reporte reporte = new ReporteDeMuelle();
@@ -308,6 +308,17 @@ class TerminalTest {
 				           + "llegada: 2000-02-02\n"
 				           + "salida: 2000-02-02\n"
 				           + "containers operados: 2");
+	}
+	
+	@Test
+	void salidaDeBuqueHasta() {
+		LocalDate fecha = LocalDate.of(2025, 11, 10);
+		
+		when(terminal.salidaDeBuqueHasta(buque, ubicacion)).thenReturn(Optional.of(fecha));
+		
+		Optional<LocalDate> resultado = terminal.salidaDeBuqueHasta(buque, ubicacion);
+		
+		assertEquals(fecha, resultado.get());
 	}
 	
 
