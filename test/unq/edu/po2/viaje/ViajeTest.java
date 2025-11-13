@@ -91,4 +91,11 @@ class ViajeTest {
 		assertEquals(puertosDelCircuito, viaje.getPuertos());
 	}
 	
+	@Test
+	void testGetBuque() {
+		assertEquals(buque, viaje.getBuque());
+	}
+	
+	
+	
 }
