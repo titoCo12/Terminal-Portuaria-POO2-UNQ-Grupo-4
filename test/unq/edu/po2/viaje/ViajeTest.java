@@ -53,36 +53,24 @@ class ViajeTest {
 		when(circuito.diasHasta(puerto2)).thenReturn(diasHastaPuerto2);
 		when(circuito.diasHasta(puerto3)).thenReturn(diasHastaPuerto3);
 		viaje = new Viaje(fechaInicio, circuito, buque, naviera);
-//		circuito.agregarPuerto(puerto1, 1, 3d);
-//		circuito.agregarPuerto(puerto2, 5, 30d);
-//		circuito.agregarPuerto(puerto3, 10, 300d);
-		
-		
-		
-		
 	}
 
 	@Test
 	void testConstructor() {
-		
 		verify(circuito, times(1)).puertosDelCircuito();
 		verify(circuito, atLeastOnce()).diasHasta(any(Puerto.class));
 	}
 	
 	@Test
 	void testPasaPorPuerto() {
-
 		assertTrue(viaje.pasaPor(puerto1));
 		assertTrue(viaje.pasaPor(puerto2));
 		assertTrue(viaje.pasaPor(puerto3));
-
 	}
 
 	@Test
 	void testNoPasaPorPuerto() {
-
 		assertFalse(viaje.pasaPor(puertoQueNoPasa));
-		
 	}
 	
 	@Test
@@ -90,16 +78,17 @@ class ViajeTest {
 		assertTrue(viaje.pasaEnFecha(fechaInicio.plusDays(diasHastaPuerto1)));
 		assertTrue(viaje.pasaEnFecha(fechaInicio.plusDays(diasHastaPuerto1+diasHastaPuerto2)));
 		assertTrue(viaje.pasaEnFecha(fechaInicio.plusDays(diasHastaPuerto1+diasHastaPuerto2+diasHastaPuerto3)));
-		
 	}
 	
 	@Test
 	void testNoPasaEnFechaQueSeAgregaron_Falso() {
 		int diasQueNoEstaEnViaje = 100;
 		assertFalse(viaje.pasaEnFecha(fechaInicio.plusDays(diasQueNoEstaEnViaje)));
-		
-		
-		
+	}
+	
+	@Test
+	void testPuertosDelViaje() {
+		assertEquals(puertosDelCircuito, viaje.getPuertos());
 	}
 	
 }

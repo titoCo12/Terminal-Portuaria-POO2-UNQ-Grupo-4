@@ -61,9 +61,7 @@ public class Viaje {
 	
 	//Devuelve todos los puertos por los que pasa en orden
 	public List<Puerto> getPuertos() {
-		return this.cronograma.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getValue))
-	            .map(Map.Entry::getKey)
-	            .toList();
+		return this.circuito.puertosDelCircuito();
 	} 
 	
 	public Circuito getCircuito() {
