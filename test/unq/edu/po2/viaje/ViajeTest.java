@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -96,6 +97,28 @@ class ViajeTest {
 		assertEquals(buque, viaje.getBuque());
 	}
 	
+	@Test
+	void testGetCircuito() {
+		assertEquals(circuito, viaje.getCircuito());
+	}
 	
+	@Test
+	void testPuertoEnFecha() {
+		assertEquals(Optional.of(puerto1), viaje.puertoEnFecha(fechaInicio.plusDays(diasHastaPuerto1)));
+	}
 	
+	@Test
+	void testNoPuertoEnFecha() {
+		//una fecha que no existe en viajes
+		assertEquals(Optional.empty(), viaje.puertoEnFecha(fechaInicio.plusDays(100)));
+	}
+	
+	@Test
+	void testFechaLlegadaA_Puerto() {
+		assertEquals(Optional.of(fechaInicio.plusDays(diasHastaPuerto1)), viaje.fechaLlegadaA(puerto1));
+	}
+	@Test
+	void testFechaLlegadaA_PuertoQueNoEstaEnViajes() {
+		assertEquals(Optional.empty(), viaje.fechaLlegadaA(puertoQueNoPasa));
+	}
 }
