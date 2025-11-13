@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -53,36 +54,24 @@ class ViajeTest {
 		when(circuito.diasHasta(puerto2)).thenReturn(diasHastaPuerto2);
 		when(circuito.diasHasta(puerto3)).thenReturn(diasHastaPuerto3);
 		viaje = new Viaje(fechaInicio, circuito, buque, naviera);
-//		circuito.agregarPuerto(puerto1, 1, 3d);
-//		circuito.agregarPuerto(puerto2, 5, 30d);
-//		circuito.agregarPuerto(puerto3, 10, 300d);
-		
-		
-		
-		
 	}
 
 	@Test
 	void testConstructor() {
-		
 		verify(circuito, times(1)).puertosDelCircuito();
 		verify(circuito, atLeastOnce()).diasHasta(any(Puerto.class));
 	}
 	
 	@Test
 	void testPasaPorPuerto() {
-
 		assertTrue(viaje.pasaPor(puerto1));
 		assertTrue(viaje.pasaPor(puerto2));
 		assertTrue(viaje.pasaPor(puerto3));
-
 	}
 
 	@Test
 	void testNoPasaPorPuerto() {
-
 		assertFalse(viaje.pasaPor(puertoQueNoPasa));
-		
 	}
 	
 	@Test
@@ -90,16 +79,46 @@ class ViajeTest {
 		assertTrue(viaje.pasaEnFecha(fechaInicio.plusDays(diasHastaPuerto1)));
 		assertTrue(viaje.pasaEnFecha(fechaInicio.plusDays(diasHastaPuerto1+diasHastaPuerto2)));
 		assertTrue(viaje.pasaEnFecha(fechaInicio.plusDays(diasHastaPuerto1+diasHastaPuerto2+diasHastaPuerto3)));
-		
 	}
 	
 	@Test
 	void testNoPasaEnFechaQueSeAgregaron_Falso() {
 		int diasQueNoEstaEnViaje = 100;
 		assertFalse(viaje.pasaEnFecha(fechaInicio.plusDays(diasQueNoEstaEnViaje)));
-		
-		
-		
 	}
 	
+	@Test
+	void testPuertosDelViaje() {
+		assertEquals(puertosDelCircuito, viaje.getPuertos());
+	}
+	
+	@Test
+	void testGetBuque() {
+		assertEquals(buque, viaje.getBuque());
+	}
+	
+	@Test
+	void testGetCircuito() {
+		assertEquals(circuito, viaje.getCircuito());
+	}
+	
+	@Test
+	void testPuertoEnFecha() {
+		assertEquals(Optional.of(puerto1), viaje.puertoEnFecha(fechaInicio.plusDays(diasHastaPuerto1)));
+	}
+	
+	@Test
+	void testNoPuertoEnFecha() {
+		//una fecha que no existe en viajes
+		assertEquals(Optional.empty(), viaje.puertoEnFecha(fechaInicio.plusDays(100)));
+	}
+	
+	@Test
+	void testFechaLlegadaA_Puerto() {
+		assertEquals(Optional.of(fechaInicio.plusDays(diasHastaPuerto1)), viaje.fechaLlegadaA(puerto1));
+	}
+	@Test
+	void testFechaLlegadaA_PuertoQueNoEstaEnViajes() {
+		assertEquals(Optional.empty(), viaje.fechaLlegadaA(puertoQueNoPasa));
+	}
 }
