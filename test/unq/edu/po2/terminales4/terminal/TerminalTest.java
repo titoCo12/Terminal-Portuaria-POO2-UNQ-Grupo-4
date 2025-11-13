@@ -31,6 +31,8 @@ class TerminalTest {
 	private EmpresaTransportista emp2;
 	private List<EmpresaTransportista> emps;
 	Buque buque;
+	Naviera naviera;
+	Puerto destino;
 	
 	
 	@BeforeEach
@@ -42,6 +44,7 @@ class TerminalTest {
 		emps = new ArrayList<>();
 		emps.add(emp1); emps.add(emp2);
 		buque = mock(Buque.class);
+		naviera = mock(Naviera.class);
 		
 		terminal = new Terminal(motor, ubicacion, emps);
 	}
@@ -321,5 +324,15 @@ class TerminalTest {
 		assertEquals(fecha, resultado.get());
 	}
 	
+	@Test
+	void diasDeNavieraHasta() {
+		when(naviera.mejorTiempoHasta(ubicacion, destino)).thenReturn(5);
+		
+		int resultado = terminal.diasDeNavieraHasta(naviera, destino);
+		
+		verify(naviera).mejorTiempoHasta(ubicacion, destino);
+		
+		assertEquals(5, resultado);
+	}
 
 }
