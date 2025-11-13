@@ -20,11 +20,11 @@ class CamionTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		
-		chofer = new Chofer("Manuel Santos", "35.201.151");
-		camion = new Camion("ABC123", chofer, orden, terminal);
+		chofer = mock(Chofer.class);
 		orden = mock(Orden.class);
 		terminal = mock(Terminal.class);
 		
+		camion = new Camion("ABC123", chofer, orden, terminal);
 	}
 
 	@Test
@@ -39,6 +39,12 @@ class CamionTest {
 		Chofer choferAsignado = camion.getChofer();
 		
 		assertEquals(chofer, choferAsignado);
+	}
+	
+	@Test
+	void testLlegadaCamion() {
+		camion.entregarCarga(orden, camion);
+		verify(terminal).llegadaDeCamion(orden, camion);
 	}
 
 }
