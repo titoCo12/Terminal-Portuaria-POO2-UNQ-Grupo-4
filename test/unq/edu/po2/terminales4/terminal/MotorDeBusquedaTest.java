@@ -3,11 +3,13 @@ package unq.edu.po2.terminales4.terminal;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import unq.edu.po2.terminales4.buque.Buque;
 import unq.edu.po2.terminales4.circuito.Circuito;
 import unq.edu.po2.terminales4.circuito.CriterioCircuito;
 import unq.edu.po2.terminales4.condicionesRutas.CondicionRuta;
@@ -24,6 +26,9 @@ class MotorDeBusquedaTest {
 	private Circuito c2;
 	private List<Viaje> viajes;
 	private List<Circuito> circuitos;
+	Puerto origen;
+	Puerto destino;
+	Buque buque;
 	
 	
 	@BeforeEach
@@ -32,6 +37,9 @@ class MotorDeBusquedaTest {
 		c2 = mock(Circuito.class);
 		v1 = mock(Viaje.class);
 		v2 = mock(Viaje.class);
+		buque = mock(Buque.class);
+		origen = mock(Puerto.class);
+		destino = mock(Puerto.class);
 		
 		viajes = new ArrayList<>();
 		viajes.add(v1); viajes.add(v2);
@@ -57,7 +65,6 @@ class MotorDeBusquedaTest {
 
 	@Test
 	void busquedaDeRutas() {
-		Puerto origen = mock(Puerto.class);
 		CondicionRuta cond = mock(CondicionRuta.class);
 		Ruta r1 = mock(Ruta.class);
 		Ruta r2 = mock(Ruta.class);
@@ -81,8 +88,6 @@ class MotorDeBusquedaTest {
 	@Test
 	void mejorCircuito() {
 		//Setup
-		Puerto origen = mock(Puerto.class);
-		Puerto destino = mock(Puerto.class);
 		CriterioCircuito criterio = mock(CriterioCircuito.class);
 		List<Circuito> filtrados = new ArrayList<>();
 		filtrados.add(c1);
@@ -101,6 +106,26 @@ class MotorDeBusquedaTest {
 		
 		assertEquals(ret.get(), c1);
 		
+	}
+	
+	@Test
+	void salidaDeBuqueHastaPuerto() {
+		when(v1.getBuque()).thenReturn(buque);
+	    when(v2.getBuque()).thenReturn(buque);
+		
+		when(v1.pasaPor(origen)).thenReturn(true);
+		when(v1.pasaPor(destino)).thenReturn(true);
+		when(v2.pasaPor(origen)).thenReturn(true);
+		when(v2.pasaPor(destino)).thenReturn(true);
+		
+		when(v1.fechaLlegadaA(origen)).thenReturn(Optional.of(LocalDate.of(2025, 11, 10)));
+		when(v1.fechaLlegadaA(destino)).thenReturn(Optional.of(LocalDate.of(2025, 11, 11)));
+		when(v2.fechaLlegadaA(origen)).thenReturn(Optional.of(LocalDate.of(2025, 11, 12)));
+		when(v2.fechaLlegadaA(destino)).thenReturn(Optional.of(LocalDate.of(2025, 11, 13)));
+		
+		Optional<LocalDate> ret = motor.salidaDeBuqueHasta(buque, origen, destino);
+		
+		assertEquals(LocalDate.of(2025, 11, 10), ret.get());
 	}
 	
 	
